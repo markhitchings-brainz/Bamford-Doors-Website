@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Bamford Doors"
+description = "The responsive public website for Bamford Doors, helping housing providers, local authorities, schools and commercial organisations research bespoke security doors, understand services and submit project enquiries."
+version = "1.0.0"
+id = "artifacts/bamford-doors"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18091
+
+[services.development]
+run = "pnpm --filter @workspace/bamford-doors run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/bamford-doors", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/bamford-doors/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18091"
+BASE_PATH = "/"

@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: inquiries
+    description: Public website enquiries
 paths:
   /healthz:
     get:
@@ -24,6 +26,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /inquiries:
+    post:
+      operationId: createInquiry
+      tags: [inquiries]
+      summary: Submit a website enquiry
+      description: Validates and records an enquiry submitted through the public website.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InquiryInput"
+      responses:
+        "201":
+          description: Enquiry received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InquiryReceipt"
+        "400":
+          description: Invalid enquiry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Enquiry could not be recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +66,63 @@ components:
           type: string
       required:
         - status
+    InquiryInput:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        phone:
+          type: string
+          maxLength: 40
+        organization:
+          type: string
+          maxLength: 180
+        enquiryType:
+          type: string
+          enum: [general, product, maintenance, stock-survey, callback, consultation]
+        productInterest:
+          type: string
+          maxLength: 160
+        projectLocation:
+          type: string
+          maxLength: 180
+        projectSize:
+          type: string
+          maxLength: 120
+        timescale:
+          type: string
+          maxLength: 120
+        message:
+          type: string
+          minLength: 1
+          maxLength: 5000
+        sourcePage:
+          type: string
+          maxLength: 300
+      required: [name, email, enquiryType, message]
+    InquiryReceipt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        message:
+          type: string
+      required: [id, createdAt, message]
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required: [error]
 
