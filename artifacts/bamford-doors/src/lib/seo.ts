@@ -65,7 +65,9 @@ export function applyPageSeo({ title, description, path, noindex, image }: PageS
     url: window.location.origin,
   };
 
-  let schema = document.getElementById("bamford-structured-data");
+  let schema = document.head.querySelector<HTMLScriptElement>(
+    "#bamford-structured-data",
+  );
   if (!schema) {
     schema = document.createElement("script");
     schema.id = "bamford-structured-data";
