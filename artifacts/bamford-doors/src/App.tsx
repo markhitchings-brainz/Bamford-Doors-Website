@@ -9,6 +9,7 @@ import { applyPageSeo } from '@/lib/seo';
 import { fetchPublishedNewsStories, fetchPublishedNewsStory, type NewsStory } from '@/sanity/client';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -419,7 +420,8 @@ function Router() {
     applyPageSeo(page);
   },[location]);
   if(pathNow()==='/admin') return <ErrorBoundary resetKey={location}><Suspense fallback={<div className="studio-loading">Loading content editor…</div>}><StudioPage/></Suspense></ErrorBoundary>;
-  return <ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route path="/" component={Home}/><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary>;
+  if(pathNow()==='/') return <ErrorBoundary resetKey={location}><ReferenceLedHome/></ErrorBoundary>;
+  return <ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary>;
 }
 function App() {
   return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')}><Router/></WouterRouter><Toaster/></TooltipProvider></QueryClientProvider>;
