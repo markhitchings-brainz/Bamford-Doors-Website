@@ -1,0 +1,1 @@
+- [Sanity Studio dependency compatibility](sanity-studio-compat.md) — align Studio's React peer requirements; older Studio dependency graphs may be blocked by the package registry.
