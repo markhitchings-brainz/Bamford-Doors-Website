@@ -15,6 +15,7 @@ import { OurHistoryPage } from '@/pages/OurHistoryPage';
 import { SustainabilityPage } from '@/pages/SustainabilityPage';
 import { MeetTheTeamPage } from '@/pages/MeetTheTeamPage';
 import { CorporateSocialResponsibilityPage } from '@/pages/CorporateSocialResponsibilityPage';
+import { FactoryPage } from '@/pages/FactoryPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -80,7 +81,7 @@ const legacyCompanyRoutes: Record<string,string> = {
 const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about':{title:'About Bamford Doors',lead:'A UK door and entrance systems manufacturer serving public and commercial buildings.',body:['Bamford designs, manufactures and installs custom-made, vandal-resistant security doors and screens.','The company serves local authorities, housing associations, schools and other public-sector buildings nationally.']},
   '/about/history':{title:'Our history',lead:'From a small marine engine named Ajax to the security entrances we make today, Bamford’s story has always been shaped by engineering and family.',body:['Discover the people, engineering milestones and product changes that shaped Bamford Doors.']},
-  '/about/factory':{title:'Our factory',lead:'Bamford designs and manufactures custom-made door and entrance systems.',body:['Tell us about your building and project requirements so the team can discuss the manufacturing and entrance options relevant to your enquiry.']},
+  '/about/factory':{title:'Our Factory',lead:'Made in Stockport, built around your project. Bespoke security doors and screens from our purpose-built 68,000 sq ft factory and office.',body:['Bamford Doors designs, manufactures and installs security doors and screens for housing associations, local authorities, schools and other public buildings.','Our factory can produce around 60 doors and screens in a standard working week, with capacity to increase to around 90 when required.','We manufacture aluminium modular, thermally broken, woodgrain-effect and GRP doors, alongside automatic operators, louvred doors, side screens and curtain walling.','Our products are designed and hand-built in Britain. Spare parts are available for up to 20 years, depending on the product and specification.']},
   '/about/sustainability':{title:'Sustainability',lead:'Bamford recognises its responsibility to procure and manufacture goods and services sustainably, protect the environment and work towards net zero.',body:['Explore Bamford’s environmental actions and the sustainability values built into its products.']},
   '/about/accreditations':{title:'Accreditations',lead:'Bamford Doors is committed to earning your trust through recognised standards and independent assessment.',body:['Share the tender criteria or certification information you need to check with the team.']},
   '/about/meet-the-team':{title:'Meet the team',lead:'Meet the people who coordinate Bamford’s projects, installations, production and regional client support.',body:['Find contact details for the team members who help manage project, manufacturing and installation enquiries.']},
@@ -372,6 +373,7 @@ function RouteContent() {
   if(companyPath==='/about/corporate-social-responsibility') return <CorporateSocialResponsibilityPage/>;
   if(companyPath==='/about/history') return <OurHistoryPage/>;
   if(companyPath==='/about/accreditations') return <AccreditationsPage/>;
+  if(companyPath==='/about/factory') return <FactoryPage/>;
   if(companyPages[companyPath]) return <AboutDetail path={companyPath} page={companyPages[companyPath]}/>;
   if(path==='/blog'||path==='/blog-2-2'||path==='/more-news') return <NewsPage/>;
   if(path==='/downloads') return <LegacyInfo title="Downloads and technical information"/>;
