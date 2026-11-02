@@ -55,22 +55,39 @@
 .amd-feature p { margin: 0; color: #5e6262; font-size: 11px; line-height: 1.75; }
 .amd-config-section { padding: 96px 0 103px; background: var(--amd-white); }
 .amd-config-head { margin-bottom: 35px; }
-.amd-config-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(370px, .9fr); gap: 26px; align-items: stretch; }
-.amd-chart { display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 18px; border: 1px solid var(--amd-line); background: #f6f5f2; }
-.amd-chart img { display: block; width: 100%; height: clamp(490px, 52vw, 760px); min-height: 0; object-fit: contain; }
-.amd-chart figcaption { padding-top: 12px; color: #727474; font-size: 8px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-.amd-types-panel { display: flex; flex-direction: column; padding: 24px; background: #f3f2ef; }
-.amd-types-heading { display: flex; align-items: center; gap: 11px; padding-bottom: 16px; border-bottom: 1px solid #d6d4d0; }
-.amd-types-heading svg { color: var(--amd-red); }
-.amd-types-heading span { font-size: 12px; font-weight: 700; }
-.amd-types-heading small { margin-left: auto; color: #7a7b79; font-size: 8px; font-weight: 700; letter-spacing: .12em; }
-.amd-type-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 18px 0 22px; padding: 0; list-style: none; }
-.amd-type-grid li { display: flex; flex-direction: column; justify-content: space-between; min-height: 83px; padding: 10px; border: 1px solid #d8d6d2; background: #fff; }
-.amd-type-grid li span { color: #9b9a96; font-size: 8px; font-weight: 700; letter-spacing: .08em; }
-.amd-type-grid li strong { font-size: 18px; letter-spacing: -.045em; }
-.amd-note { display: flex; gap: 11px; align-items: flex-start; margin-top: auto; padding: 14px; border-left: 2px solid var(--amd-red); background: #e8e7e3; }
-.amd-note svg { flex: 0 0 auto; color: var(--amd-red); }
-.amd-note p { margin: 0; color: #565a59; font-size: 10px; line-height: 1.7; }
+.amd-design-guide { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; padding: 15px 18px; border: 1px solid var(--amd-line); background: #f6f5f2; }
+.amd-design-guide p { margin: 0; color: #5d6060; font-size: 11px; line-height: 1.6; }
+.amd-design-guide strong { color: var(--amd-ink); }
+.amd-design-guide > span { flex: 0 0 auto; color: #777; font-size: 8px; font-weight: 700; letter-spacing: .14em; }
+.amd-design-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.amd-design-grid li { min-width: 0; }
+.amd-design-card { display: flex; width: 100%; height: 100%; flex-direction: column; padding: 10px; border: 1px solid var(--amd-line); background: #fff; color: var(--amd-ink); text-align: left; cursor: pointer; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.amd-design-card:hover { transform: translateY(-2px); border-color: #aaa7a1; box-shadow: 0 8px 20px rgba(0,0,0,.07); }
+.amd-design-card:focus-visible, .amd-design-dialog button:focus-visible { outline: 2px solid var(--amd-red); outline-offset: 3px; }
+.amd-design-card.is-selected { border-color: var(--amd-red); box-shadow: inset 0 0 0 1px var(--amd-red); }
+.amd-design-thumb { display: grid; width: 100%; aspect-ratio: 3 / 4; place-items: center; padding: 15px; background: #f6f5f2; }
+.amd-design-thumb img { display: block; width: 100%; height: 100%; max-height: 250px; object-fit: contain; }
+.amd-design-meta { display: grid; grid-template-columns: minmax(0, 1fr) 18px; align-items: center; gap: 5px 10px; padding: 12px 3px 4px; }
+.amd-design-order { grid-column: 1; color: #888783; font-size: 8px; font-weight: 700; letter-spacing: .12em; }
+.amd-design-meta strong { grid-column: 1; font-size: 15px; letter-spacing: -.035em; }
+.amd-design-meta svg { grid-column: 2; grid-row: 1 / 3; color: var(--amd-red); }
+.amd-design-dialog { width: min(920px, calc(100% - 32px)); max-width: 920px; max-height: min(820px, calc(100% - 32px)); margin: auto; padding: 0; overflow: auto; border: 0; background: #f7f6f3; color: var(--amd-ink); box-shadow: 0 24px 90px rgba(0,0,0,.32); }
+.amd-design-dialog::backdrop { background: rgba(0,0,0,.78); }
+.amd-design-dialog-content { display: grid; min-height: 570px; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); }
+.amd-design-dialog-visual { display: grid; min-width: 0; min-height: 570px; margin: 0; padding: 32px; place-items: center; background: #fff; }
+.amd-design-dialog-visual img { display: block; width: 100%; max-width: 370px; height: min(68vh, 660px); object-fit: contain; }
+.amd-design-dialog-copy { display: flex; min-width: 0; flex-direction: column; padding: clamp(26px, 5vw, 54px); }
+.amd-design-dialog-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.amd-design-dialog-heading .amd-eyebrow { margin-bottom: 13px; }
+.amd-design-dialog-heading h3 { margin: 0; font-size: clamp(42px, 5vw, 62px); line-height: .98; letter-spacing: -.075em; }
+.amd-design-dialog-index { margin: 13px 0 0; color: #727474; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.amd-design-close { display: grid; width: 42px; height: 42px; flex: 0 0 auto; padding: 0; place-items: center; border: 1px solid var(--amd-line); background: #fff; color: var(--amd-ink); cursor: pointer; }
+.amd-design-dialog-description { margin: 38px 0; color: #5d6060; font-size: 12px; line-height: 1.8; }
+.amd-design-dialog-description p + p { margin-top: 14px; }
+.amd-design-dialog-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 17px; border-top: 1px solid var(--amd-line); }
+.amd-design-dialog-controls > span { color: #777; font-size: 8px; font-weight: 700; letter-spacing: .13em; }
+.amd-design-dialog-controls button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; border: 0; background: transparent; color: var(--amd-ink); font-size: 10px; font-weight: 700; cursor: pointer; }
+.amd-design-dialog-controls button svg { color: var(--amd-red); }
 .amd-gallery { padding: 96px 0 103px; background: #202020; color: #fff; }
 .amd-gallery-top { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 35px; }
 .amd-gallery h2 { font-size: clamp(39px, 5.1vw, 64px); }
@@ -139,8 +156,9 @@
   .amd-hero-image img { height: min(65vw, 450px); }
   .amd-feature-list { grid-template-columns: 1fr 1fr; }
   .amd-feature:nth-child(3) { padding-left: 0; border-left: 0; }
-  .amd-config-layout { grid-template-columns: 1fr; }
-  .amd-chart img { height: min(70vh, 600px); min-height: 0; max-height: 600px; }
+  .amd-design-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .amd-design-dialog-content { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); }
+  .amd-design-dialog-visual { padding: 24px; }
   .amd-gallery-grid figure img, .amd-gallery-grid .amd-gallery-main img { height: 290px; }
   .amd-evidence-inner { grid-template-columns: 82px minmax(0, 1fr); }
   .amd-evidence-link { grid-column: 2; }
@@ -160,9 +178,18 @@
   .amd-feature-list { grid-template-columns: 1fr; }
   .amd-feature, .amd-feature + .amd-feature { grid-template-columns: 1fr auto; min-height: 155px; padding: 19px 0; border-left: 0; }
   .amd-feature + .amd-feature { border-top: 0; }
-  .amd-type-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .amd-types-panel { padding: 16px; }
-  .amd-chart { padding: 10px; }
+  .amd-design-guide { align-items: flex-start; flex-direction: column; gap: 7px; padding: 13px 14px; }
+  .amd-design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .amd-design-card { padding: 7px; }
+  .amd-design-thumb { padding: 11px; }
+  .amd-design-meta { padding-top: 10px; }
+  .amd-design-meta strong { font-size: 13px; }
+  .amd-design-dialog { width: calc(100% - 20px); max-height: calc(100% - 20px); }
+  .amd-design-dialog-content { grid-template-columns: 1fr; }
+  .amd-design-dialog-visual { min-height: 310px; padding: 20px; }
+  .amd-design-dialog-visual img { height: min(42vh, 370px); }
+  .amd-design-dialog-copy { padding: 24px; }
+  .amd-design-dialog-description { margin: 22px 0; }
   .amd-gallery-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
   .amd-gallery-grid .amd-gallery-main { grid-column: 1 / -1; }
   .amd-gallery-grid figure img, .amd-gallery-grid .amd-gallery-main img { height: 235px; }
@@ -184,7 +211,6 @@
   .amd-closing-actions .amd-button { width: 100%; justify-content: space-between; }
 }
 @media (max-width: 390px) {
-  .amd-type-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .amd-gallery-grid { grid-template-columns: 1fr; }
   .amd-gallery-grid .amd-gallery-main { grid-column: auto; }
 }

@@ -1,10 +1,16 @@
-import { ArrowDown, ArrowRight, Check, ChevronRight, CircleHelp, Cog, DoorOpen, Layers3, LockKeyhole, Palette, ScanLine } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, Cog, Layers3, LockKeyhole, Palette, ScanLine, X } from 'lucide-react';
 import { Link } from 'wouter';
 import './aluminium-modular-doors.css';
 
 const media = '/media/aluminium-modular/';
 
 const types = ['1000', '1100', '1110', '1111', '2000', '2200', '2220', '2222', '2100', '2210', '3000', '3300', '3100', '4000', '4400', '4100'];
+const doorDesigns = types.map((code, index) => ({
+  code,
+  index,
+  src: `${media}designs/type-${code}.svg`,
+}));
 
 const finishes = [
   { code: 'RAL 5005', name: 'Signal blue', color: '#174889' },
@@ -33,6 +39,27 @@ const checklist = [
 ];
 
 export function AluminiumModularDoorsPage() {
+  const [selectedDesignIndex, setSelectedDesignIndex] = useState(0);
+  const [designViewerOpen, setDesignViewerOpen] = useState(false);
+  const designDialogRef = useRef<HTMLDialogElement>(null);
+  const selectedDesign = doorDesigns[selectedDesignIndex];
+
+  useEffect(() => {
+    const dialog = designDialogRef.current;
+    if (!dialog) return;
+    if (designViewerOpen && !dialog.open) dialog.showModal();
+    if (!designViewerOpen && dialog.open) dialog.close();
+  }, [designViewerOpen]);
+
+  const openDesign = (index: number) => {
+    setSelectedDesignIndex(index);
+    setDesignViewerOpen(true);
+  };
+
+  const moveDesign = (direction: -1 | 1) => {
+    setSelectedDesignIndex(current => (current + direction + doorDesigns.length) % doorDesigns.length);
+  };
+
   return (
     <main className="amd-page" data-testid="page-aluminium-modular-doors">
       <section className="amd-hero" aria-labelledby="amd-title">
@@ -97,19 +124,67 @@ export function AluminiumModularDoorsPage() {
             <div><p className="amd-eyebrow">Choose a door design</p><h2 id="amd-config-title">Sixteen starting points.</h2></div>
             <p>Brochure design types shown as a guide. The final door and screen arrangement is bespoke to the opening.</p>
           </div>
-          <div className="amd-config-layout">
-            <figure className="amd-chart">
-              <img src={`${media}door-options-chart.jpg`} alt="Brochure chart showing all 16 aluminium modular door design types, from Type 1000 to Type 4400" width="1005" height="1865" />
-              <figcaption>Illustrated door designs / brochure reference</figcaption>
-            </figure>
-            <div className="amd-types-panel">
-              <div className="amd-types-heading"><DoorOpen size={19} aria-hidden="true" /><span>Design type index</span><small>16 TYPES</small></div>
-              <ol className="amd-type-grid" aria-label="All brochure door design types" data-testid="list-amd-design-types">
-                {types.map((type, index) => <li key={type} data-testid={`type-amd-${type}`}><span>{String(index + 1).padStart(2, '0')}</span><strong>{type}</strong></li>)}
-              </ol>
-              <aside className="amd-note"><CircleHelp size={17} aria-hidden="true" /><p>Type codes describe brochure door layouts. Screens, opening dimensions and project details are agreed separately.</p></aside>
-            </div>
+          <div className="amd-design-guide">
+            <p><strong>Select a design</strong> to inspect its front elevation and type code at a larger size.</p>
+            <span>16 MODULAR DESIGNS</span>
           </div>
+          <ul className="amd-design-grid" aria-label="Aluminium modular door designs" data-testid="list-amd-design-types">
+            {doorDesigns.map(design => (
+              <li key={design.code}>
+                <button
+                  type="button"
+                  className={`amd-design-card${selectedDesignIndex === design.index ? ' is-selected' : ''}`}
+                  aria-label={`View a larger drawing of modular door Type ${design.code}`}
+                  aria-haspopup="dialog"
+                  aria-pressed={selectedDesignIndex === design.index}
+                  data-testid={`button-amd-type-${design.code}`}
+                  onClick={() => openDesign(design.index)}
+                >
+                  <span className="amd-design-thumb"><img src={design.src} alt="" width="300" height="500" /></span>
+                  <span className="amd-design-meta">
+                    <span className="amd-design-order">DESIGN {String(design.index + 1).padStart(2, '0')}</span>
+                    <strong>Type {design.code}</strong>
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <dialog
+            ref={designDialogRef}
+            className="amd-design-dialog"
+            aria-labelledby="amd-design-dialog-title"
+            data-testid="dialog-amd-design"
+            onClose={() => setDesignViewerOpen(false)}
+            onClick={event => {
+              if (event.target === designDialogRef.current) setDesignViewerOpen(false);
+            }}
+          >
+            <div className="amd-design-dialog-content">
+              <figure className="amd-design-dialog-visual">
+                <img src={selectedDesign.src} alt={`Front elevation drawing of aluminium modular door Type ${selectedDesign.code}`} width="300" height="500" />
+              </figure>
+              <div className="amd-design-dialog-copy">
+                <div className="amd-design-dialog-heading">
+                  <div>
+                    <p className="amd-eyebrow">Selected door design</p>
+                    <h3 id="amd-design-dialog-title">Type {selectedDesign.code}</h3>
+                    <p className="amd-design-dialog-index">Design {String(selectedDesignIndex + 1).padStart(2, '0')} of 16 · Front elevation</p>
+                  </div>
+                  <button className="amd-design-close" type="button" aria-label="Close enlarged door design" onClick={() => setDesignViewerOpen(false)}><X size={20} aria-hidden="true" /></button>
+                </div>
+                <div className="amd-design-dialog-description">
+                  <p>This illustration shows the panel layout for Type {selectedDesign.code}. Select another type to compare the modular door designs.</p>
+                  <p>Door and screen combinations, dimensions, glazing and hardware are confirmed for each project.</p>
+                </div>
+                <div className="amd-design-dialog-controls">
+                  <button type="button" aria-label={`Previous design from Type ${selectedDesign.code}`} onClick={() => moveDesign(-1)}><ArrowLeft size={16} aria-hidden="true" /><span>Previous</span></button>
+                  <span>{String(selectedDesignIndex + 1).padStart(2, '0')} / 16</span>
+                  <button type="button" aria-label={`Next design from Type ${selectedDesign.code}`} onClick={() => moveDesign(1)}><span>Next</span><ArrowRight size={16} aria-hidden="true" /></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
         </div>
       </section>
 
