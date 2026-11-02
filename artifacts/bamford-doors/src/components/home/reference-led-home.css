@@ -27,7 +27,7 @@
 .rl-header-cta:hover { background: var(--rl-red-deep); transform: translateY(-2px); }
 .rl-nav { background: var(--rl-ink); color: white; }
 .rl-nav-inner { width: min(1320px, calc(100% - 104px)); min-height: 48px; margin: auto; display: flex; align-items: stretch; gap: clamp(25px, 4vw, 60px); }
-.rl-nav-inner > a { position: relative; display: flex; align-items: center; text-decoration: none; color: #eee; font-size: 10px; font-weight: 600; letter-spacing: .04em; transition: color .2s; }
+.rl-nav-inner > a { position: relative; display: flex; align-items: center; text-decoration: none; color: #eee; font-size: 11px; font-weight: 600; letter-spacing: .04em; transition: color .2s; }
 .rl-nav-inner > a:not(.rl-nav-mobile-cta):after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--rl-red); transform: scaleX(0); transform-origin: left; transition: transform .22s ease; }
 .rl-nav-inner > a:hover { color: #fff; }.rl-nav-inner > a:hover:after { transform: scaleX(1); }
 .rl-nav-inner > .rl-nav-mobile-cta,.rl-menu-toggle { display: none; }

@@ -112,10 +112,10 @@ function Header() {
   const [location]=useLocation();
   return <><div className="topline"><span>DESIGNED · MANUFACTURED · INSTALLED</span><span>UK-wide service for public and commercial buildings</span></div><header className="header"><div className="header-inner">
     <Link href="/" className="brand" aria-label="Bamford Doors home" data-testid="link-home-logo"><img src="/media/bamford-doors-wordmark.png" alt="Bamford Doors" /></Link>
-    <nav className="nav" aria-label="Main navigation">{navItems.map(([label,path])=><Link key={path} href={path} aria-current={location===path?'page':undefined} data-testid={`link-nav-${label.toLowerCase().replaceAll(' ','-')}`}>{label}</Link>)}</nav>
+    <nav className="nav" aria-label="Main navigation"><Link href="/" data-testid="link-nav-home">Home</Link>{navItems.map(([label,path])=><Link key={path} href={path} aria-current={location===path?'page':undefined} data-testid={`link-nav-${label.toLowerCase().replaceAll(' ','-')}`}>{label}</Link>)}</nav>
     <Link className="nav-cta" href="/contact?purpose=consultation" data-testid="link-contact-header">Start an enquiry <ArrowRight size={15}/></Link>
     <button className="menu-button" aria-label={open?'Close menu':'Open menu'} aria-expanded={open} onClick={()=>setOpen(!open)} data-testid="button-mobile-menu">{open?<X/>:<Menu/>}</button>
-  </div>{open&&<nav className="mobile-nav" aria-label="Mobile navigation">{navItems.map(([label,path])=><Link key={path} href={path} onClick={()=>setOpen(false)} data-testid={`link-mobile-${label.toLowerCase().replaceAll(' ','-')}`}>{label}</Link>)}<Link className="nav-cta" href="/contact?purpose=consultation" onClick={()=>setOpen(false)} data-testid="link-mobile-contact">Request a Consultation <ArrowRight size={15}/></Link></nav>}</header></>;
+  </div>{open&&<nav className="mobile-nav" aria-label="Mobile navigation"><Link href="/" onClick={()=>setOpen(false)} data-testid="link-mobile-home">Home</Link>{navItems.map(([label,path])=><Link key={path} href={path} onClick={()=>setOpen(false)} data-testid={`link-mobile-${label.toLowerCase().replaceAll(' ','-')}`}>{label}</Link>)}<Link className="nav-cta" href="/contact?purpose=consultation" onClick={()=>setOpen(false)} data-testid="link-mobile-contact">Request a Consultation <ArrowRight size={15}/></Link></nav>}</header></>;
 }
 
 function Footer() {
