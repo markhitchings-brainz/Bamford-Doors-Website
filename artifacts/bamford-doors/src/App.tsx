@@ -10,6 +10,7 @@ import { fetchPublishedNewsStories, fetchPublishedNewsStory, type NewsStory } fr
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
+import { AccreditationsPage } from '@/pages/AccreditationsPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -77,7 +78,7 @@ const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about/history':{title:'Our history',lead:'Learn about the company behind Bamford Doors.',body:['For information about Bamford’s company history, contact the team.']},
   '/about/factory':{title:'Our factory',lead:'Bamford designs and manufactures custom-made door and entrance systems.',body:['Tell us about your building and project requirements so the team can discuss the manufacturing and entrance options relevant to your enquiry.']},
   '/about/sustainability':{title:'Sustainability',lead:'Ask us about current sustainability information relevant to your project or procurement.',body:['Share the policy or project information you need, and the Bamford team can discuss the details available for your enquiry.']},
-  '/about/accreditations':{title:'Accreditations',lead:'Ask about the current accreditation or framework requirements relevant to your project.',body:['Share the tender criteria or certification information you need to check with the team.']},
+  '/about/accreditations':{title:'Accreditations',lead:'Bamford Doors is committed to earning your trust through recognised standards and independent assessment.',body:['Share the tender criteria or certification information you need to check with the team.']},
   '/about/meet-the-team':{title:'Meet the team',lead:'Contact Bamford about your building, product or project.',body:['Use the enquiry form to direct your question to the team. Include the product or service you are considering, if known.']},
   '/about/aluminium-versus-steel':{title:'Aluminium versus steel',lead:'Material choice depends on the entrance, specification and project requirements.',body:['Share the building and project requirements with the team to discuss relevant door options.']},
   '/about/corporate-social-responsibility':{title:'Corporate social responsibility',lead:'Ask about social value information relevant to your project or procurement.',body:['Tell the team which project criteria or information you need to discuss.']},
@@ -362,6 +363,7 @@ function RouteContent() {
   if(path==='/contact'||path==='/contact-us') return <ContactPage/>;
   if(path==='/about'||path==='/about-5') return <AboutIndex/>;
   const companyPath=legacyCompanyRoutes[path]||path;
+  if(companyPath==='/about/accreditations') return <AccreditationsPage/>;
   if(companyPages[companyPath]) return <AboutDetail path={companyPath} page={companyPages[companyPath]}/>;
   if(path==='/blog'||path==='/blog-2-2'||path==='/more-news') return <NewsPage/>;
   if(path==='/downloads') return <LegacyInfo title="Downloads and technical information"/>;
