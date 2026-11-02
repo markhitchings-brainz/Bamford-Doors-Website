@@ -19,6 +19,7 @@ import { FactoryPage } from '@/pages/FactoryPage';
 import { AluminiumVsSteelPage } from '@/pages/AluminiumVsSteelPage';
 import { ConservationAreasPage } from '@/pages/ConservationAreasPage';
 import { CoastalApplicationsPage } from '@/pages/CoastalApplicationsPage';
+import { AluminiumModularDoorsPage } from '@/pages/AluminiumModularDoorsPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -28,7 +29,7 @@ type Service = { slug:string; title:string; summary:string; howItWorks:string[];
 type Sector = { slug:string; title:string; summary:string; considerations:string[]; relatedProducts:string[] };
 
 const products: Product[] = [
-  {slug:'aluminium-modular-doors',title:'Aluminium modular doors',summary:'Custom-made aluminium entrance doors and screens for shared and public buildings.',applications:['Communal entrances','Public and commercial buildings'],features:['Designed and manufactured to suit the entrance','Door and screen systems'],image:'/media/aluminium.webp',legacyPath:'/aluminium-modular-doors/'},
+  {slug:'aluminium-modular-doors',title:'Aluminium modular doors',summary:'Bespoke modular aluminium doors and screens for communal, public and commercial buildings, with configurable glazing, access and finishes.',applications:['Communal entrances','Public and commercial buildings'],features:['Heavy-duty engineered aluminium sections','Bespoke door and screen combinations','Multiple glazing, access and finish options'],image:'/media/aluminium-modular/communal-entrance.jpg',legacyPath:'/aluminium-modular-doors/'},
   {slug:'thermally-broken-doors',title:'Thermally broken doors',summary:'A thermally broken entrance door option for buildings where this product type is required.',applications:['Communal entrances','Public and commercial buildings'],features:['Custom-made entrance systems','Available as a door and screen arrangement'],image:'/media/thermal.webp',legacyPath:'/thermally-broken-doors/'},
   {slug:'wood-effect-door',title:'Wood effect doors',summary:'A wood-effect finish option for a custom-made entrance door.',applications:['Communal entrances','Housing provider buildings'],features:['Wood-effect appearance','Made to suit the entrance'],image:'/media/wood-effect.webp',legacyPath:'/wood-effect-door/'},
   {slug:'hmo',title:'HMO entrance doors',summary:'Custom-made entrance doors for houses in multiple occupation.',applications:['Houses in multiple occupation','Shared residential entrances'],features:['Designed for the entrance','Can be discussed with our team'],image:'/media/hmo.webp',legacyPath:'/hmo/'},
@@ -386,6 +387,7 @@ function RouteContent() {
   if(path==='/downloads') return <LegacyInfo title="Downloads and technical information"/>;
   const alias=legacyAliases[path];
   const product=products.find(p=>path===productPath(p)||path===p.legacyPath.replace(/\/$/,'')||path===alias);
+  if(product?.slug==='aluminium-modular-doors') return <AluminiumModularDoorsPage/>;
   if(product) return <ProductDetail product={product}/>;
   const service=services.find(s=>path===servicePath(s)||path===s.legacyPath.replace(/\/$/,''));
   if(service) return <ServiceDetail service={service}/>;
