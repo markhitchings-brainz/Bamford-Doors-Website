@@ -86,7 +86,7 @@ export function ReferenceLedHome() {
 
         <section className="rl-intro rl-wrap">
           <div className="rl-intro-heading"><p className="rl-kicker">An entrance is part of the building</p><h2>Good design begins<br />with <em>good questions.</em></h2></div>
-          <div className="rl-intro-copy"><span className="rl-rule-number">01 <i>—</i> CONTEXT FIRST</span><p className="rl-intro-lead">Every entrance has a job to do — and a building around it.</p><p>We work with housing providers and building teams to understand the setting, the people who use it and the work being planned. Then we can explore the right door and screen options together.</p><Link className="rl-link" href="/about">Meet Bamford <ArrowRight size={14} /></Link></div>
+          <div className="rl-intro-copy"><span className="rl-rule-number">01 <i>—</i> CONTEXT FIRST</span><p className="rl-intro-lead">Every entrance has a job to do — and a building around it.</p><p>We work with housing providers and building teams to understand the setting, the people who use it and the work being planned. Then we can explore the right door and screen options together.</p><Link className="rl-link" href="/contact">discuss your doors <ArrowRight size={14} /></Link></div>
         </section>
 
         <section className="rl-sectors">
