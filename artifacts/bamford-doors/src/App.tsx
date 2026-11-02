@@ -17,6 +17,7 @@ import { MeetTheTeamPage } from '@/pages/MeetTheTeamPage';
 import { CorporateSocialResponsibilityPage } from '@/pages/CorporateSocialResponsibilityPage';
 import { FactoryPage } from '@/pages/FactoryPage';
 import { AluminiumVsSteelPage } from '@/pages/AluminiumVsSteelPage';
+import { ConservationAreasPage } from '@/pages/ConservationAreasPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -89,7 +90,7 @@ const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about/aluminium-versus-steel':{title:'Aluminium versus steel',lead:'Compare aluminium and steel doors for corrosion, maintenance, strength, weight and whole-project requirements.',body:['A practical guide to the material trade-offs that shape entrance design, operation and long-term care.']},
   '/about/corporate-social-responsibility':{title:'Corporate social responsibility',lead:'Bamford Doors contributes to the communities it works in through charitable giving, practical support, school and college partnerships, and work with housing associations.',body:['Our colleagues play an active part through our in-house charity team and monthly challenges, supporting causes that matter to our staff and our community.']},
   '/about/unique-environments':{title:'Unique environments',lead:'Some buildings have specific setting and exposure requirements.',body:['Discuss the building, location and relevant planning or environmental requirements with the Bamford team.']},
-  '/about/conservation-areas':{title:'Conservation areas',lead:'Doors in conservation areas may need to respond to the character and requirements of the place.',body:['Project-specific planning and conservation requirements should be confirmed with the relevant authority and project team.']},
+  '/about/conservation-areas':{title:'Conservation areas',lead:'Explore bespoke communal entrance design for conservation areas, with guidance on finishes, planning context and access.',body:['Review design options for heritage settings and confirm local planning requirements before specifying or installing.']},
   '/about/coastal-applications':{title:'Coastal applications',lead:'The project location and exposure should be considered when specifying an entrance.',body:['Discuss the site and project requirements, including any environmental criteria specified for the project, with the team.']},
 };
 const navItems = [['Products','/products'],['Services','/services'],['Sectors','/sectors'],['Case studies','/case-studies'],['About','/about']] as const;
@@ -376,6 +377,7 @@ function RouteContent() {
   if(companyPath==='/about/accreditations') return <AccreditationsPage/>;
   if(companyPath==='/about/factory') return <FactoryPage/>;
   if(companyPath==='/about/aluminium-versus-steel') return <AluminiumVsSteelPage/>;
+  if(companyPath==='/about/conservation-areas') return <ConservationAreasPage/>;
   if(companyPages[companyPath]) return <AboutDetail path={companyPath} page={companyPages[companyPath]}/>;
   if(path==='/blog'||path==='/blog-2-2'||path==='/more-news') return <NewsPage/>;
   if(path==='/downloads') return <LegacyInfo title="Downloads and technical information"/>;
