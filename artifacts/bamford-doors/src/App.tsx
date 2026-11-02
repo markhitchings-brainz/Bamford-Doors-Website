@@ -12,6 +12,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
 import { AccreditationsPage } from '@/pages/AccreditationsPage';
 import { OurHistoryPage } from '@/pages/OurHistoryPage';
+import { SustainabilityPage } from '@/pages/SustainabilityPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -78,7 +79,7 @@ const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about':{title:'About Bamford Doors',lead:'A UK door and entrance systems manufacturer serving public and commercial buildings.',body:['Bamford designs, manufactures and installs custom-made, vandal-resistant security doors and screens.','The company serves local authorities, housing associations, schools and other public-sector buildings nationally.']},
   '/about/history':{title:'Our history',lead:'From a small marine engine named Ajax to the security entrances we make today, Bamford’s story has always been shaped by engineering and family.',body:['Discover the people, engineering milestones and product changes that shaped Bamford Doors.']},
   '/about/factory':{title:'Our factory',lead:'Bamford designs and manufactures custom-made door and entrance systems.',body:['Tell us about your building and project requirements so the team can discuss the manufacturing and entrance options relevant to your enquiry.']},
-  '/about/sustainability':{title:'Sustainability',lead:'Ask us about current sustainability information relevant to your project or procurement.',body:['Share the policy or project information you need, and the Bamford team can discuss the details available for your enquiry.']},
+  '/about/sustainability':{title:'Sustainability',lead:'Bamford recognises its responsibility to procure and manufacture goods and services sustainably, protect the environment and work towards net zero.',body:['Explore Bamford’s environmental actions and the sustainability values built into its products.']},
   '/about/accreditations':{title:'Accreditations',lead:'Bamford Doors is committed to earning your trust through recognised standards and independent assessment.',body:['Share the tender criteria or certification information you need to check with the team.']},
   '/about/meet-the-team':{title:'Meet the team',lead:'Contact Bamford about your building, product or project.',body:['Use the enquiry form to direct your question to the team. Include the product or service you are considering, if known.']},
   '/about/aluminium-versus-steel':{title:'Aluminium versus steel',lead:'Material choice depends on the entrance, specification and project requirements.',body:['Share the building and project requirements with the team to discuss relevant door options.']},
@@ -364,6 +365,7 @@ function RouteContent() {
   if(path==='/contact'||path==='/contact-us') return <ContactPage/>;
   if(path==='/about'||path==='/about-5') return <AboutIndex/>;
   const companyPath=legacyCompanyRoutes[path]||path;
+  if(companyPath==='/about/sustainability') return <SustainabilityPage/>;
   if(companyPath==='/about/history') return <OurHistoryPage/>;
   if(companyPath==='/about/accreditations') return <AccreditationsPage/>;
   if(companyPages[companyPath]) return <AboutDetail path={companyPath} page={companyPages[companyPath]}/>;
