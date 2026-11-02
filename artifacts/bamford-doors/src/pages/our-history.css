@@ -1,0 +1,448 @@
+.history-page {
+  --history-red: #bd1e2d;
+  --history-ink: #20201f;
+  --history-paper: #f3f1ed;
+  --history-line: #dedbd5;
+  color: var(--history-ink);
+}
+
+.history-page figure {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #e5e2dc;
+}
+
+.history-page figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.history-page figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 13px 16px;
+  color: white;
+  background: linear-gradient(transparent, rgba(22, 21, 20, 0.76));
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.history-hero {
+  padding: 26px 0 74px;
+  background: var(--history-paper);
+  border-bottom: 1px solid var(--history-line);
+}
+
+.history-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 45px;
+  color: #77736e;
+  font-size: 11px;
+}
+
+.history-breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.history-breadcrumbs a:hover {
+  color: var(--history-red);
+}
+
+.history-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: clamp(40px, 7vw, 100px);
+  align-items: center;
+}
+
+.history-hero-copy .eyebrow,
+.history-page .eyebrow {
+  color: var(--history-red);
+}
+
+.history-hero-copy h1 {
+  font-size: clamp(54px, 7vw, 86px);
+  line-height: 0.96;
+  letter-spacing: -0.085em;
+}
+
+.history-hero-lead {
+  max-width: 520px;
+  margin: 24px 0 28px;
+  color: #55534f;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.6;
+}
+
+.history-hero-stamp {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-top: 18px;
+  border-top: 1px solid #c9c5bd;
+}
+
+.history-hero-stamp strong {
+  color: var(--history-red);
+  font-size: 26px;
+  letter-spacing: -0.06em;
+}
+
+.history-hero-stamp span {
+  color: #716d67;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.history-hero-image {
+  height: 415px;
+}
+
+.history-hero-image img {
+  object-position: center 50%;
+}
+
+.history-origin {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.62fr);
+  gap: clamp(50px, 10vw, 145px);
+  align-items: center;
+  padding-top: 88px;
+  padding-bottom: 93px;
+}
+
+.history-origin-copy h2,
+.history-marine-copy h2,
+.history-timeline-heading h2,
+.history-closing-copy h2 {
+  margin: 0;
+  font-size: clamp(39px, 5vw, 62px);
+  line-height: 1;
+  letter-spacing: -0.075em;
+}
+
+.history-page h2 em {
+  color: var(--history-red);
+  font-style: normal;
+}
+
+.history-origin-copy > p:last-child,
+.history-marine-copy > p:last-child,
+.history-closing-copy > p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 20px 0 0;
+  color: #5b5853;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.history-ajax-mark {
+  min-height: 225px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f6f3 !important;
+}
+
+.history-ajax-mark img {
+  max-width: 75%;
+  max-height: 175px;
+  object-fit: contain !important;
+}
+
+.history-ajax-mark figcaption {
+  color: #fff;
+}
+
+.history-marine {
+  padding: 78px 0 84px;
+  background: var(--history-paper);
+}
+
+.history-marine-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+  gap: clamp(46px, 8vw, 108px);
+  align-items: center;
+}
+
+.history-marine-photos {
+  position: relative;
+  min-height: 390px;
+  padding: 0 95px 45px 0;
+}
+
+.history-miss-england {
+  height: 335px;
+}
+
+.history-propeller {
+  position: absolute !important;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  height: 175px;
+  border: 10px solid var(--history-paper);
+}
+
+.history-marine-copy h2 {
+  max-width: 420px;
+}
+
+.history-timeline {
+  padding: 92px 0 104px;
+}
+
+.history-timeline-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 42px;
+  margin-bottom: 42px;
+}
+
+.history-timeline-heading h2 {
+  max-width: 650px;
+}
+
+.history-timeline-heading > p {
+  max-width: 360px;
+  margin: 0 0 4px;
+  color: #625f5a;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.history-timeline-list {
+  border-top: 1px solid var(--history-line);
+}
+
+.history-milestone {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) minmax(240px, 0.62fr);
+  gap: 36px;
+  align-items: center;
+  padding: 25px 0;
+  border-bottom: 1px solid var(--history-line);
+}
+
+.history-milestone-year {
+  color: var(--history-red);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.history-milestone-copy h3 {
+  margin: 0 0 9px;
+  font-size: 22px;
+}
+
+.history-milestone-copy p {
+  max-width: 590px;
+  margin: 0;
+  color: #5b5853;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.history-milestone-image {
+  height: 175px;
+}
+
+.history-milestone:nth-child(1) .history-milestone-image img,
+.history-milestone:nth-child(3) .history-milestone-image img {
+  object-position: center 35%;
+}
+
+.history-milestone:nth-child(2) .history-milestone-image img {
+  object-position: center 30%;
+}
+
+.history-closing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--history-ink);
+  color: #fff;
+}
+
+.history-closing-image {
+  min-height: 420px;
+}
+
+.history-closing-image img {
+  position: absolute;
+  inset: 0;
+}
+
+.history-closing-copy {
+  align-self: center;
+  max-width: 650px;
+  padding: 70px clamp(36px, 8vw, 115px);
+}
+
+.history-closing-copy h2 {
+  font-size: clamp(40px, 5vw, 62px);
+}
+
+.history-closing-copy > p:not(.eyebrow) {
+  max-width: 450px;
+  margin-bottom: 24px;
+  color: #c8c5c0;
+}
+
+@media (max-width: 900px) {
+  .history-hero-grid {
+    gap: 42px;
+  }
+
+  .history-origin {
+    gap: 55px;
+  }
+
+  .history-milestone {
+    grid-template-columns: 82px minmax(0, 1fr) minmax(195px, 0.62fr);
+    gap: 22px;
+  }
+}
+
+@media (max-width: 700px) {
+  .history-hero {
+    padding: 22px 0 45px;
+  }
+
+  .history-breadcrumbs {
+    margin-bottom: 34px;
+    font-size: 10px;
+  }
+
+  .history-hero-grid,
+  .history-origin,
+  .history-marine-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .history-hero-grid {
+    gap: 30px;
+  }
+
+  .history-hero-copy h1 {
+    font-size: clamp(50px, 14vw, 68px);
+  }
+
+  .history-hero-lead {
+    margin: 18px 0 22px;
+    font-size: 17px;
+  }
+
+  .history-hero-image {
+    height: 270px;
+  }
+
+  .history-origin {
+    gap: 30px;
+    padding-top: 62px;
+    padding-bottom: 66px;
+  }
+
+  .history-origin-copy h2,
+  .history-marine-copy h2,
+  .history-timeline-heading h2,
+  .history-closing-copy h2 {
+    font-size: clamp(38px, 11vw, 50px);
+  }
+
+  .history-origin-copy > p:last-child,
+  .history-marine-copy > p:last-child,
+  .history-closing-copy > p:not(.eyebrow) {
+    font-size: 13px;
+  }
+
+  .history-ajax-mark {
+    min-height: 190px;
+  }
+
+  .history-marine {
+    padding: 60px 0 65px;
+  }
+
+  .history-marine-grid {
+    gap: 34px;
+  }
+
+  .history-marine-photos {
+    min-height: 300px;
+    padding: 0 67px 36px 0;
+  }
+
+  .history-miss-england {
+    height: 260px;
+  }
+
+  .history-propeller {
+    width: 47%;
+    height: 140px;
+    border-width: 7px;
+  }
+
+  .history-timeline {
+    padding: 65px 0 73px;
+  }
+
+  .history-timeline-heading {
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  .history-timeline-heading > p {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  .history-milestone {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    padding: 23px 0 26px;
+  }
+
+  .history-milestone-year {
+    font-size: 14px;
+  }
+
+  .history-milestone-copy h3 {
+    font-size: 20px;
+  }
+
+  .history-milestone-copy p {
+    font-size: 12px;
+  }
+
+  .history-milestone-image {
+    height: 210px;
+  }
+
+  .history-closing {
+    grid-template-columns: 1fr;
+  }
+
+  .history-closing-image {
+    min-height: 260px;
+  }
+
+  .history-closing-copy {
+    padding: 48px 20px 55px;
+  }
+}
