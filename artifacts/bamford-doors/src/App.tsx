@@ -14,6 +14,7 @@ import { AccreditationsPage } from '@/pages/AccreditationsPage';
 import { OurHistoryPage } from '@/pages/OurHistoryPage';
 import { SustainabilityPage } from '@/pages/SustainabilityPage';
 import { MeetTheTeamPage } from '@/pages/MeetTheTeamPage';
+import { CorporateSocialResponsibilityPage } from '@/pages/CorporateSocialResponsibilityPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -84,7 +85,7 @@ const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about/accreditations':{title:'Accreditations',lead:'Bamford Doors is committed to earning your trust through recognised standards and independent assessment.',body:['Share the tender criteria or certification information you need to check with the team.']},
   '/about/meet-the-team':{title:'Meet the team',lead:'Meet the people who coordinate Bamford’s projects, installations, production and regional client support.',body:['Find contact details for the team members who help manage project, manufacturing and installation enquiries.']},
   '/about/aluminium-versus-steel':{title:'Aluminium versus steel',lead:'Material choice depends on the entrance, specification and project requirements.',body:['Share the building and project requirements with the team to discuss relevant door options.']},
-  '/about/corporate-social-responsibility':{title:'Corporate social responsibility',lead:'Ask about social value information relevant to your project or procurement.',body:['Tell the team which project criteria or information you need to discuss.']},
+  '/about/corporate-social-responsibility':{title:'Corporate social responsibility',lead:'Bamford Doors contributes to the communities it works in through charitable giving, practical support, school and college partnerships, and work with housing associations.',body:['Our colleagues play an active part through our in-house charity team and monthly challenges, supporting causes that matter to our staff and our community.']},
   '/about/unique-environments':{title:'Unique environments',lead:'Some buildings have specific setting and exposure requirements.',body:['Discuss the building, location and relevant planning or environmental requirements with the Bamford team.']},
   '/about/conservation-areas':{title:'Conservation areas',lead:'Doors in conservation areas may need to respond to the character and requirements of the place.',body:['Project-specific planning and conservation requirements should be confirmed with the relevant authority and project team.']},
   '/about/coastal-applications':{title:'Coastal applications',lead:'The project location and exposure should be considered when specifying an entrance.',body:['Discuss the site and project requirements, including any environmental criteria specified for the project, with the team.']},
@@ -368,6 +369,7 @@ function RouteContent() {
   const companyPath=legacyCompanyRoutes[path]||path;
   if(companyPath==='/about/meet-the-team') return <MeetTheTeamPage/>;
   if(companyPath==='/about/sustainability') return <SustainabilityPage/>;
+  if(companyPath==='/about/corporate-social-responsibility') return <CorporateSocialResponsibilityPage/>;
   if(companyPath==='/about/history') return <OurHistoryPage/>;
   if(companyPath==='/about/accreditations') return <AccreditationsPage/>;
   if(companyPages[companyPath]) return <AboutDetail path={companyPath} page={companyPages[companyPath]}/>;
