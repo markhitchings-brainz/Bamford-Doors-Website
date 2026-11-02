@@ -1,1 +1,2 @@
 - [Sanity Studio dependency compatibility](sanity-studio-compat.md) — align Studio's React peer requirements; older Studio dependency graphs may be blocked by the package registry.
+- [Legacy media availability](legacy-media.md) — verify old-site images in a browser; successful HEAD requests do not guarantee that portraits will render.

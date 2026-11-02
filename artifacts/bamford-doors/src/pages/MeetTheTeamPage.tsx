@@ -129,7 +129,7 @@ function TeamPortrait({ member, index }: { member: TeamMember; index: number }) 
           alt={`Portrait of ${member.name}`}
           style={{ objectPosition: member.imagePosition }}
           referrerPolicy="no-referrer"
-          loading={index < 4 ? 'eager' : 'lazy'}
+          loading="eager"
           onError={() => setImageFailed(true)}
         />
       ) : (
