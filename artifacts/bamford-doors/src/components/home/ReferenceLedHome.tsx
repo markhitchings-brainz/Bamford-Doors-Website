@@ -38,7 +38,7 @@ function Header() {
           <button className="rl-menu-toggle" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
         </div>
         <nav className={`rl-nav${open ? ' is-open' : ''}`} aria-label="Main navigation">
-          <div className="rl-nav-inner">{navItems.map(([label, path]) => <Link key={path} href={path} onClick={() => setOpen(false)}>{label}<span /></Link>)}
+          <div className="text-[14px]">{navItems.map(([label, path]) => <Link key={path} href={path} onClick={() => setOpen(false)}>{label}<span /></Link>)}
             <Link className="rl-nav-mobile-cta" href="/contact?purpose=consultation" onClick={() => setOpen(false)}>Start an enquiry <ArrowRight size={15} /></Link>
           </div>
         </nav>
