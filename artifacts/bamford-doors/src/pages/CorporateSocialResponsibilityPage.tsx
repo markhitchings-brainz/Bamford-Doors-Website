@@ -1,16 +1,17 @@
-import { ArrowRight, ChevronRight, MoveUpRight } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
 import './corporate-social-responsibility.css';
 
 const videos = {
   general: {
-    embed: 'https://player.vimeo.com/video/1138682565?h=1cb295b164&dnt=1',
-    url: 'https://vimeo.com/1138682565/1cb295b164',
+    url: 'https://cdn.sanity.io/files/ih9rxf6u/production/6dfefc09a719311833e08f430853366d0c6b5c54.mp4',
+    poster: 'csr-social-value-poster.jpg',
     title: 'Bamford Doors social value video',
   },
   defib: {
-    embed: 'https://player.vimeo.com/video/1195994342?h=ba188fd6af&dnt=1',
-    url: 'https://vimeo.com/1195994342/ba188fd6af',
+    url: 'https://cdn.sanity.io/files/ih9rxf6u/production/6fe23c8e67f654171d632593b6a3dcd3541240e6.mp4',
+    poster: 'csr-defib-poster.jpg',
     title: 'Bamford Doors Defib Giveaway in Nottingham video',
   },
 };
@@ -54,23 +55,29 @@ const sections = [
   },
 ];
 
-function VimeoFrame({ video, testId }: { video: typeof videos.general; testId: string }) {
+function DirectVideoPlayer({ video, testId }: { video: typeof videos.general; testId: string }) {
+  const [failed, setFailed] = useState(false);
   return (
     <div className="csr-video">
       <div className="csr-video-frame">
-        <iframe
-          src={video.embed}
-          title={video.title}
-          loading="lazy"
-          allow="fullscreen; picture-in-picture"
-          allowFullScreen
-          referrerPolicy="strict-origin-when-cross-origin"
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster={`${import.meta.env.BASE_URL}media/${video.poster}`}
+          aria-label={video.title}
+          onError={() => setFailed(true)}
           data-testid={`video-${testId}`}
-        />
+        >
+          <source src={video.url} type="video/mp4" onError={() => setFailed(true)} />
+          Your browser does not support embedded video. <a href={video.url}>Open the video file</a>.
+        </video>
       </div>
-      <a className="csr-vimeo-link" href={video.url} target="_blank" rel="noopener noreferrer" data-testid={`link-vimeo-${testId}`}>
-        Watch on Vimeo <MoveUpRight size={13} aria-hidden="true" />
-      </a>
+      {failed && (
+        <p className="csr-video-error" role="status">
+          The video could not be loaded. <a href={video.url} target="_blank" rel="noopener noreferrer">Try opening the MP4 directly</a>.
+        </p>
+      )}
     </div>
   );
 }
@@ -113,7 +120,7 @@ export function CorporateSocialResponsibilityPage() {
             <p className="eyebrow">Watch</p>
             <h2 id="csr-feature-heading">Our social value <em>in practice.</em></h2>
           </div>
-          <VimeoFrame video={videos.general} testId="social-value" />
+          <DirectVideoPlayer video={videos.general} testId="social-value" />
         </div>
       </section>
 
@@ -140,7 +147,7 @@ export function CorporateSocialResponsibilityPage() {
             <h2 id="csr-defib-heading">Defib Giveaway in Nottingham</h2>
             <p>Watch the video from our Defib Giveaway in Nottingham.</p>
           </div>
-          <VimeoFrame video={videos.defib} testId="defib-nottingham" />
+          <DirectVideoPlayer video={videos.defib} testId="defib-nottingham" />
         </div>
       </section>
 
