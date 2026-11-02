@@ -40,7 +40,8 @@
 .rl-kicker { margin: 0 0 20px; color: var(--rl-red); font-size: 9px; font-weight: 700; letter-spacing: .17em; line-height: 1.5; text-transform: uppercase; }
 .rl-kicker b { padding: 0 7px; color: #9d9992; }
 .rl-hero h1 { margin: 0; font-size: clamp(60px, 7vw, 96px); font-weight: 700; letter-spacing: -.085em; line-height: .88; }
-.rl-hero h1 em,.rl-site h2 em { color: var(--rl-red); font-style: normal; }
+.rl-hero h1 em { display: inline-block; color: var(--rl-red); font-size: clamp(30px,3.5vw,50px); font-style: normal; letter-spacing: -.075em; line-height: 1; white-space: nowrap; }
+.rl-site h2 em { color: var(--rl-red); font-style: normal; }
 .rl-hero-lead { max-width: 390px; margin: 24px 0 9px; font-size: clamp(17px,1.5vw,21px); line-height: 1.45; letter-spacing: -.035em; }
 .rl-hero-body { max-width: 380px; color: var(--rl-body); font-size: 11px; line-height: 1.8; margin: 0 0 23px; }
 .rl-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 21px; }
