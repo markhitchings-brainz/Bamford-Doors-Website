@@ -23,7 +23,7 @@ const factoryImages = [
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/c97f3a28fcff2a6acde86ff17a1d7ea61be05640-1500x998.webp', label: 'CNC manufacturing', alt: 'CNC machinery used in the production process' },
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/e69f3618f22d1d0eced4fd6f380d31e7a040722f-1500x998.webp', label: 'Automated production', alt: 'Automated machinery processing a door section' },
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/f2561d9b4cb10bad5940864430e387c109ad903d-1500x844.webp', label: 'Inside the factory', alt: 'Wide view across the Bamford factory floor' },
-  { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/29a882bd21b3545aa41d086c72c04d7653d9630e-1500x844.webp', label: 'Made in Stockport', alt: 'Door and screen production area at the Stockport factory' },
+  { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/ae86741e8c8ad62c9bf8cb543c5aa15602915855-1920x1080.jpg', label: 'Renovated factory exterior', alt: 'Exterior of the renovated Bamford factory in Stockport, showing its new roof and side walling' },
 ].map((image, index) => ({ ...image, number: index + 1 }));
 
 const featuredImageNumbers = new Set([9, 13, 15, 16]);
