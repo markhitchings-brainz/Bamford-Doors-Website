@@ -153,7 +153,7 @@ export function CorporateSocialResponsibilityPage() {
             <p className="eyebrow">Talk to Bamford</p>
             <h2>Talk to us about
             your new door project</h2>
-            <p>Tell the team which project criteria or information you need to discuss.</p>
+            <p>Talk to our helpful team about your upcoming project</p>
           </div>
           <Link href="/contact?purpose=consultation" className="button" data-testid="link-csr-contact">
             Contact our team <ArrowRight size={15} />
