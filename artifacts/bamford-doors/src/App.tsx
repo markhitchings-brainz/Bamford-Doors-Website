@@ -18,6 +18,7 @@ import { CorporateSocialResponsibilityPage } from '@/pages/CorporateSocialRespon
 import { FactoryPage } from '@/pages/FactoryPage';
 import { AluminiumVsSteelPage } from '@/pages/AluminiumVsSteelPage';
 import { ConservationAreasPage } from '@/pages/ConservationAreasPage';
+import { CoastalApplicationsPage } from '@/pages/CoastalApplicationsPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -91,7 +92,7 @@ const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about/corporate-social-responsibility':{title:'Corporate social responsibility',lead:'Bamford Doors contributes to the communities it works in through charitable giving, practical support, school and college partnerships, and work with housing associations.',body:['Our colleagues play an active part through our in-house charity team and monthly challenges, supporting causes that matter to our staff and our community.']},
   '/about/unique-environments':{title:'Unique environments',lead:'Some buildings have specific setting and exposure requirements.',body:['Discuss the building, location and relevant planning or environmental requirements with the Bamford team.']},
   '/about/conservation-areas':{title:'Conservation areas',lead:'Explore bespoke communal entrance design for conservation areas, with guidance on finishes, planning context and access.',body:['Review design options for heritage settings and confirm local planning requirements before specifying or installing.']},
-  '/about/coastal-applications':{title:'Coastal applications',lead:'The project location and exposure should be considered when specifying an entrance.',body:['Discuss the site and project requirements, including any environmental criteria specified for the project, with the team.']},
+  '/about/coastal-applications':{title:'Coastal applications',lead:'Plan communal entrances for salt-laden air, wind-driven rain and demanding coastal exposure.',body:['Compare material considerations, finishes and practical specification questions for coastal properties.']},
 };
 const navItems = [['Products','/products'],['Services','/services'],['Sectors','/sectors'],['Case studies','/case-studies'],['About','/about']] as const;
 const productPath=(p:Product)=>`/products/${p.slug}`;
@@ -378,6 +379,7 @@ function RouteContent() {
   if(companyPath==='/about/factory') return <FactoryPage/>;
   if(companyPath==='/about/aluminium-versus-steel') return <AluminiumVsSteelPage/>;
   if(companyPath==='/about/conservation-areas') return <ConservationAreasPage/>;
+  if(companyPath==='/about/coastal-applications') return <CoastalApplicationsPage/>;
   if(companyPages[companyPath]) return <AboutDetail path={companyPath} page={companyPages[companyPath]}/>;
   if(path==='/blog'||path==='/blog-2-2'||path==='/more-news') return <NewsPage/>;
   if(path==='/downloads') return <LegacyInfo title="Downloads and technical information"/>;

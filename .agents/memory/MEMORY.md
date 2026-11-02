@@ -1,3 +1,4 @@
 - [Sanity Studio dependency compatibility](sanity-studio-compat.md) — align Studio's React peer requirements; older Studio dependency graphs may be blocked by the package registry.
 - [Legacy media availability](legacy-media.md) — verify old-site images in a browser; successful HEAD requests do not guarantee that portraits will render.
 - [Website video hosting](media-hosting.md) — use Sanity CDN for supplied videos, with direct playback and no large MP4s in the Vercel repository.
+- [Brand header colour](brand-header-colour.md) — use black rather than dark grey for page headers, as specified by the user’s brand guidance.
