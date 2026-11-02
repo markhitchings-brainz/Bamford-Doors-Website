@@ -24,7 +24,28 @@ const factoryImages = [
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/e69f3618f22d1d0eced4fd6f380d31e7a040722f-1500x998.webp', label: 'Automated production', alt: 'Automated machinery processing a door section' },
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/f2561d9b4cb10bad5940864430e387c109ad903d-1500x844.webp', label: 'Inside the factory', alt: 'Wide view across the Bamford factory floor' },
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/29a882bd21b3545aa41d086c72c04d7653d9630e-1500x844.webp', label: 'Made in Stockport', alt: 'Door and screen production area at the Stockport factory' },
-];
+].map((image, index) => ({ ...image, number: index + 1 }));
+
+const featuredImageNumbers = new Set([9, 13, 15, 16]);
+const factoryGalleryImages = factoryImages.filter((image) => !featuredImageNumbers.has(image.number));
+
+function FactoryPhoto({
+  image,
+  className = '',
+}: {
+  image: (typeof factoryImages)[number];
+  className?: string;
+}) {
+  return (
+    <figure className={`factory-photo ${className}`}>
+      <img src={image.url} alt={image.alt} loading="lazy" />
+      <figcaption>
+        <span>{String(image.number).padStart(2, '0')}</span>
+        <span>{image.label}</span>
+      </figcaption>
+    </figure>
+  );
+}
 
 const productTypes = [
   {
@@ -148,6 +169,10 @@ export function FactoryPage() {
         </div>
       </section>
 
+      <section className="factory-intro-showcase wrap" aria-label="Inside the Stockport factory">
+        <FactoryPhoto image={factoryImages[14]} className="factory-overview-photo" />
+      </section>
+
       <section className="factory-renovation" aria-labelledby="factory-renovation-title">
         <div className="wrap factory-renovation-grid">
           <div className="factory-renovation-copy">
@@ -167,6 +192,7 @@ export function FactoryPage() {
               <span>02 / RENOVATION</span>
               <strong>New side walling</strong>
             </div>
+            <FactoryPhoto image={factoryImages[15]} className="factory-renovation-photo" />
           </div>
         </div>
       </section>
@@ -217,6 +243,10 @@ export function FactoryPage() {
               ))}
             </div>
           </div>
+          <div className="factory-capacity-images" aria-label="People and machinery at work">
+            <FactoryPhoto image={factoryImages[8]} />
+            <FactoryPhoto image={factoryImages[12]} />
+          </div>
         </div>
       </section>
 
@@ -226,14 +256,11 @@ export function FactoryPage() {
             <p className="eyebrow">Inside the works</p>
             <h2 id="factory-gallery-title">Stockport, at work.</h2>
           </div>
-          <p>Views from the factory where bespoke doors and screens take shape.</p>
+          <p>Browse materials, machinery and finished work in a clear view of production.</p>
         </div>
         <div className="factory-gallery-grid">
-          {factoryImages.map((image, index) => (
-            <figure className="factory-gallery-item" key={image.url} data-testid={`image-factory-${index + 1}`}>
-              <img src={image.url} alt={image.alt} loading="lazy" />
-              <figcaption><span>{String(index + 1).padStart(2, '0')}</span><span>{image.label}</span></figcaption>
-            </figure>
+          {factoryGalleryImages.map((image) => (
+            <FactoryPhoto image={image} key={image.url} className="factory-gallery-item" />
           ))}
         </div>
       </section>
