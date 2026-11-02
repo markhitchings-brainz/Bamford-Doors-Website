@@ -113,7 +113,6 @@ export function CorporateSocialResponsibilityPage() {
           </div>
         </div>
       </section>
-
       <section className="csr-feature" aria-labelledby="csr-feature-heading">
         <div className="wrap">
           <div className="csr-feature-head">
@@ -123,7 +122,6 @@ export function CorporateSocialResponsibilityPage() {
           <DirectVideoPlayer video={videos.general} testId="social-value" />
         </div>
       </section>
-
       <section className="csr-sections" id="csr-sections" aria-label="Our social value work">
         <div className="wrap">
           {sections.map((s) => (
@@ -139,7 +137,6 @@ export function CorporateSocialResponsibilityPage() {
           ))}
         </div>
       </section>
-
       <section className="csr-community" aria-labelledby="csr-defib-heading">
         <div className="wrap csr-community-grid">
           <div className="csr-community-copy">
@@ -150,12 +147,12 @@ export function CorporateSocialResponsibilityPage() {
           <DirectVideoPlayer video={videos.defib} testId="defib-nottingham" />
         </div>
       </section>
-
       <section className="csr-closing">
         <div className="wrap csr-closing-inner">
           <div>
             <p className="eyebrow">Talk to Bamford</p>
-            <h2>Need social value information for a project?</h2>
+            <h2>Talk to us about
+            your new door project</h2>
             <p>Tell the team which project criteria or information you need to discuss.</p>
           </div>
           <Link href="/contact?purpose=consultation" className="button" data-testid="link-csr-contact">
