@@ -272,6 +272,10 @@
   object-position: center 30%;
 }
 
+.history-milestone:nth-child(4) .history-milestone-image img {
+  object-position: center 12%;
+}
+
 .history-closing {
   display: grid;
   grid-template-columns: 1fr 1fr;
