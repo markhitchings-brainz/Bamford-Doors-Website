@@ -73,7 +73,7 @@ export function ReferenceLedHome() {
         <div className="rl-hero-image"><img src="/media/grp.webp" alt="Bamford entrance door installed at a shared residential building" /><div className="rl-image-caption"><span>01</span><i /> ENTRANCE SYSTEMS</div></div>
         <div className="rl-hero-panel">
           <p className="rl-kicker">Bamford Doors <b>/</b> Made for the entrance</p>
-          <h1>Entrances<br />that work<br /><em>harder.</em></h1>
+          <h1>Entrances<br />that work<br /><em>Elevate Your Spaces.</em></h1>
           <p className="rl-hero-lead">Custom-made security doors and entrance systems for the buildings people rely on.</p>
           <p className="rl-hero-body">Designed, manufactured and installed for housing providers, councils, schools and public building teams.</p>
           <div className="rl-hero-actions"><Link className="rl-button" href="/contact?purpose=consultation">Discuss your project <ArrowRight size={16} /></Link><Link className="rl-quiet-link" href="/products">Explore products <ArrowUpRight size={16} /></Link></div>
