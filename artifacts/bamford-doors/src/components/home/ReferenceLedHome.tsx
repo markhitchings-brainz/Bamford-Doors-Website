@@ -56,7 +56,7 @@ function ProductCard({ item, index }: { item: typeof products[number]; index: nu
 
 function Footer() {
   return <footer className="rl-footer"><div className="rl-wrap">
-    <div className="rl-footer-top"><div className="rl-footer-brand"><img src="/media/bamford-doors-wordmark.png" alt="Bamford Doors" /><p>Custom-made security doors and screens for public and commercial buildings.</p></div>
+    <div className="rl-footer-top"><div className="rl-footer-brand"><img src="/media/bamford-doors-footer-logo.png" alt="Bamford Doors" /><p>Custom-made security doors and screens for public and commercial buildings.</p></div>
       <div className="rl-footer-col"><h3>Explore</h3>{navItems.slice(0, 4).map(([label, path]) => <Link href={path} key={path}>{label}</Link>)}<Link href="/news-insights">News &amp; insights</Link></div>
       <div className="rl-footer-col"><h3>Company</h3><Link href="/about">About Bamford</Link><Link href="/faq">Frequently asked questions</Link><Link href="/downloads">Documents and downloads</Link></div>
       <div className="rl-footer-contact"><p className="rl-kicker">A good place to start</p><h3>Tell us about<br />your entrance.</h3><Link href="/contact">Contact our team <ArrowRight size={15} /></Link></div>

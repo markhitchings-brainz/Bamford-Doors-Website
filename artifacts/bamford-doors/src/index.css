@@ -396,7 +396,7 @@ p { line-height:1.75; }
 .faq-list details p { color:#555; max-width:800px; margin:16px 0 0; font-size:14px; }
 .footer { background:#171717; color:#fff; margin-top:auto; padding:52px 0 24px; }
 .footer-grid { display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:35px; padding-bottom:42px; }
-.footer-logo { width:190px; background:white; padding:8px; height:auto; display:block; }
+.footer-logo { width:190px; height:auto; display:block; }
 .footer p,.footer a { color:#c9c9c9; font-size:12px; line-height:1.8; }
 .footer h3 { color:#fff; font-size:12px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:15px; }
 .footer a { display:block; text-decoration:none; margin:6px 0; }
