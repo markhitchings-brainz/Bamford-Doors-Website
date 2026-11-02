@@ -26,7 +26,7 @@ const factoryImages = [
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/ae86741e8c8ad62c9bf8cb543c5aa15602915855-1920x1080.jpg', label: 'Renovated factory exterior', alt: 'Exterior of the renovated Bamford factory in Stockport, showing its new roof and side walling' },
 ].map((image, index) => ({ ...image, number: index + 1 }));
 
-const featuredImageNumbers = new Set([9, 13, 15, 16]);
+const featuredImageNumbers = new Set([15, 16]);
 const factoryGalleryImages = factoryImages.filter((image) => !featuredImageNumbers.has(image.number));
 
 function FactoryPhoto({
@@ -242,10 +242,6 @@ export function FactoryPage() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="factory-capacity-images" aria-label="People and machinery at work">
-            <FactoryPhoto image={factoryImages[8]} />
-            <FactoryPhoto image={factoryImages[12]} />
           </div>
         </div>
       </section>
