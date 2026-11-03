@@ -20,6 +20,7 @@ import { AluminiumVsSteelPage } from '@/pages/AluminiumVsSteelPage';
 import { ConservationAreasPage } from '@/pages/ConservationAreasPage';
 import { CoastalApplicationsPage } from '@/pages/CoastalApplicationsPage';
 import { AluminiumModularDoorsPage } from '@/pages/AluminiumModularDoorsPage';
+import { ThermallyBrokenDoorsPage } from '@/pages/ThermallyBrokenDoorsPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -388,6 +389,7 @@ function RouteContent() {
   const alias=legacyAliases[path];
   const product=products.find(p=>path===productPath(p)||path===p.legacyPath.replace(/\/$/,'')||path===alias);
   if(product?.slug==='aluminium-modular-doors') return <AluminiumModularDoorsPage/>;
+  if(product?.slug==='thermally-broken-doors') return <ThermallyBrokenDoorsPage/>;
   if(product) return <ProductDetail product={product}/>;
   const service=services.find(s=>path===servicePath(s)||path===s.legacyPath.replace(/\/$/,''));
   if(service) return <ServiceDetail service={service}/>;
