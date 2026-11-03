@@ -1,10 +1,18 @@
-type PageSeo = {
+export type PageSeo = {
   title: string;
   description: string;
   path: string;
   noindex?: boolean;
   image?: string;
 };
+
+export const SITE_ORIGIN = "https://bamforddoors.com";
+
+export function canonicalUrl(path: string) {
+  const canonicalPath =
+    path === "/" ? "/" : `${path.replace(/\/+$/, "")}/`;
+  return new URL(canonicalPath, SITE_ORIGIN).toString();
+}
 
 function upsertMeta(attribute: "name" | "property", key: string, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(
@@ -20,8 +28,8 @@ function upsertMeta(attribute: "name" | "property", key: string, content: string
 
 export function applyPageSeo({ title, description, path, noindex, image }: PageSeo) {
   const pageTitle = title === "Bamford Doors" ? title : `${title} | Bamford Doors`;
-  const canonicalUrl = new URL(path, window.location.origin).toString();
-  const imageUrl = new URL(image || "/media/aluminium.webp", window.location.origin).toString();
+  const canonicalPageUrl = canonicalUrl(path);
+  const imageUrl = new URL(image || "/media/aluminium.webp", SITE_ORIGIN).toString();
 
   document.title = pageTitle;
   upsertMeta("name", "description", description);
@@ -29,7 +37,7 @@ export function applyPageSeo({ title, description, path, noindex, image }: PageS
   upsertMeta("property", "og:title", pageTitle);
   upsertMeta("property", "og:description", description);
   upsertMeta("property", "og:type", "website");
-  upsertMeta("property", "og:url", canonicalUrl);
+  upsertMeta("property", "og:url", canonicalPageUrl);
   upsertMeta("property", "og:image", imageUrl);
   upsertMeta("property", "og:image:alt", title);
   upsertMeta("property", "og:site_name", "Bamford Doors");
@@ -46,7 +54,7 @@ export function applyPageSeo({ title, description, path, noindex, image }: PageS
     canonical.rel = "canonical";
     document.head.appendChild(canonical);
   }
-  canonical.href = canonicalUrl;
+  canonical.href = canonicalPageUrl;
 
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -55,14 +63,14 @@ export function applyPageSeo({ title, description, path, noindex, image }: PageS
     legalName: "F. Bamford (Engineering) Ltd",
     description:
       "Design, manufacture and installation of custom-made security doors and screens.",
-    url: window.location.origin,
-    logo: new URL("/media/bamford-doors-wordmark.png", window.location.origin).toString(),
+    url: SITE_ORIGIN,
+    logo: new URL("/media/bamford-doors-wordmark.png", SITE_ORIGIN).toString(),
   };
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Bamford Doors",
-    url: window.location.origin,
+    url: SITE_ORIGIN,
   };
 
   let schema = document.head.querySelector<HTMLScriptElement>(

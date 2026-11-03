@@ -5,7 +5,7 @@ import { Menu, X, ArrowRight, ChevronRight, MoveUpRight } from 'lucide-react';
 import { Link, Route, Router as WouterRouter, Switch, useLocation } from 'wouter';
 import { PortableText } from '@portabletext/react';
 import { ErrorBoundary } from '@/components/error-boundary';
-import { applyPageSeo } from '@/lib/seo';
+import { applyPageSeo, type PageSeo } from '@/lib/seo';
 import { fetchPublishedNewsStories, fetchPublishedNewsStory, type NewsStory } from '@/sanity/client';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -313,6 +313,7 @@ function ArticleDetail({slug}:{slug:string}) {
       description: story.seoDescription || story.excerpt,
       path: `/news-insights/${story.slug}`,
       image: story.mainImage?.url,
+      noindex: true,
     });
   }, [story]);
 
@@ -413,27 +414,59 @@ function RouteContent() {
   return <NotFound/>;
 }
 
-function getPageSeo(path:string) {
+export function getPageSeo(path:string): PageSeo {
   const product=products.find(p=>path===productPath(p)||path===p.legacyPath.replace(/\/$/,''));
   const service=services.find(s=>path===servicePath(s)||path===s.legacyPath.replace(/\/$/,''));
   const sector=sectors.find(s=>path===sectorPath(s));
   const companyPath=legacyCompanyRoutes[path]||path;
   const company=companyPages[companyPath];
+  if(path==='/admin') return {title:'Content editor',description:'Private content management area.',path,noindex:true};
   if(path==='/') return {title:'Quality Bespoke Security Doors',description:'Bamford Doors designs, manufactures and installs bespoke security doors and screens for housing providers, councils, schools and public buildings.',path:'/'};
   if(path==='/products') return {title:'Security Door Products',description:'Explore Bamford Doors’ custom-made security door and entrance system options for housing, public and commercial buildings.',path};
   if(path==='/services') return {title:'Door Project and Maintenance Services',description:'Discuss project management, maintenance, stock condition surveys and entrance-system services with Bamford Doors.',path};
   if(path==='/sectors') return {title:'Sectors We Serve',description:'Explore door and entrance system information for housing, local authorities, education, healthcare and public buildings.',path};
-  if(path==='/contact'||path==='/contact-us') return {title:'Contact Bamford Doors',description:'Contact Bamford Doors about a security door, entrance system, project, maintenance requirement or stock condition survey.',path:'/contact'};
+  if(path==='/contact'||path==='/contact-us') return {title:'Contact Bamford Doors',description:'Contact Bamford Doors about a security door, entrance system, project, maintenance requirement or stock condition survey.',path:'/contact',noindex:path==='/contact-us'};
   if(path==='/case-studies') return {title:'Project Experience',description:'Discuss building-specific entrance requirements and relevant project experience with Bamford Doors.',path,noindex:true};
-  if(path==='/news-insights'||path==='/blog'||path==='/blog-2-2'||path==='/more-news') return {title:'News and Insights for Building Teams',description:'Practical starting points for teams planning, maintaining or improving a shared entrance.',path:'/news-insights'};
+  if(path==='/news-insights'||path==='/blog'||path==='/blog-2-2'||path==='/more-news') return {title:'News and Insights for Building Teams',description:'Practical starting points for teams planning, maintaining or improving a shared entrance.',path:'/news-insights',noindex:path!=='/news-insights'};
   if(path==='/faq') return {title:'Security Door and Entrance FAQs',description:'Practical answers about security door enquiries, product options and services from Bamford Doors.',path};
-  if(product) return {title:product.title,description:product.summary,path:productPath(product)};
-  if(service) return {title:service.title,description:service.summary,path:servicePath(service)};
+  if(product) return {title:product.title,description:product.summary,path:productPath(product),image:product.image||undefined,noindex:path!==productPath(product)};
+  if(service) return {title:service.title,description:service.summary,path:servicePath(service),noindex:path!==servicePath(service)};
   if(sector) return {title:`Security Doors for ${sector.title}`,description:sector.summary,path:sectorPath(sector)};
-  if(company) return {title:company.title,description:company.lead,path:companyPath,noindex:companyPath!=='/about'};
+  if(company) return {title:company.title,description:company.lead,path:companyPath,noindex:companyPath!==path||companyPath==='/about/unique-environments'};
   if(path.startsWith('/case-studies/')) return {title:'Project Experience',description:'Discuss building-specific entrance requirements and relevant project experience with Bamford Doors.',path,noindex:true};
   if(path.startsWith('/news-insights/')) return {title:path.split('/').pop()!.split('-').map(w=>w[0]?.toUpperCase()+w.slice(1)).join(' '),description:'Practical information for teams planning, maintaining or improving shared entrances.',path,noindex:true};
-  return {title:'Bamford Doors',description:'Bamford Doors designs, manufactures and installs custom-made security doors and screens.',path,noindex:legacyEntries.has(path)||path==='/downloads'};
+  return {title:'Bamford Doors',description:'Bamford Doors designs and manufactures custom-made security doors and entrance systems for shared buildings.',path,noindex:true};
+}
+
+export function getSeoRoutes(): Array<PageSeo & { requestPath: string }> {
+  const canonicalPaths = [
+    '/',
+    '/products',
+    ...products.map(productPath),
+    '/services',
+    ...services.map(servicePath),
+    '/sectors',
+    ...sectors.map(sectorPath),
+    ...Object.keys(companyPages),
+    '/news-insights',
+    '/faq',
+    '/contact',
+    '/case-studies',
+    '/admin',
+    '/downloads',
+    '/contact-us',
+    '/blog',
+    '/blog-2-2',
+    '/more-news',
+    ...products.map(product=>product.legacyPath.replace(/\/$/,'')),
+    ...services.map(service=>service.legacyPath.replace(/\/$/,'')),
+    ...Object.keys(legacyCompanyRoutes),
+    ...Object.keys(legacyAliases),
+  ];
+  return [...new Set(canonicalPaths)].map((requestPath) => ({
+    ...getPageSeo(requestPath),
+    requestPath,
+  }));
 }
 
 function Router() {
