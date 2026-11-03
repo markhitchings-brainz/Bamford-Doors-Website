@@ -4,19 +4,19 @@ import './thermally-broken-doors.css';
 
 const testing = [
   {
-    label: 'Brochure-reported test',
+    label: 'Independent testing',
     value: 'BS EN ISO 10077-1:2006',
-    detail: 'The brochure states that the door/screen was independently tested in accordance with this standard.',
+    detail: 'The door and screen were independently tested in accordance with this standard.',
   },
   {
-    label: 'Reported reference value',
+    label: 'L2A reference value',
     value: 'U-value 3.5',
-    detail: 'The brochure compares this with the L2A figure it cites for high-use entrance doors.',
+    detail: 'The reference value for high-use entrance doors cited in the test information.',
   },
   {
-    label: 'Representative sample',
+    label: 'Tested sample',
     value: '1230 × 2180 mm',
-    detail: 'A sample with a thermally unbroken sill is reported to have achieved a U-value of 2.1.',
+    detail: 'With a thermally unbroken sill, this sample achieved a U-value of 2.1.',
   },
 ];
 
@@ -74,7 +74,7 @@ export function ThermallyBrokenDoorsPage() {
           <p className="tb-eyebrow">Product overview</p>
           <h2 id="tb-overview-title">Designed for demanding shared entrances.</h2>
           <p>The Bamford thermally broken door is based on the tried-and-tested Secure by Design modular door set. It is designed to provide strength against physical attack alongside a thermal, energy-efficient entrance solution.</p>
-          <p>The brochure describes the system as compliant with Parts Q, L, M and K. Requirements depend on the project and the complete doorset specification, so confirm current compliance for the selected configuration.</p>
+          <p>The system can be specified with Building Regulations Parts Q, L, M and K in mind. Requirements depend on the project and the complete doorset specification, so confirm compliance for the selected configuration.</p>
           <Link href="/products/aluminium-modular-doors" className="tb-inline-link" data-testid="link-tb-modular">Explore aluminium modular doors <ArrowRight size={15} aria-hidden="true" /></Link>
         </div>
         <div className="tb-overview-side">
@@ -93,7 +93,7 @@ export function ThermallyBrokenDoorsPage() {
         <div className="tb-wrap">
           <div className="tb-section-head">
             <div><p className="tb-eyebrow">Designed as a complete set</p><h2 id="tb-visual-title">From section detail<br />to finished entrance.</h2></div>
-            <p>The brochure pairs the profile construction with an installed door set. Together, they show why the sill, door and surrounding screen need to be considered as one system.</p>
+            <p>The profile detail and installed door set show why the sill, door and surrounding screen need to be considered as one system.</p>
           </div>
           <div className="tb-visual-grid">
             <figure className="tb-visual-card tb-profile-card">
@@ -105,7 +105,7 @@ export function ThermallyBrokenDoorsPage() {
               <figcaption><span>02 / Installed example</span><strong>Thermally broken door set</strong></figcaption>
             </figure>
           </div>
-          <p className="tb-image-note">Images reproduced from the supplied product brochure. Confirm the appearance and specification of the proposed system with Bamford.</p>
+          <p className="tb-image-note">Illustrative images. Confirm the appearance and specification of the proposed system with Bamford.</p>
         </div>
       </section>
 
@@ -113,7 +113,7 @@ export function ThermallyBrokenDoorsPage() {
         <div className="tb-wrap">
           <div className="tb-section-head tb-testing-head">
             <div><p className="tb-eyebrow">Testing information</p><h2 id="tb-testing-title">The important figures</h2></div>
-            <p>These are historical brochure figures, not a substitute for current test evidence or a project-specific assessment.</p>
+            <p>The test method and results relate to a specific tested doorset. Confirm their relevance against current requirements and the exact project specification.</p>
           </div>
           <div className="tb-testing-grid">
             {testing.map((item, index) => (
@@ -128,9 +128,9 @@ export function ThermallyBrokenDoorsPage() {
           </div>
           <div className="tb-result-callout">
             <Thermometer size={23} aria-hidden="true" />
-            <p><strong>Reported result: U-value 2.1.</strong> The brochure says this was 1.4 lower than its cited L2A figure for high-use entrance doors. It also notes that improved values can be achieved using a thermally broken sill and/or a larger side screen.</p>
+            <p><strong>Sample result: U-value 2.1.</strong> This is 1.4 below the 3.5 L2A reference value for high-use entrance doors. Improved values can be achieved using a thermally broken sill and/or a larger side screen.</p>
           </div>
-          <p className="tb-disclaimer">The test method, regulatory references and performance values above are transcribed from the supplied brochure. Regulations and standards may have changed; request the relevant current test report and confirm applicability to the exact doorset, dimensions and project.</p>
+          <p className="tb-disclaimer">Performance values and regulatory references relate to specific test conditions and may not apply to every configuration. Ask Bamford for current test documentation and confirm the requirements for the exact doorset, dimensions and project.</p>
         </div>
       </section>
 
