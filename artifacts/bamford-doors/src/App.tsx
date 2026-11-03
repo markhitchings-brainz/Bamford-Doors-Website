@@ -463,7 +463,8 @@ export function getSeoRoutes(): Array<PageSeo & { requestPath: string }> {
     ...Object.keys(legacyCompanyRoutes),
     ...Object.keys(legacyAliases),
   ];
-  return [...new Set(canonicalPaths)].map((requestPath) => ({
+  const normalizedPaths = canonicalPaths.map((routePath) => routePath.replace(/\/+$/, '') || '/');
+  return [...new Set(normalizedPaths)].map((requestPath) => ({
     ...getPageSeo(requestPath),
     requestPath,
   }));
@@ -472,10 +473,6 @@ export function getSeoRoutes(): Array<PageSeo & { requestPath: string }> {
 function Router() {
   const [location]=useLocation();
   useEffect(()=>{
-    if(pathNow()==='/admin') {
-      document.title='Content editor | Bamford Doors';
-      return;
-    }
     const page=getPageSeo(pathNow());
     applyPageSeo(page);
   },[location]);

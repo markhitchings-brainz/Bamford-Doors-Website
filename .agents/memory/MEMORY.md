@@ -3,3 +3,4 @@
 - [Website video hosting](media-hosting.md) — use Sanity CDN for supplied videos, with direct playback and no large MP4s in the Vercel repository.
 - [Brand header colour](brand-header-colour.md) — use black rather than dark grey for page headers, as specified by the user’s brand guidance.
 - [Visitor-facing product copy](historic-brochure-claims.md) — address website visitors directly without naming source documents; qualify technical claims and prompt current evidence checks.
+- [Static SEO routing](seo-static-routing.md) — directory-style canonical URLs serve generated metadata; metadata pre-rendering is not full page-body SSR.
