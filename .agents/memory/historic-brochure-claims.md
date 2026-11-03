@@ -3,8 +3,10 @@ name: Historic brochure claims
 description: How to present legacy technical, regulatory and test claims from Bamford product brochures.
 ---
 
-Label technical and regulatory figures transcribed from older brochures as brochure-reported, and state that current evidence and project applicability must be confirmed.
+Write website copy directly to the reader. Do not mention brochures, source documents, or copied product literature in visitor-facing text.
 
-**Why:** Product brochures may cite superseded standards or regulations, and test results apply to particular samples and configurations.
+Qualify technical, regulatory, approval, and test claims: invite the reader to confirm current evidence and applicability to the exact project configuration. Do not imply universal compliance or guaranteed performance.
 
-**How to apply:** When creating or updating product pages from legacy brochure content, preserve the source figures accurately but do not present them as current, universal compliance or guaranteed performance.
+**Why:** the user asked that Bamford website copy address visitors directly and not refer to the brochure/source material. Older product information may also cite superseded standards, and test results apply only to particular samples and configurations.
+
+**How to apply:** When adapting historical product information for any Bamford page, state relevant product details as clear, direct customer-facing copy; keep the qualification about current evidence and project fit without naming the source document.
