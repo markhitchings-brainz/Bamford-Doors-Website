@@ -22,6 +22,7 @@ import { CoastalApplicationsPage } from '@/pages/CoastalApplicationsPage';
 import { AluminiumModularDoorsPage } from '@/pages/AluminiumModularDoorsPage';
 import { ThermallyBrokenDoorsPage } from '@/pages/ThermallyBrokenDoorsPage';
 import { WoodEffectDoorsPage } from '@/pages/WoodEffectDoorsPage';
+import { HmoEntranceDoorsPage } from '@/pages/HmoEntranceDoorsPage';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -34,7 +35,7 @@ const products: Product[] = [
   {slug:'aluminium-modular-doors',title:'Aluminium modular doors',summary:'Bespoke modular aluminium doors and screens for communal, public and commercial buildings, with configurable glazing, access and finishes.',applications:['Communal entrances','Public and commercial buildings'],features:['Heavy-duty engineered aluminium sections','Bespoke door and screen combinations','Multiple glazing, access and finish options'],image:'/media/aluminium-modular/communal-entrance.jpg',legacyPath:'/aluminium-modular-doors/'},
   {slug:'thermally-broken-doors',title:'Thermally broken doors',summary:'A thermally broken entrance door option for buildings where this product type is required.',applications:['Communal entrances','Public and commercial buildings'],features:['Custom-made entrance systems','Available as a door and screen arrangement'],image:'/media/thermal.webp',legacyPath:'/thermally-broken-doors/'},
   {slug:'wood-effect-door',title:'Wood effect doors',summary:'Bespoke aluminium entrance doors with a woodgrain-effect finish, designed around the building and project requirements.',applications:['Communal entrances','Housing provider buildings'],features:['Woodgrain-effect powder-coated finish','Door and screen arrangements made to suit the opening'],image:'/media/wood-effect.webp',legacyPath:'/wood-effect-door/'},
-  {slug:'hmo',title:'HMO entrance doors',summary:'Custom-made entrance doors for houses in multiple occupation.',applications:['Houses in multiple occupation','Shared residential entrances'],features:['Designed for the entrance','Can be discussed with our team'],image:'/media/hmo.webp',legacyPath:'/hmo/'},
+  {slug:'hmo',title:'HMO entrance doors',summary:'Made-to-measure entrance doors for houses in multiple occupation, planned around the building, its residents and the way access is managed.',applications:['Houses in multiple occupation','Shared residential entrances'],features:['Bespoke door and screen options','Discuss access, glazing and locking choices','Confirm current security evidence for the selected doorset'],image:'/media/hmo/entrance-03.jpg',legacyPath:'/hmo/'},
   {slug:'grp-doors',title:'Glass reinforced plastic (GRP) doors',summary:'A GRP door option within Bamford’s range of custom-made entrance systems.',applications:['Communal entrances','Public and commercial buildings'],features:['Custom-made door option','Discuss suitability with our team'],image:'/media/grp.webp',legacyPath:'/glass-reinforced-plastic-grp-doors/'},
   {slug:'automatic-operators',title:'Automatic operators',summary:'Automatic operators for entrance doors. Please contact the team to discuss the requirements of your building.',applications:['Building entrances','Shared access points'],features:['Operator options for entrance doors','Project requirements discussed with our team'],image:'/media/automatic.webp',legacyPath:'/automatic-operators/'},
   {slug:'mailboxes',title:'Mailboxes',summary:'Mailbox options for shared residential entrances.',applications:['Communal entrances','Housing provider buildings'],features:['Mailbox options','Discuss layout and requirements with our team'],image:'/media/mailboxes.webp',legacyPath:'/mailboxes/'},
@@ -392,6 +393,7 @@ function RouteContent() {
   if(product?.slug==='aluminium-modular-doors') return <AluminiumModularDoorsPage/>;
   if(product?.slug==='thermally-broken-doors') return <ThermallyBrokenDoorsPage/>;
   if(product?.slug==='wood-effect-door') return <WoodEffectDoorsPage/>;
+  if(product?.slug==='hmo') return <HmoEntranceDoorsPage/>;
   if(product) return <ProductDetail product={product}/>;
   const service=services.find(s=>path===servicePath(s)||path===s.legacyPath.replace(/\/$/,''));
   if(service) return <ServiceDetail service={service}/>;
