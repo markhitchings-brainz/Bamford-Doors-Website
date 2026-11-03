@@ -62,7 +62,7 @@ export function ThermallyBrokenDoorsPage() {
               <div className="tb-hero-meta"><span>01 / Thermally broken door sets</span><span>Made around the entrance</span></div>
             </div>
             <figure className="tb-hero-image">
-              <img src="/media/thermal.webp" alt="White aluminium communal entrance door and glazed screen" width="500" height="313" />
+              <img src="/media/thermally-broken/hero-door.jpg" alt="White thermally broken entrance door and glazed screen in a brick communal entrance" width="773" height="827" />
               <figcaption>Thermally broken entrance system</figcaption>
             </figure>
           </div>
