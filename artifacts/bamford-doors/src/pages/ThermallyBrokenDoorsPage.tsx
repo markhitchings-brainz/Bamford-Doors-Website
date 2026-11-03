@@ -112,7 +112,7 @@ export function ThermallyBrokenDoorsPage() {
       <section className="tb-testing" id="testing" aria-labelledby="tb-testing-title">
         <div className="tb-wrap">
           <div className="tb-section-head tb-testing-head">
-            <div><p className="tb-eyebrow">Testing information</p><h2 id="tb-testing-title">The figures reported in the brochure.</h2></div>
+            <div><p className="tb-eyebrow">Testing information</p><h2 id="tb-testing-title">The important figures</h2></div>
             <p>These are historical brochure figures, not a substitute for current test evidence or a project-specific assessment.</p>
           </div>
           <div className="tb-testing-grid">
