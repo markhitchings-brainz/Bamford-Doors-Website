@@ -101,7 +101,7 @@ export function ThermallyBrokenDoorsPage() {
               <figcaption><span>01 / Profile detail</span><strong>Thermal break and sill</strong></figcaption>
             </figure>
             <figure className="tb-visual-card tb-install-card">
-              <div className="tb-visual-image"><img src="/media/thermally-broken/door-set.jpg" alt="White paired entrance doors installed beneath a glazed upper screen" width="286" height="382" /></div>
+              <div className="tb-visual-image"><img src="/media/thermally-broken/door-set.jpg" alt="White paired entrance doors with glazed panels and a glazed upper screen" width="747" height="845" /></div>
               <figcaption><span>02 / Installed example</span><strong>Thermally broken door set</strong></figcaption>
             </figure>
           </div>
