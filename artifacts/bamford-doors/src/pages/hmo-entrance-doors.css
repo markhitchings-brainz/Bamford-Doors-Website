@@ -50,11 +50,11 @@
 .hmo-section-head h2 { max-width: 12ch; }
 .hmo-section-head > p, .hmo-gallery-head > p { max-width: 410px; margin: 0 0 2px; color: var(--hmo-muted); font-size: 12px; line-height: 1.8; }
 .hmo-consideration-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #c7c5c0; }
-.hmo-consideration { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr; gap: 21px 12px; min-height: 220px; padding: 22px 22px 25px 0; border-bottom: 1px solid #c7c5c0; }
+.hmo-consideration { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 15px 12px; min-height: 185px; padding: 18px 22px 20px 0; border-bottom: 1px solid #c7c5c0; }
 .hmo-consideration + .hmo-consideration { padding-left: 22px; border-left: 1px solid #c7c5c0; }
 .hmo-consideration-index { color: #777; font-size: 9px; font-weight: 700; letter-spacing: .13em; }
 .hmo-consideration > svg { color: var(--hmo-red); }
-.hmo-consideration > div { grid-column: 1 / -1; align-self: end; }
+.hmo-consideration > div { grid-column: 1 / -1; align-self: start; }
 .hmo-consideration h3 { margin: 0 0 9px; font-size: 17px; letter-spacing: -.045em; }
 .hmo-consideration p { margin: 0; color: #5e6262; font-size: 11px; line-height: 1.75; }
 .hmo-security { padding: 45px 0; color: #fff; background: #111; border-top: 4px solid var(--hmo-red); }
@@ -112,7 +112,7 @@
   .hmo-section-head, .hmo-gallery-head { align-items: flex-start; flex-direction: column; gap: 15px; margin-bottom: 26px; }
   .hmo-considerations, .hmo-gallery { padding-block: 60px; }
   .hmo-consideration-grid, .hmo-gallery-grid { grid-template-columns: 1fr; }
-  .hmo-consideration, .hmo-consideration + .hmo-consideration, .hmo-consideration:nth-child(3) { min-height: 170px; padding: 20px 0; border-left: 0; }
+  .hmo-consideration, .hmo-consideration + .hmo-consideration, .hmo-consideration:nth-child(3) { min-height: 0; padding: 17px 0; border-left: 0; }
   .hmo-gallery-image { height: 360px; }
   .hmo-closing { padding-block: 55px; }
   .hmo-closing-inner { align-items: flex-start; flex-direction: column; gap: 25px; }
