@@ -21,8 +21,8 @@ const vite = await createServer({
 });
 
 try {
-  const [{ getSeoRoutes }, { SITE_ORIGIN, canonicalUrl }] = await Promise.all([
-    vite.ssrLoadModule("/src/App.tsx"),
+  const [{ getSeoRoutes, renderPage }, { SITE_ORIGIN, canonicalUrl }] = await Promise.all([
+    vite.ssrLoadModule("/src/entry-server.tsx"),
     vite.ssrLoadModule("/src/lib/seo.ts"),
   ]);
   const { getCaseStudySeoRoutes } = await vite.ssrLoadModule("/src/sanity/caseStudySeo.ts");
@@ -31,6 +31,12 @@ try {
     ...await getCaseStudySeoRoutes(),
   ];
   const template = await readFile(path.join(outputDirectory, "index.html"), "utf8");
+  if (!template.includes('<div id="root"></div>')) {
+    throw new Error('Expected a fresh Vite build with an empty root. Run the full build before pre-rendering.');
+  }
+  // Unknown routes and CMS articles must mount normally, not hydrate a copy of
+  // the homepage. Hosting fallbacks point here rather than the generated home.
+  await writeFile(path.join(outputDirectory, "spa.html"), template);
 
   const escapeHtml = (value) =>
     String(value)
@@ -123,7 +129,14 @@ try {
   await writeFile(path.join(outputDirectory, "sitemap.xml"), sitemap);
 
   for (const route of routes) {
-    const routeHtml = renderHead(template, route);
+    const body = renderPage(route.requestPath);
+    if (body && !/<h1\b/.test(body)) {
+      throw new Error(`Pre-rendered page has no H1: ${route.requestPath}`);
+    }
+    const routeHtml = renderHead(template, route).replace(
+      '<div id="root"></div>',
+      () => `<div id="root">${body}</div>`,
+    );
     if (route.requestPath === "/") {
       await writeFile(path.join(outputDirectory, "index.html"), routeHtml);
       continue;
@@ -138,7 +151,7 @@ try {
   }
 
   console.log(
-    `Generated route metadata for ${routes.length} URLs and a sitemap with ${indexablePaths.length} indexable URLs.`,
+    `Generated page bodies and metadata for ${routes.length} URLs and a sitemap with ${indexablePaths.length} indexable URLs.`,
   );
 } finally {
   await vite.close();

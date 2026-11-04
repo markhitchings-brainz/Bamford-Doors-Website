@@ -67,11 +67,7 @@ const productTypes = [
 ];
 
 function useReducedMotionPreference() {
-  const [reducedMotion, setReducedMotion] = useState(() =>
-    typeof window !== 'undefined' &&
-    typeof window.matchMedia === 'function' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  );
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     if (typeof window.matchMedia !== 'function') return undefined;

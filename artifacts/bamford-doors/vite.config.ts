@@ -31,6 +31,22 @@ export default defineConfig(async ({ command }) => {
   return {
     base: basePath,
     plugins: [
+      {
+        name: 'static-page-preview-fallback',
+        configurePreviewServer(server) {
+          // Vite normally falls back to index.html, which is now a rendered
+          // homepage. Match the production host's client-only fallback instead.
+          return () => {
+            server.middlewares.use((req, _res, next) => {
+              const originalPath = new URL(req.originalUrl || '/', 'http://preview.local').pathname;
+              if (req.url?.split('?')[0] === '/index.html' && originalPath !== '/' && originalPath !== '/index.html') {
+                req.url = '/spa.html';
+              }
+              next();
+            });
+          };
+        },
+      },
       react(),
       tailwindcss(),
       runtimeErrorOverlay(),
@@ -58,7 +74,13 @@ export default defineConfig(async ({ command }) => {
           'attached_assets',
         ),
       },
-      dedupe: ['react', 'react-dom'],
+      dedupe: ['react', 'react-dom', '@tanstack/react-query'],
+    },
+    // The generated API client lives in a workspace package with a different
+    // React peer resolution. Process its query hooks through Vite so SSR uses
+    // this app's single React instance, just like the browser build.
+    ssr: {
+      noExternal: ['@tanstack/react-query', '@tanstack/query-core'],
     },
     root: path.resolve(import.meta.dirname),
     build: {

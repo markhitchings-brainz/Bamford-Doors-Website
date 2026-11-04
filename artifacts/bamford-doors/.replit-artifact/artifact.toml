@@ -21,7 +21,7 @@ publicDir = "artifacts/bamford-doors/dist/public"
 
 [[services.production.rewrites]]
 from = "/*"
-to = "/index.html"
+to = "/spa.html"
 
 [services.env]
 PORT = "18091"

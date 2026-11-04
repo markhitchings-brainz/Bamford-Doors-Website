@@ -2,10 +2,11 @@
   "framework": "vite",
   "buildCommand": "pnpm --filter @workspace/bamford-doors run build",
   "outputDirectory": "artifacts/bamford-doors/dist/public",
+  "trailingSlash": true,
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/spa.html"
     }
   ]
 }

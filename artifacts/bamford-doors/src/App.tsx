@@ -106,7 +106,7 @@ const navItems = [['Products','/products'],['Services','/services'],['Sectors','
 const productPath=(p:Product)=>`/products/${p.slug}`;
 const servicePath=(s:Service)=>`/services/${s.slug}`;
 const sectorPath=(s:Sector)=>`/sectors/${s.slug}`;
-const pathNow=()=>decodeURI(window.location.pathname).replace(/\/+$/,'')||'/';
+const normalizePath=(path:string)=>decodeURI(path).replace(/\/+$/,'')||'/';
 const queryClient=new QueryClient();
 const legacyEntries = new Map<string,string>(
   migrationInventory
@@ -187,12 +187,17 @@ function SectorDetail({sector}:{sector:Sector}) {
 
 function ContactPage() {
   const mutation=useCreateInquiry();
-  const params=new URLSearchParams(window.location.search);
-  const purposeValue=params.get('purpose')||'general';
-  const initialType=['general','product','maintenance','stock-survey','callback','consultation'].includes(purposeValue)?purposeValue:'general';
-  const initialProduct=params.get('product')||'';
-  const initialProject=params.get('project')||'';
-  const [values,setValues]=useState({name:'',email:'',phone:'',organization:'',enquiryType:initialType,productInterest:initialProduct,projectLocation:'',projectSize:'',timescale:'',message:initialProject?`I’d like to discuss a project similar to "${initialProject}".`:''});
+  const [location]=useLocation();
+  const [values,setValues]=useState({name:'',email:'',phone:'',organization:'',enquiryType:'general',productInterest:'',projectLocation:'',projectSize:'',timescale:'',message:''});
+  // Query-specific defaults are applied after hydration: every query URL shares
+  // the same generated contact HTML.
+  useEffect(()=>{
+    const params=new URLSearchParams(window.location.search);
+    const purpose=params.get('purpose')||'general';
+    const enquiryType=['general','product','maintenance','stock-survey','callback','consultation'].includes(purpose)?purpose:'general';
+    const project=params.get('project')||'';
+    setValues(v=>({...v,enquiryType,productInterest:params.get('product')||'',message:project?`I’d like to discuss a project similar to "${project}".`:v.message}));
+  },[]);
   const [errors,setErrors]=useState<Record<string,string>>({});
   const update=(key:string,value:string)=>setValues(v=>({...v,[key]:value}));
   const submit=(e:FormEvent<HTMLFormElement>)=>{
@@ -201,7 +206,7 @@ function ContactPage() {
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))next.email='Please enter a valid email address.';
     if(!values.message.trim())next.message='Please tell us a little about your enquiry.';
     setErrors(next); if(Object.keys(next).length)return;
-    mutation.mutate({data:{...values,enquiryType:values.enquiryType as 'general'|'product'|'maintenance'|'stock-survey'|'callback'|'consultation',sourcePage:pathNow()}});
+    mutation.mutate({data:{...values,enquiryType:values.enquiryType as 'general'|'product'|'maintenance'|'stock-survey'|'callback'|'consultation',sourcePage:normalizePath(location)}});
   };
   return <><PageHeading eyebrow="Contact" title="Talk to our team" lead="Tell us about your building, product interest or project. We’ll record your enquiry and provide an on-screen receipt when it is submitted."/><section className="wrap contact-grid"><aside className="contact-aside"><p className="eyebrow">Start a conversation</p><h3>What are you looking to discuss?</h3><p>Share the details you have. You can include information about the building, location and timing, but only fields marked required need to be completed.</p><p>For a product-specific question, choose “Product enquiry” and tell us which system you have in mind.</p></aside><div>{mutation.isSuccess?<div className="success-box" role="status" data-testid="status-enquiry-success"><p className="eyebrow">Enquiry recorded</p><h3>Thank you, {values.name}.</h3><p>{mutation.data.message}</p><p>Receipt reference: <strong>{mutation.data.id}</strong></p><button type="button" className="button button-outline" onClick={()=>{mutation.reset();setValues(v=>({...v,name:'',email:'',phone:'',organization:'',message:''}));}} data-testid="button-new-enquiry">Send another enquiry</button></div>:<form onSubmit={submit} noValidate><div className="form-grid">
       <div className="field"><label htmlFor="name">Name <span aria-hidden="true">*</span></label><input id="name" value={values.name} onChange={e=>update('name',e.target.value)} autoComplete="name" aria-invalid={!!errors.name} data-testid="input-name"/>{errors.name&&<span className="form-error">{errors.name}</span>}</div>
@@ -370,7 +375,8 @@ function LegacyInfo({title}:{title:string}) {
 function NotFound() { return <section className="notfound"><div className="wrap"><p className="eyebrow">404 · Page not found</p><h1 style={{fontSize:58}}>Page not found.</h1><p>We couldn’t find the page you were looking for.</p><Link href="/" className="button">Return home <ArrowRight size={15}/></Link></div></section>; }
 
 function RouteContent() {
-  const path=pathNow();
+  const [location]=useLocation();
+  const path=normalizePath(location);
   if(path==='/') return <Home/>;
   if(path==='/products') return <ProductIndex/>;
   if(path==='/services') return <ServiceIndex/>;
@@ -476,15 +482,16 @@ export function getSeoRoutes(): Array<PageSeo & { requestPath: string }> {
 
 function Router() {
   const [location]=useLocation();
+  const path=normalizePath(location);
   useEffect(()=>{
-    const page=getPageSeo(pathNow());
+    const page=getPageSeo(path);
     applyPageSeo(page);
-  },[location]);
-  if(pathNow()==='/admin'||pathNow().startsWith('/admin/')) return <ErrorBoundary resetKey={location}><Suspense fallback={<div className="studio-loading">Loading content editor…</div>}><StudioPage/></Suspense></ErrorBoundary>;
-  if(pathNow()==='/') return <ErrorBoundary resetKey={location}><ReferenceLedHome/></ErrorBoundary>;
+  },[path]);
+  if(path==='/admin'||path.startsWith('/admin/')) return <ErrorBoundary resetKey={location}><Suspense fallback={<div className="studio-loading">Loading content editor…</div>}><StudioPage/></Suspense></ErrorBoundary>;
+  if(path==='/') return <ErrorBoundary resetKey={location}><ReferenceLedHome/></ErrorBoundary>;
   return <ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary>;
 }
-function App() {
-  return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')}><Router/></WouterRouter><Toaster/></TooltipProvider></QueryClientProvider>;
+function App({ssrPath}:{ssrPath?:string}={}) {
+  return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')} ssrPath={ssrPath}><Router/></WouterRouter><Toaster/></TooltipProvider></QueryClientProvider>;
 }
 export default App;
