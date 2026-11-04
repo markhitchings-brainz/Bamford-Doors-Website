@@ -8,6 +8,7 @@ const navItems = [
   ['Services', '/services'],
   ['Sectors', '/sectors'],
   ['Case studies', '/case-studies'],
+  ['News', '/news-insights'],
   ['About', '/about'],
 ] as const;
 

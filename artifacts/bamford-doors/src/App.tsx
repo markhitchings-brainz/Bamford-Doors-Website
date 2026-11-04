@@ -102,7 +102,7 @@ const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about/conservation-areas':{title:'Conservation areas',lead:'Explore bespoke communal entrance design for conservation areas, with guidance on finishes, planning context and access.',body:['Review design options for heritage settings and confirm local planning requirements before specifying or installing.']},
   '/about/coastal-applications':{title:'Coastal applications',lead:'Plan communal entrances for salt-laden air, wind-driven rain and demanding coastal exposure.',body:['Compare material considerations, finishes and practical specification questions for coastal properties.']},
 };
-const navItems = [['Products','/products'],['Services','/services'],['Sectors','/sectors'],['Case studies','/case-studies'],['About','/about']] as const;
+const navItems = [['Products','/products'],['Services','/services'],['Sectors','/sectors'],['Case studies','/case-studies'],['News','/news-insights'],['About','/about']] as const;
 const productPath=(p:Product)=>`/products/${p.slug}`;
 const servicePath=(s:Service)=>`/services/${s.slug}`;
 const sectorPath=(s:Sector)=>`/sectors/${s.slug}`;
