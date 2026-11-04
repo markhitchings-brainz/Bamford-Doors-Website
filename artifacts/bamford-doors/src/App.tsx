@@ -424,7 +424,7 @@ export function getPageSeo(path:string): PageSeo {
   const sector=sectors.find(s=>path===sectorPath(s));
   const companyPath=legacyCompanyRoutes[path]||path;
   const company=companyPages[companyPath];
-  if(path==='/admin') return {title:'Content editor',description:'Private content management area.',path,noindex:true};
+  if(path==='/admin'||path.startsWith('/admin/')) return {title:'Content editor',description:'Private content management area.',path,noindex:true};
   if(path==='/') return {title:'Quality Bespoke Security Doors',description:'Bamford Doors designs, manufactures and installs bespoke security doors and screens for housing providers, councils, schools and public buildings.',path:'/'};
   if(path==='/products') return {title:'Security Door Products',description:'Explore Bamford Doors’ custom-made security door and entrance system options for housing, public and commercial buildings.',path};
   if(path==='/services') return {title:'Door Project and Maintenance Services',description:'Discuss project management, maintenance, stock condition surveys and entrance-system services with Bamford Doors.',path};
@@ -480,7 +480,7 @@ function Router() {
     const page=getPageSeo(pathNow());
     applyPageSeo(page);
   },[location]);
-  if(pathNow()==='/admin') return <ErrorBoundary resetKey={location}><Suspense fallback={<div className="studio-loading">Loading content editor…</div>}><StudioPage/></Suspense></ErrorBoundary>;
+  if(pathNow()==='/admin'||pathNow().startsWith('/admin/')) return <ErrorBoundary resetKey={location}><Suspense fallback={<div className="studio-loading">Loading content editor…</div>}><StudioPage/></Suspense></ErrorBoundary>;
   if(pathNow()==='/') return <ErrorBoundary resetKey={location}><ReferenceLedHome/></ErrorBoundary>;
   return <ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary>;
 }
