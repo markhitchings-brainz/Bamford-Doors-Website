@@ -14,3 +14,9 @@ Describe the current approach as pre-rendered metadata, not full page-body SSR.
 **Why:** It preserves the existing React/static application without a framework migration; the visible page body still relies on JavaScript.
 
 **How to apply:** Treat full page-content pre-rendering and CMS article SEO as separate work, and do not imply that all crawler rendering limitations have been eliminated.
+
+Disable client dependency discovery in build-only Vite middleware used to load application modules.
+
+**Why:** Once generated directory HTML exists, discovery can scan those output pages as source entries and report unresolved bundle asset imports. Network-backed build loaders leave enough time for that unnecessary scan to run.
+
+**How to apply:** Keep browser dependency optimisation out of metadata/SSG module-loading servers; verify the build output and raw canonical responses instead.

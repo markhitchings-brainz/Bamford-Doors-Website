@@ -15,6 +15,7 @@ process.env.NODE_ENV = "production";
 const vite = await createServer({
   configFile: path.join(packageRoot, "vite.config.ts"),
   server: { middlewareMode: true },
+  optimizeDeps: { noDiscovery: true, include: [] },
   appType: "custom",
   logLevel: "error",
 });
@@ -24,7 +25,11 @@ try {
     vite.ssrLoadModule("/src/App.tsx"),
     vite.ssrLoadModule("/src/lib/seo.ts"),
   ]);
-  const routes = getSeoRoutes();
+  const { getCaseStudySeoRoutes } = await vite.ssrLoadModule("/src/sanity/caseStudySeo.ts");
+  const routes = [
+    ...getSeoRoutes().filter((route) => route.requestPath !== "/case-studies"),
+    ...await getCaseStudySeoRoutes(),
+  ];
   const template = await readFile(path.join(outputDirectory, "index.html"), "utf8");
 
   const escapeHtml = (value) =>

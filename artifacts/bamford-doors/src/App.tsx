@@ -23,6 +23,9 @@ import { AluminiumModularDoorsPage } from '@/pages/AluminiumModularDoorsPage';
 import { ThermallyBrokenDoorsPage } from '@/pages/ThermallyBrokenDoorsPage';
 import { WoodEffectDoorsPage } from '@/pages/WoodEffectDoorsPage';
 import { HmoEntranceDoorsPage } from '@/pages/HmoEntranceDoorsPage';
+import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
+import { CaseStudyDetailPage } from '@/pages/CaseStudyDetailPage';
+import { CASE_STUDIES_SEO } from '@/sanity/caseStudySeo';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -188,7 +191,8 @@ function ContactPage() {
   const purposeValue=params.get('purpose')||'general';
   const initialType=['general','product','maintenance','stock-survey','callback','consultation'].includes(purposeValue)?purposeValue:'general';
   const initialProduct=params.get('product')||'';
-  const [values,setValues]=useState({name:'',email:'',phone:'',organization:'',enquiryType:initialType,productInterest:initialProduct,projectLocation:'',projectSize:'',timescale:'',message:''});
+  const initialProject=params.get('project')||'';
+  const [values,setValues]=useState({name:'',email:'',phone:'',organization:'',enquiryType:initialType,productInterest:initialProduct,projectLocation:'',projectSize:'',timescale:'',message:initialProject?`I’d like to discuss a project similar to "${initialProject}".`:''});
   const [errors,setErrors]=useState<Record<string,string>>({});
   const update=(key:string,value:string)=>setValues(v=>({...v,[key]:value}));
   const submit=(e:FormEvent<HTMLFormElement>)=>{
@@ -371,7 +375,7 @@ function RouteContent() {
   if(path==='/products') return <ProductIndex/>;
   if(path==='/services') return <ServiceIndex/>;
   if(path==='/sectors') return <SectorIndex/>;
-  if(path==='/case-studies') return <CaseStudies/>;
+  if(path==='/case-studies') return <CaseStudiesPage/>;
   if(path==='/news-insights') return <NewsPage/>;
   if(path==='/faq') return <FAQPage/>;
   if(path==='/contact'||path==='/contact-us') return <ContactPage/>;
@@ -404,7 +408,7 @@ function RouteContent() {
   const article=path.match(/^\/news-insights\/(.+)$/);
   if(article) return <ArticleDetail slug={article[1]}/>;
   const caseDetail=path.match(/^\/case-studies\/(.+)$/);
-  if(caseDetail) return <CaseStudies/>;
+  if(caseDetail) return <CaseStudyDetailPage key={caseDetail[1]} slug={caseDetail[1]}/>;
   const legacyType=legacyEntries.get(path);
   if(legacyType==='news/article candidate') return <LegacyArticleDetail title={path.split('/').pop()!.split('-').map(w=>w[0]?.toUpperCase()+w.slice(1)).join(' ')}/>;
   if(legacyType==='case study candidate') return <CaseStudies/>;
@@ -426,7 +430,7 @@ export function getPageSeo(path:string): PageSeo {
   if(path==='/services') return {title:'Door Project and Maintenance Services',description:'Discuss project management, maintenance, stock condition surveys and entrance-system services with Bamford Doors.',path};
   if(path==='/sectors') return {title:'Sectors We Serve',description:'Explore door and entrance system information for housing, local authorities, education, healthcare and public buildings.',path};
   if(path==='/contact'||path==='/contact-us') return {title:'Contact Bamford Doors',description:'Contact Bamford Doors about a security door, entrance system, project, maintenance requirement or stock condition survey.',path:'/contact',noindex:path==='/contact-us'};
-  if(path==='/case-studies') return {title:'Project Experience',description:'Discuss building-specific entrance requirements and relevant project experience with Bamford Doors.',path,noindex:true};
+  if(path==='/case-studies') return {...CASE_STUDIES_SEO,noindex:true};
   if(path==='/news-insights'||path==='/blog'||path==='/blog-2-2'||path==='/more-news') return {title:'News and Insights for Building Teams',description:'Practical starting points for teams planning, maintaining or improving a shared entrance.',path:'/news-insights',noindex:path!=='/news-insights'};
   if(path==='/faq') return {title:'Security Door and Entrance FAQs',description:'Practical answers about security door enquiries, product options and services from Bamford Doors.',path};
   if(product) return {title:product.title,description:product.summary,path:productPath(product),image:product.image||undefined,noindex:path!==productPath(product)};
