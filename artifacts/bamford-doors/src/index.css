@@ -367,6 +367,16 @@ p { line-height:1.75; }
 .crumbs a:hover { color:var(--bamford-red); }
 .detail-layout { display:grid; grid-template-columns:1fr .82fr; gap:70px; padding:54px 0 90px; }
 .detail-image img { width:100%; height:430px; object-fit:cover; display:block; }
+.product-photo-gallery { padding:78px 0 86px; background:#171717; color:#fff; }
+.product-photo-gallery-heading { display:flex; align-items:end; justify-content:space-between; gap:36px; margin-bottom:30px; }
+.product-photo-gallery-heading .eyebrow { color:#fff; }
+.product-photo-gallery-heading h2 { max-width:650px; margin:0; font-size:clamp(30px,4vw,48px); line-height:1.08; letter-spacing:-.045em; }
+.product-photo-gallery-heading > p { max-width:350px; margin:0 0 3px; color:#c5c5c5; font-size:12px; line-height:1.75; }
+.product-photo-gallery-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.product-photo-gallery-grid figure { min-width:0; margin:0; padding:8px; border:1px solid #444; background:#222; }
+.product-photo-gallery-grid img { display:block; width:100%; height:clamp(310px,36vw,420px); object-fit:cover; object-position:center 42%; background:#333; }
+.product-photo-gallery-grid figcaption { display:flex; flex-direction:column; gap:8px; padding:13px 5px 5px; font-size:12px; font-weight:600; line-height:1.45; }
+.product-photo-gallery-grid figcaption span { color:#aaa; font-size:8px; letter-spacing:.12em; }
 .info-list { list-style:none; margin:24px 0; padding:0; }
 .info-list li { border-top:1px solid var(--line); padding:17px 0; font-size:14px; line-height:1.65; }
 .info-list li:before { content:""; display:inline-block; width:7px; height:7px; background:var(--bamford-red); margin:0 12px 1px 0; }
@@ -434,6 +444,11 @@ p { line-height:1.75; }
   .feature-band .hero-actions .button { width:100%; }
  .page-hero { padding:40px 0 36px; } .crumbs { margin-bottom:25px; }
  .detail-layout { padding:35px 0 60px; } .detail-image img { height:280px; }
+ .product-photo-gallery { padding:58px 0; }
+ .product-photo-gallery-heading { display:block; margin-bottom:23px; }
+ .product-photo-gallery-heading > p { margin-top:12px; }
+ .product-photo-gallery-grid { grid-template-columns:1fr; gap:10px; }
+ .product-photo-gallery-grid img { height:360px; }
  .contact-grid { padding:34px 0 60px; }
  .form-grid { grid-template-columns:1fr; } .field.full { grid-column:auto; }
  .footer-grid { grid-template-columns:1fr 1fr; gap:26px; } .footer-logo { width:155px; }
