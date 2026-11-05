@@ -24,10 +24,27 @@ const factoryImages = [
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/e69f3618f22d1d0eced4fd6f380d31e7a040722f-1500x998.webp', label: 'Automated production', alt: 'Automated machinery processing a door section' },
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/f2561d9b4cb10bad5940864430e387c109ad903d-1500x844.webp', label: 'Inside the factory', alt: 'Wide view across the Bamford factory floor' },
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/ae86741e8c8ad62c9bf8cb543c5aa15602915855-1920x1080.jpg', label: 'Renovated factory exterior', alt: 'Exterior of the renovated Bamford factory in Stockport, showing its new roof and side walling' },
-].map((image, index) => ({ ...image, number: index + 1 }));
+].map((image, index) => {
+  const dimensions = image.url.match(/-(\d+)x(\d+)\.(?:webp|jpe?g)$/i);
+  if (!dimensions) {
+    throw new Error(`Factory image is missing its source dimensions: ${image.url}`);
+  }
+
+  return {
+    ...image,
+    width: Number(dimensions[1]),
+    height: Number(dimensions[2]),
+    number: index + 1,
+  };
+});
 
 const featuredImageNumbers = new Set([15, 16]);
 const factoryGalleryImages = factoryImages.filter((image) => !featuredImageNumbers.has(image.number));
+const factoryImageWidths = [320, 480, 640, 800, 960, 1200, 1440, 1600, 1920];
+
+function getFactoryImageUrl(url: string, width: number) {
+  return `${url}?w=${width}&fit=max&auto=format&q=82`;
+}
 
 function FactoryPhoto({
   image,
@@ -36,9 +53,27 @@ function FactoryPhoto({
   image: (typeof factoryImages)[number];
   className?: string;
 }) {
+  const sizes = className.includes('factory-gallery-item')
+    ? '(max-width: 635px) calc((100vw - 46px) / 2), (max-width: 700px) 295px, (max-width: 760px) 189px, (max-width: 1368px) calc((100vw - 120px) / 3), 416px'
+    : '(max-width: 700px) min(600px, calc(100vw - 36px)), (max-width: 1368px) calc(100vw - 88px), 1280px';
+  const srcSet = [...new Set([...factoryImageWidths, image.width])]
+    .filter((width) => width <= image.width)
+    .sort((a, b) => a - b)
+    .map((width) => `${getFactoryImageUrl(image.url, width)} ${width}w`)
+    .join(', ');
+
   return (
     <figure className={`factory-photo ${className}`}>
-      <img src={image.url} alt={image.alt} loading="lazy" />
+      <img
+        src={getFactoryImageUrl(image.url, Math.min(640, image.width))}
+        srcSet={srcSet}
+        sizes={sizes}
+        width={image.width}
+        height={image.height}
+        alt={image.alt}
+        loading="lazy"
+        decoding="async"
+      />
       <figcaption>
         <span>{String(image.number).padStart(2, '0')}</span>
         <span>{image.label}</span>
@@ -66,30 +101,45 @@ const productTypes = [
   },
 ];
 
-function useReducedMotionPreference() {
-  const [reducedMotion, setReducedMotion] = useState(false);
+type NetworkInformation = EventTarget & {
+  effectiveType?: string;
+  saveData?: boolean;
+};
+
+function useFactoryHeroVideoPreference() {
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
 
   useEffect(() => {
-    if (typeof window.matchMedia !== 'function') return undefined;
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updatePreference = () => setReducedMotion(preference.matches);
+    const preference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
+    const isConstrainedConnection = () =>
+      Boolean(connection?.saveData) || ['slow-2g', '2g', '3g'].includes(connection?.effectiveType ?? '');
+    const updatePreference = () => {
+      setShouldLoadVideo(!preference?.matches && !isConstrainedConnection());
+    };
+
     updatePreference();
-    preference.addEventListener?.('change', updatePreference);
-    return () => preference.removeEventListener?.('change', updatePreference);
+
+    preference?.addEventListener?.('change', updatePreference);
+    connection?.addEventListener?.('change', updatePreference);
+    return () => {
+      preference?.removeEventListener?.('change', updatePreference);
+      connection?.removeEventListener?.('change', updatePreference);
+    };
   }, []);
 
-  return reducedMotion;
+  return shouldLoadVideo;
 }
 
 export function FactoryPage() {
-  const reducedMotion = useReducedMotionPreference();
+  const shouldLoadVideo = useFactoryHeroVideoPreference();
 
   return (
     <main className="factory-page">
       <section className="factory-hero" aria-labelledby="factory-hero-title">
         <div className="factory-hero-media" aria-hidden="true">
           <img className="factory-hero-poster" src={factoryHeroPoster} alt="" />
-          {!reducedMotion && (
+          {shouldLoadVideo && (
             <video
               className="factory-hero-video"
               autoPlay
