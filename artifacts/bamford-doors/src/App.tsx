@@ -47,7 +47,7 @@ const products: Product[] = [
   {slug:'grp-doors',title:'Glass reinforced plastic (GRP) doors',summary:'Custom-made GRP entrance doors for communal, public and commercial buildings. Explore material properties and discuss the right specification for your project.',applications:['Shared residential entrances','Public and commercial buildings'],features:['Strong, lightweight GRP material','Versatile material for entrance designs','Discuss suitability and specification for your opening'],image:'/media/grp-doors/hero.webp',legacyPath:'/glass-reinforced-plastic-grp-doors/'},
   {slug:'automatic-operators',title:'Automatic door operators',summary:'Automatic door operators for public and shared building entrances. Discuss swing-door models, access options, energy settings, installation and maintenance with Bamford Doors.',applications:['Public and commercial building entrances','Shared residential entrances'],features:['Record DFA 127 swing-door operator may be specified, subject to current availability','Full-power or low-energy configurations','Push or pull operation and access-control options','Installation and maintenance packages to discuss'],image:'/media/automatic-operators-entrance.jpg',legacyPath:'/automatic-operators/'},
   {slug:'mailboxes',title:'Mailboxes',summary:'UK-manufactured mailboxes can be incorporated into door sets or installed on, in or through a wall or panel, planned alongside the wider entrance and access requirements.',applications:['Communal residential entrances','Door sets, walls and entrance panels','New entrance projects and existing buildings'],features:['Door-entry equipment can be considered alongside the mailbox layout','Options for specified security and fire requirements, subject to project suitability','Mailbox design coordinated with the wider entrance'],image:'/media/mailbox-entrance-01.jpg',legacyPath:'/mailboxes/'},
-  {slug:'block-address-signs',title:'Block and address signs',summary:'Entrance signage options for residential blocks and addresses.',applications:['Residential blocks','Building entrances'],features:['Block and address signage','Discuss details with our team'],image:'/media/signage.webp',legacyPath:'/block-address-signs/'},
+  {slug:'block-address-signs',title:'Block and address signs',summary:'Made-to-measure block and address signs for communal entrances, including signs designed to cover unused wall openings after door-entry equipment is relocated.',applications:['Communal entrances and residential blocks','Unused wall openings after door-entry alterations','Building identification and wayfinding'],features:['5 mm polycarbonate sign face','Stainless-steel vandal-resistant, anti-tamper screws','Made to order with your chosen size, font and logo'],image:'/media/block-address-signs-entrance.jpg',legacyPath:'/block-address-signs/'},
   {slug:'screens-and-curtain-walling',title:'Screens and curtain walling',summary:'Bespoke aluminium side screens and curtain walling, supplied and installed to suit building entrances and project requirements.',applications:['Building entrances','Public and commercial buildings'],features:['High-strength aluminium framing','Interchangeable glazed, GRP or louvred panels','Bespoke configurations for each application','Supply and installation available'],image:'/media/screens-curtain-walling.jpg',legacyPath:'/screens-and-curtain-walling/'},
   {slug:'door-entry-control-systems',title:'Door entry and control systems',summary:'Door entry and access control options for communal and public building entrances.',applications:['Communal entrances','Public buildings'],features:['System requirements discussed in the context of the building','Contact the team to discuss available options'],image:'/media/door-entry-control.jpg',legacyPath:'/door-entry-access-control-systems/'},
   {slug:'louvered-doors',title:'Louvered doors',summary:'Bespoke louvred doors and screens for service areas that need ventilation and privacy. Angled slats allow air to pass while the door is closed, with the layout and colour tailored to the opening.',applications:['Bin stores','Plant rooms','Boiler rooms and other service areas'],features:['Angled slats support airflow through the closed door','Louvred door and screen combinations','Made to suit the opening and project colour requirements'],image:'/media/louvered-doors.jpg',legacyPath:'/louvered-doors/'},
@@ -266,8 +266,78 @@ function MailboxesPageContent({product}:{product:Product}) {
     </section>
   </>;
 }
+function BlockAddressSignsContent({product}:{product:Product}) {
+  return <>
+    <section className="section signage-overview">
+      <div className="wrap">
+        <Breadcrumbs items={[{label:'Products',href:'/products'},{label:product.title}]}/>
+        <div className="detail-layout signage-detail">
+          <div className="detail-image"><img src={product.image || ''} alt="Block address sign displayed beside a communal entrance door" width="758" height="1024"/></div>
+          <div className="detail-text">
+            <p className="eyebrow">Entrance signage</p>
+            <h2 style={{fontSize:34}}>Useful information. A considered entrance detail.</h2>
+            <p>When door-entry equipment is relocated or incorporated into a new side screen, the work can leave an unused aperture in the wall or brickwork. A made-to-measure sign can cover that opening and keep building information clear.</p>
+            <p>Bamford can supply and install a purpose-made sign, tailored with your chosen wording, dimensions, font or logo.</p>
+            <Link className="button" href={`/contact?purpose=product&product=${encodeURIComponent(product.title)}`} data-testid="link-enquire-block-address-signs">Discuss a sign for your project <ArrowRight size={15}/></Link>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="section section-muted" aria-labelledby="signage-specification-title">
+      <div className="wrap">
+        <div className="section-head">
+          <div><p className="eyebrow">Made to measure</p><h2 id="signage-specification-title">Built around your entrance and its requirements.</h2></div>
+          <p>Discuss the opening, sign layout and visual details with the team.</p>
+        </div>
+        <div className="signage-spec-grid">
+          <article className="signage-spec-card">
+            <p className="signage-spec-index">01 / APPLICATION</p>
+            <h3>Cover previous door-entry openings.</h3>
+            <p>A purpose-made sign can cover an unused aperture after door-entry panels are moved or integrated into a replacement side screen. Dimensions can be tailored to the area.</p>
+          </article>
+          <article className="signage-spec-card">
+            <p className="signage-spec-index">02 / SPECIFICATION</p>
+            <h3>Choose the details that suit the building.</h3>
+            <p>Signs are constructed from 5 mm polycarbonate and secured with stainless-steel vandal-resistant, anti-tamper screws. Size, font, logos and information can be set to your requirements; confirm the final specification for your project.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section className="section signage-detail-section" aria-labelledby="signage-detail-title">
+      <div className="wrap signage-proof-layout">
+        <div className="signage-proof-copy">
+          <p className="eyebrow">Block and address signage</p>
+          <h2 id="signage-detail-title">Clear identification at the entrance.</h2>
+          <p>Block numbers, street names, logos and other required information can be combined in a layout designed for the sign’s position on the building.</p>
+          <p>Share the opening dimensions and the wording you need, and the team can discuss a suitable sign and installation.</p>
+        </div>
+        <figure className="signage-proof-image">
+          <img src="/media/block-address-signs-detail.jpg" alt="Close-up of a block address sign showing building numbers and street name" width="758" height="1024" loading="lazy"/>
+          <figcaption>Block number and street name displayed on a made-to-measure sign.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section className="signage-contact" aria-labelledby="signage-contact-title">
+      <div className="wrap signage-contact-inner">
+        <div>
+          <p className="eyebrow">Talk to our team</p>
+          <h2 id="signage-contact-title">Discuss block and address signs for your entrance.</h2>
+          <p>Tell us about the building, the sign location and the information you would like to include.</p>
+        </div>
+        <div className="signage-contact-links">
+          <a href="tel:+441614806500">Call 0161 480 6500 <ArrowRight size={15}/></a>
+          <a href="mailto:sales@bamforddoors.com">Email sales@bamforddoors.com <ArrowRight size={15}/></a>
+        </div>
+      </div>
+    </section>
+  </>;
+}
 function ProductDetail({product}:{product:Product}) {
   if(product.slug==='mailboxes') return <><PageHeading eyebrow="Products" title={product.title} lead={product.summary}/><MailboxesPageContent product={product}/><section className="section section-muted"><div className="wrap"><p className="eyebrow">More to explore</p><h2 style={{marginBottom:28}}>Related products</h2><div className="product-grid">{products.filter(p=>p.slug!==product.slug).slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section></>;
+  if(product.slug==='block-address-signs') return <><PageHeading eyebrow="Products" title={product.title} lead={product.summary}/><BlockAddressSignsContent product={product}/><section className="section section-muted"><div className="wrap"><p className="eyebrow">More to explore</p><h2 style={{marginBottom:28}}>Related products</h2><div className="product-grid">{products.filter(p=>p.slug!==product.slug).slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section></>;
   const louveredDoor = product.slug === 'louvered-doors';
   const curtainWallingPhotos = product.slug === 'screens-and-curtain-walling' ? [
     { src: '/media/screens-curtain-walling-02.jpg', alt: 'Green entrance door within a tall aluminium-framed side screen with louvred panels', caption: 'Side screen with a mix of panel types' },

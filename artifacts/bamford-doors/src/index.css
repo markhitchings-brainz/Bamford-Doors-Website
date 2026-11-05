@@ -400,6 +400,33 @@ p { line-height:1.75; }
 .mailbox-contact-links a { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:16px 0; border-top:1px solid #494949; color:#fff; text-decoration:none; font-size:12px; font-weight:600; }
 .mailbox-contact-links a:last-child { border-bottom:1px solid #494949; }
 .mailbox-contact-links a svg { color:var(--bamford-red); flex-shrink:0; }
+.signage-overview { padding:30px 0 0; }
+.signage-detail { padding:32px 0 76px; }
+.signage-detail .detail-image img { height:430px; object-position:65% center; }
+.signage-detail .detail-text .button { margin-top:8px; }
+.signage-spec-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.signage-spec-card { padding:30px; background:#fff; border-bottom:2px solid var(--bamford-red); }
+.signage-spec-index { margin:0 0 20px; color:var(--bamford-red); font-size:9px; font-weight:700; letter-spacing:.14em; }
+.signage-spec-card h3 { max-width:24ch; margin:0 0 14px; font-size:24px; line-height:1.2; }
+.signage-spec-card p:last-child { max-width:550px; margin:0; color:#5c5c5c; font-size:12px; line-height:1.75; }
+.signage-detail-section { padding:74px 0; }
+.signage-proof-layout { display:grid; grid-template-columns:1fr .8fr; align-items:center; gap:70px; }
+.signage-proof-copy { max-width:600px; }
+.signage-proof-copy h2 { max-width:16ch; margin:0 0 18px; font-size:clamp(32px,4vw,46px); line-height:1.08; letter-spacing:-.04em; }
+.signage-proof-copy p:not(.eyebrow) { color:#555; font-size:14px; line-height:1.8; }
+.signage-proof-image { margin:0; padding:8px; border:1px solid var(--line); background:#f5f5f4; }
+.signage-proof-image img { display:block; width:100%; height:420px; object-fit:cover; object-position:center 48%; }
+.signage-proof-image figcaption { padding:12px 5px 4px; color:#555; font-size:11px; line-height:1.5; }
+.signage-contact { padding:76px 0; color:#fff; background:#171717; }
+.signage-contact-inner { display:grid; grid-template-columns:1fr auto; align-items:center; gap:60px; }
+.signage-contact-inner > div:first-child { max-width:700px; }
+.signage-contact-inner .eyebrow { color:#fff; }
+.signage-contact-inner h2 { max-width:17ch; margin:0 0 14px; font-size:clamp(34px,4vw,49px); line-height:1.08; }
+.signage-contact-inner p:not(.eyebrow) { margin:0; color:#c5c5c5; font-size:13px; line-height:1.8; }
+.signage-contact-links { display:flex; flex-direction:column; min-width:250px; }
+.signage-contact-links a { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:16px 0; border-top:1px solid #494949; color:#fff; text-decoration:none; font-size:12px; font-weight:600; }
+.signage-contact-links a:last-child { border-bottom:1px solid #494949; }
+.signage-contact-links a svg { color:var(--bamford-red); flex-shrink:0; }
 .info-list { list-style:none; margin:24px 0; padding:0; }
 .info-list li { border-top:1px solid var(--line); padding:17px 0; font-size:14px; line-height:1.65; }
 .info-list li:before { content:""; display:inline-block; width:7px; height:7px; background:var(--bamford-red); margin:0 12px 1px 0; }
@@ -481,6 +508,17 @@ p { line-height:1.75; }
  .mailbox-contact { padding:55px 0; }
  .mailbox-contact-inner { grid-template-columns:1fr; gap:28px; }
  .mailbox-contact-links { min-width:0; }
+  .signage-overview { padding-top:24px; }
+  .signage-detail { padding:22px 0 54px; }
+  .signage-detail .detail-image img { height:300px; }
+  .signage-spec-grid { grid-template-columns:1fr; gap:10px; }
+  .signage-spec-card { padding:23px; }
+  .signage-detail-section { padding:55px 0; }
+  .signage-proof-layout { grid-template-columns:1fr; gap:25px; }
+  .signage-proof-image img { height:340px; }
+  .signage-contact { padding:55px 0; }
+  .signage-contact-inner { grid-template-columns:1fr; gap:28px; }
+  .signage-contact-links { min-width:0; }
  .contact-grid { padding:34px 0 60px; }
  .form-grid { grid-template-columns:1fr; } .field.full { grid-column:auto; }
  .footer-grid { grid-template-columns:1fr 1fr; gap:26px; } .footer-logo { width:155px; }
