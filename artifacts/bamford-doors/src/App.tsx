@@ -22,6 +22,7 @@ import { ThermallyBrokenDoorsPage } from '@/pages/ThermallyBrokenDoorsPage';
 import { WoodEffectDoorsPage } from '@/pages/WoodEffectDoorsPage';
 import { HmoEntranceDoorsPage } from '@/pages/HmoEntranceDoorsPage';
 import { GrpDoorsPage } from '@/pages/GrpDoorsPage';
+import { AutomaticOperatorsPage } from '@/pages/AutomaticOperatorsPage';
 import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
 import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
 import { CASE_STUDIES_SEO } from '@/sanity/caseStudySeo';
@@ -44,7 +45,7 @@ const products: Product[] = [
   {slug:'wood-effect-door',title:'Wood effect doors',summary:'Bespoke aluminium entrance doors with a woodgrain-effect finish, designed around the building and project requirements.',applications:['Communal entrances','Housing provider buildings'],features:['Woodgrain-effect powder-coated finish','Door and screen arrangements made to suit the opening'],image:'/media/wood-effect-product.jpg',legacyPath:'/wood-effect-door/'},
   {slug:'hmo',title:'HMO entrance doors',summary:'Made-to-measure entrance doors for houses in multiple occupation, planned around the building, its residents and the way access is managed.',applications:['Houses in multiple occupation','Shared residential entrances'],features:['Bespoke door and screen options','Discuss access, glazing and locking choices','Confirm current security evidence for the selected doorset'],image:'/media/hmo/entrance-03.jpg',legacyPath:'/hmo/'},
   {slug:'grp-doors',title:'Glass reinforced plastic (GRP) doors',summary:'Custom-made GRP entrance doors for communal, public and commercial buildings. Explore material properties and discuss the right specification for your project.',applications:['Shared residential entrances','Public and commercial buildings'],features:['Strong, lightweight GRP material','Versatile material for entrance designs','Discuss suitability and specification for your opening'],image:'/media/grp-doors/hero.webp',legacyPath:'/glass-reinforced-plastic-grp-doors/'},
-  {slug:'automatic-operators',title:'Automatic operators',summary:'Automatic operators for entrance doors. Please contact the team to discuss the requirements of your building.',applications:['Building entrances','Shared access points'],features:['Operator options for entrance doors','Project requirements discussed with our team'],image:'/media/automatic.webp',legacyPath:'/automatic-operators/'},
+  {slug:'automatic-operators',title:'Automatic door operators',summary:'Automatic door operators for public and shared building entrances. Discuss swing-door models, access options, energy settings, installation and maintenance with Bamford Doors.',applications:['Public and commercial building entrances','Shared residential entrances'],features:['Record DFA 127 swing-door operator may be specified, subject to current availability','Full-power or low-energy configurations','Push or pull operation and access-control options','Installation and maintenance packages to discuss'],image:'/media/automatic-operators-entrance.jpg',legacyPath:'/automatic-operators/'},
   {slug:'mailboxes',title:'Mailboxes',summary:'Mailbox options for shared residential entrances.',applications:['Communal entrances','Housing provider buildings'],features:['Mailbox options','Discuss layout and requirements with our team'],image:'/media/mailboxes.webp',legacyPath:'/mailboxes/'},
   {slug:'block-address-signs',title:'Block and address signs',summary:'Entrance signage options for residential blocks and addresses.',applications:['Residential blocks','Building entrances'],features:['Block and address signage','Discuss details with our team'],image:'/media/signage.webp',legacyPath:'/block-address-signs/'},
   {slug:'screens-and-curtain-walling',title:'Screens and curtain walling',summary:'Bespoke aluminium side screens and curtain walling, supplied and installed to suit building entrances and project requirements.',applications:['Building entrances','Public and commercial buildings'],features:['High-strength aluminium framing','Interchangeable glazed, GRP or louvred panels','Bespoke configurations for each application','Supply and installation available'],image:'/media/screens-curtain-walling.jpg',legacyPath:'/screens-and-curtain-walling/'},
@@ -415,6 +416,7 @@ function RouteContent() {
   if(product?.slug==='wood-effect-door') return <WoodEffectDoorsPage/>;
   if(product?.slug==='hmo') return <HmoEntranceDoorsPage/>;
   if(product?.slug==='grp-doors') return <GrpDoorsPage/>;
+  if(product?.slug==='automatic-operators') return <AutomaticOperatorsPage/>;
   if(product) return <ProductDetail product={product}/>;
   const service=services.find(s=>path===servicePath(s)||path===s.legacyPath.replace(/\/$/,''));
   if(service) return <ServiceDetail service={service}/>;
