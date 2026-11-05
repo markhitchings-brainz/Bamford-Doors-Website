@@ -57,6 +57,7 @@ try {
     ['/products/aluminium-modular-doors/', 'Built around', 'aluminium'],
     ['/about/', 'Made for the entrance', 'Bamford'],
     ['/services/project-management/', 'Project Management', 'project'],
+    ['/services/stock-condition-surveys/', 'Stock Condition Surveys', 'door entry and access systems'],
     ['/sectors/social-housing/', 'Social housing', 'entrance'],
   ];
   for (const [route, heading, copy] of representative) {
