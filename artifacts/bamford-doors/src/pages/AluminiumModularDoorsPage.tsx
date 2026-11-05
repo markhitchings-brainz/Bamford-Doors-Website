@@ -45,9 +45,9 @@ const features = [
 const checklist = [
   ['Leaf & hinge', 'A rebated door leaf with a continuous piano hinge.'],
   ['Closing', 'Concealed closer and automatic operator options can be discussed.'],
-  ['Glazing', 'Brochure-listed options include laminated, toughened, double-glazed, polycarbonate and Georgian wired glazing. Confirm current availability, compliance and suitability for the project.'],
+  ['Glazing', 'Options may include laminated, toughened, double-glazed, polycarbonate and Georgian wired glass. Ask us to confirm current availability, compliance and suitability for your project.'],
   ['Threshold', 'Low-threshold access may be a project requirement. Confirm the achievable threshold and full accessibility performance for the selected configuration.'],
-  ['Maintenance', 'Published product information says units can be stripped down to components, including glazing, to support serviceability.'],
+  ['Maintenance', 'Some components, including glazing, can be removed to support servicing. Ask us to confirm the maintenance options for your selected configuration.'],
   ['Material', 'Aluminium is relatively light and recyclable. End-of-life outcomes depend on collection and processing routes.'],
 ];
 
@@ -139,7 +139,7 @@ export function AluminiumModularDoorsPage() {
         <div className="amd-wrap">
           <div className="amd-section-head amd-config-head">
             <div><p className="amd-eyebrow">Choose a door design</p><h2 id="amd-config-title">Sixteen starting points.</h2></div>
-            <p>Brochure design types shown as a guide. The final door and screen arrangement is bespoke to the opening.</p>
+            <p>Explore sixteen door designs. The drawings show example panel layouts; your final door and screen arrangement is made to suit the opening.</p>
           </div>
           <div className="amd-design-guide">
             <p><strong>Select a design</strong> to inspect its front elevation and type code at a larger size.</p>
@@ -252,7 +252,7 @@ export function AluminiumModularDoorsPage() {
       <section className="amd-finish-section" aria-labelledby="amd-finish-title">
         <div className="amd-wrap amd-finish-layout">
           <div className="amd-finish-copy">
-            <p className="amd-eyebrow">Colour / Standard brochure range</p>
+            <p className="amd-eyebrow">Standard colour options</p>
             <h2 id="amd-finish-title">A finish that<br />belongs <em>there.</em></h2>
             <p>Seven standard powder-coat colours provide a clear starting point for a building’s palette. Bespoke finishes may be discussed for your project.</p>
             <div className="amd-swatch-warning"><Palette size={18} aria-hidden="true" /><span>Screen swatches are indicative only. Check a physical powder-coat sample before selection.</span></div>
@@ -283,7 +283,7 @@ export function AluminiumModularDoorsPage() {
       <section className="amd-evidence" aria-labelledby="amd-evidence-title">
         <div className="amd-wrap amd-evidence-inner">
           <div className="amd-evidence-mark"><LockKeyhole size={24} aria-hidden="true" /><span>Evidence<br />to confirm</span></div>
-          <div><p className="amd-eyebrow">Published product information</p><h2 id="amd-evidence-title">Confirm what applies now.</h2><p>Source brochure and older official product information state Secured by Design approval and testing to STS 202 BR2. These are not blanket current guarantees. Specifiers should confirm current evidence, certification scope, configuration and terms before relying on any claim.</p></div>
+          <div><p className="amd-eyebrow">Security and certification</p><h2 id="amd-evidence-title">Confirm what applies to your entrance.</h2><p>Security approvals and test results apply only to the product and configuration assessed. If you need Secured by Design approval or testing to STS 202 BR2, ask Bamford to confirm the current status, evidence and scope for your chosen entrance before specifying.</p></div>
           <Link href="/about/accreditations" className="amd-evidence-link" data-testid="link-amd-accreditations">Accreditations <ArrowRight size={15} aria-hidden="true" /></Link>
         </div>
       </section>

@@ -1,4 +1,5 @@
-import { ArrowDown, ArrowRight, Check, ChevronRight, Layers3, Ruler, Scale, ShieldCheck, Thermometer, Waves } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, Layers3, Ruler, Scale, ShieldCheck, Thermometer, Waves, X } from 'lucide-react';
 import { Link } from 'wouter';
 import './grp-doors.css';
 
@@ -84,9 +85,37 @@ const gallery = [
   },
 ];
 
+const designTypes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K'];
+const doorDesigns = designTypes.map((code, index) => ({
+  code,
+  index,
+  src: `/media/grp-doors/designs/type-${code.toLowerCase()}.png`,
+}));
+
 const enquiryHref = '/contact?purpose=product&product=Glass%20reinforced%20plastic%20(GRP)%20doors';
 
 export function GrpDoorsPage() {
+  const [selectedDesignIndex, setSelectedDesignIndex] = useState(0);
+  const [designViewerOpen, setDesignViewerOpen] = useState(false);
+  const designDialogRef = useRef<HTMLDialogElement>(null);
+  const selectedDesign = doorDesigns[selectedDesignIndex];
+
+  useEffect(() => {
+    const dialog = designDialogRef.current;
+    if (!dialog) return;
+    if (designViewerOpen && !dialog.open) dialog.showModal();
+    if (!designViewerOpen && dialog.open) dialog.close();
+  }, [designViewerOpen]);
+
+  const openDesign = (index: number) => {
+    setSelectedDesignIndex(index);
+    setDesignViewerOpen(true);
+  };
+
+  const moveDesign = (direction: -1 | 1) => {
+    setSelectedDesignIndex(current => (current + direction + doorDesigns.length) % doorDesigns.length);
+  };
+
   return (
     <main className="grp-page" data-testid="page-grp-doors">
       <section className="grp-hero" aria-labelledby="grp-title">
@@ -156,6 +185,81 @@ export function GrpDoorsPage() {
             })}
           </div>
           <p className="grp-property-note">The performance of a completed doorset depends on its design, components, installation and intended use. Confirm suitability and any project-specific requirements with Bamford.</p>
+        </div>
+      </section>
+
+      <section className="grp-designs" aria-labelledby="grp-designs-title">
+        <div className="grp-wrap">
+          <div className="grp-section-head grp-designs-head">
+            <div><p className="grp-eyebrow">Choose a door design</p><h2 id="grp-designs-title">Ten starting points.</h2></div>
+            <p>Explore Types A–H, J and K. Final door and glazing arrangements are confirmed for the opening and project brief.</p>
+          </div>
+          <div className="grp-design-guide">
+            <p><strong>Select a design</strong> to inspect its front elevation and type at a larger size.</p>
+            <span>10 GRP DESIGNS</span>
+          </div>
+          <ul className="grp-design-grid" aria-label="GRP door designs" data-testid="list-grp-design-types">
+            {doorDesigns.map(design => (
+              <li key={design.code}>
+                <button
+                  type="button"
+                  className={`grp-design-card${selectedDesignIndex === design.index ? ' is-selected' : ''}`}
+                  aria-label={`View a larger drawing of GRP door Type ${design.code}`}
+                  aria-haspopup="dialog"
+                  aria-pressed={selectedDesignIndex === design.index}
+                  data-testid={`button-grp-type-${design.code}`}
+                  onClick={() => openDesign(design.index)}
+                >
+                  <span className="grp-design-thumb"><img src={design.src} alt="" width="300" height="500" /></span>
+                  <span className="grp-design-meta">
+                    <span className="grp-design-order">DESIGN {String(design.index + 1).padStart(2, '0')}</span>
+                    <strong>Type {design.code}</strong>
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <dialog
+            ref={designDialogRef}
+            className="grp-design-dialog"
+            aria-labelledby="grp-design-dialog-title"
+            data-testid="dialog-grp-design"
+            onClose={() => setDesignViewerOpen(false)}
+            onClick={event => {
+              if (event.target === designDialogRef.current) setDesignViewerOpen(false);
+            }}
+          >
+            <div className="grp-design-dialog-content">
+              <figure className="grp-design-dialog-visual">
+                <img
+                  src={selectedDesign.src}
+                  alt={`Front elevation drawing of GRP door Type ${selectedDesign.code}`}
+                  width="300"
+                  height="500"
+                />
+              </figure>
+              <div className="grp-design-dialog-copy">
+                <div className="grp-design-dialog-heading">
+                  <div>
+                    <p className="grp-eyebrow">Selected door design</p>
+                    <h3 id="grp-design-dialog-title">Type {selectedDesign.code}</h3>
+                    <p className="grp-design-dialog-index">Design {String(selectedDesignIndex + 1).padStart(2, '0')} of 10 · Front elevation</p>
+                  </div>
+                  <button className="grp-design-close" type="button" aria-label="Close enlarged door design" onClick={() => setDesignViewerOpen(false)}><X size={20} aria-hidden="true" /></button>
+                </div>
+                <div className="grp-design-dialog-description">
+                  <p>This illustration shows the panel and vision-panel arrangement for Type {selectedDesign.code}. Select another type to compare the available designs.</p>
+                  <p>Final panel configuration, glazing, dimensions and hardware are confirmed for each project.</p>
+                </div>
+                <div className="grp-design-dialog-controls">
+                  <button type="button" aria-label={`Previous design from Type ${selectedDesign.code}`} onClick={() => moveDesign(-1)}><ArrowLeft size={16} aria-hidden="true" /><span>Previous</span></button>
+                  <span>{String(selectedDesignIndex + 1).padStart(2, '0')} / 10</span>
+                  <button type="button" aria-label={`Next design from Type ${selectedDesign.code}`} onClick={() => moveDesign(1)}><span>Next</span><ArrowRight size={16} aria-hidden="true" /></button>
+                </div>
+              </div>
+            </div>
+          </dialog>
         </div>
       </section>
 

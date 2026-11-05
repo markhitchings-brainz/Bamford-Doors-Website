@@ -62,6 +62,42 @@
 .grp-property p { grid-column: 1 / -1; align-self: end; margin: 0; color: #5e6262; font-size: 11px; line-height: 1.75; }
 .grp-property-note { max-width: 860px; margin: 21px 0 0; color: #676967; font-size: 10px; line-height: 1.75; }
 
+.grp-designs { padding: 96px 0 103px; background: #fff; }
+.grp-designs-head { margin-bottom: 35px; }
+.grp-design-guide { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; padding: 15px 18px; border: 1px solid var(--grp-line); background: #f6f5f2; }
+.grp-design-guide p { margin: 0; color: #5d6060; font-size: 11px; line-height: 1.6; }
+.grp-design-guide strong { color: var(--grp-ink); }
+.grp-design-guide > span { flex: 0 0 auto; color: #777; font-size: 8px; font-weight: 700; letter-spacing: .14em; }
+.grp-design-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.grp-design-grid li { min-width: 0; }
+.grp-design-card { display: flex; width: 100%; height: 100%; flex-direction: column; padding: 10px; border: 1px solid var(--grp-line); background: #fff; color: var(--grp-ink); font: inherit; text-align: left; cursor: pointer; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.grp-design-card:hover { transform: translateY(-2px); border-color: #aaa7a1; box-shadow: 0 8px 20px rgba(0,0,0,.07); }
+.grp-design-card:focus-visible, .grp-design-dialog button:focus-visible { outline: 2px solid var(--grp-red); outline-offset: 3px; }
+.grp-design-card.is-selected { border-color: var(--grp-red); box-shadow: inset 0 0 0 1px var(--grp-red); }
+.grp-design-thumb { display: grid; width: 100%; aspect-ratio: 3 / 4; place-items: center; padding: 15px; background: #f6f5f2; }
+.grp-design-thumb img { display: block; width: 100%; height: 100%; max-height: 250px; object-fit: contain; }
+.grp-design-meta { display: grid; grid-template-columns: minmax(0, 1fr) 18px; align-items: center; gap: 5px 10px; padding: 12px 3px 4px; }
+.grp-design-order { grid-column: 1; color: #888783; font-size: 8px; font-weight: 700; letter-spacing: .12em; }
+.grp-design-meta strong { grid-column: 1; font-size: 15px; letter-spacing: -.035em; }
+.grp-design-meta svg { grid-column: 2; grid-row: 1 / 3; color: var(--grp-red); }
+.grp-design-dialog { width: min(920px, calc(100% - 32px)); max-width: 920px; max-height: min(820px, calc(100% - 32px)); margin: auto; padding: 0; overflow: auto; border: 0; background: #f7f6f3; color: var(--grp-ink); box-shadow: 0 24px 90px rgba(0,0,0,.32); }
+.grp-design-dialog::backdrop { background: rgba(0,0,0,.78); }
+.grp-design-dialog-content { display: grid; min-height: 570px; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); }
+.grp-design-dialog-visual { display: grid; min-width: 0; min-height: 570px; margin: 0; padding: 32px; place-items: center; background: #fff; }
+.grp-design-dialog-visual img { display: block; width: 100%; max-width: 370px; height: min(68vh, 660px); object-fit: contain; }
+.grp-design-dialog-copy { display: flex; min-width: 0; flex-direction: column; padding: clamp(26px, 5vw, 54px); }
+.grp-design-dialog-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.grp-design-dialog-heading .grp-eyebrow { margin-bottom: 13px; }
+.grp-design-dialog-heading h3 { margin: 0; font-size: clamp(42px, 5vw, 62px); line-height: .98; letter-spacing: -.075em; }
+.grp-design-dialog-index { margin: 13px 0 0; color: #727474; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.grp-design-close { display: grid; width: 42px; height: 42px; flex: 0 0 auto; padding: 0; place-items: center; border: 1px solid var(--grp-line); background: #fff; color: var(--grp-ink); cursor: pointer; }
+.grp-design-dialog-description { margin: 38px 0; color: #5d6060; font-size: 12px; line-height: 1.8; }
+.grp-design-dialog-description p + p { margin-top: 14px; }
+.grp-design-dialog-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 17px; border-top: 1px solid var(--grp-line); }
+.grp-design-dialog-controls > span { color: #777; font-size: 8px; font-weight: 700; letter-spacing: .13em; }
+.grp-design-dialog-controls button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; border: 0; background: transparent; color: var(--grp-ink); font-size: 10px; font-weight: 700; cursor: pointer; }
+.grp-design-dialog-controls button svg { color: var(--grp-red); }
+
 .grp-gallery { padding: 94px 0 100px; color: #fff; background: #111; }
 .grp-gallery-head .grp-eyebrow { color: #fff; }
 .grp-gallery-head h2 { font-size: clamp(39px, 5vw, 62px); }
@@ -87,6 +123,7 @@
   .grp-property-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grp-property:nth-child(odd) { padding-left: 0; border-left: 0; }
   .grp-property:nth-child(even) { padding-left: 22px; border-left: 1px solid #c7c5c0; }
+  .grp-design-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
   .grp-wrap { width: min(100% - 56px, 760px); }
@@ -94,6 +131,8 @@
   .grp-hero-image { width: min(100%, 650px); margin-inline: auto; }
   .grp-intro { grid-template-columns: 1fr; }
   .grp-intro-side { padding: 10px 0 0; }
+  .grp-design-dialog-content { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); }
+  .grp-design-dialog-visual { padding: 24px; }
 }
 @media (max-width: 680px) {
   .grp-wrap { width: calc(100% - 40px); }
@@ -112,6 +151,16 @@
   .grp-properties, .grp-gallery { padding-block: 60px; }
   .grp-gallery-grid { grid-template-columns: 1fr; }
   .grp-gallery-image { height: 360px; }
+  .grp-designs { padding-block: 60px; }
+  .grp-design-guide { align-items: flex-start; flex-direction: column; gap: 7px; padding: 13px 14px; }
+  .grp-design-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .grp-design-card { padding: 7px; }
+  .grp-design-thumb { padding: 11px; }
+  .grp-design-dialog-content { grid-template-columns: 1fr; }
+  .grp-design-dialog-visual { min-height: 310px; padding: 20px; }
+  .grp-design-dialog-visual img { height: min(42vh, 370px); }
+  .grp-design-dialog-copy { padding: 24px; }
+  .grp-design-dialog-description { margin: 22px 0; }
   .grp-property { min-height: 0; }
   .grp-next { padding-block: 55px; }
   .grp-next-inner { align-items: flex-start; flex-direction: column; gap: 25px; }
