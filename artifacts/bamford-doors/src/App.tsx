@@ -46,7 +46,7 @@ const products: Product[] = [
   {slug:'hmo',title:'HMO entrance doors',summary:'Made-to-measure entrance doors for houses in multiple occupation, planned around the building, its residents and the way access is managed.',applications:['Houses in multiple occupation','Shared residential entrances'],features:['Bespoke door and screen options','Discuss access, glazing and locking choices','Confirm current security evidence for the selected doorset'],image:'/media/hmo/entrance-03.jpg',legacyPath:'/hmo/'},
   {slug:'grp-doors',title:'Glass reinforced plastic (GRP) doors',summary:'Custom-made GRP entrance doors for communal, public and commercial buildings. Explore material properties and discuss the right specification for your project.',applications:['Shared residential entrances','Public and commercial buildings'],features:['Strong, lightweight GRP material','Versatile material for entrance designs','Discuss suitability and specification for your opening'],image:'/media/grp-doors/hero.webp',legacyPath:'/glass-reinforced-plastic-grp-doors/'},
   {slug:'automatic-operators',title:'Automatic door operators',summary:'Automatic door operators for public and shared building entrances. Discuss swing-door models, access options, energy settings, installation and maintenance with Bamford Doors.',applications:['Public and commercial building entrances','Shared residential entrances'],features:['Record DFA 127 swing-door operator may be specified, subject to current availability','Full-power or low-energy configurations','Push or pull operation and access-control options','Installation and maintenance packages to discuss'],image:'/media/automatic-operators-entrance.jpg',legacyPath:'/automatic-operators/'},
-  {slug:'mailboxes',title:'Mailboxes',summary:'Mailbox options for shared residential entrances.',applications:['Communal entrances','Housing provider buildings'],features:['Mailbox options','Discuss layout and requirements with our team'],image:'/media/mailboxes.webp',legacyPath:'/mailboxes/'},
+  {slug:'mailboxes',title:'Mailboxes',summary:'UK-manufactured mailboxes can be incorporated into door sets or installed on, in or through a wall or panel, planned alongside the wider entrance and access requirements.',applications:['Communal residential entrances','Door sets, walls and entrance panels','New entrance projects and existing buildings'],features:['Door-entry equipment can be considered alongside the mailbox layout','Options for specified security and fire requirements, subject to project suitability','Mailbox design coordinated with the wider entrance'],image:'/media/mailbox-entrance-01.jpg',legacyPath:'/mailboxes/'},
   {slug:'block-address-signs',title:'Block and address signs',summary:'Entrance signage options for residential blocks and addresses.',applications:['Residential blocks','Building entrances'],features:['Block and address signage','Discuss details with our team'],image:'/media/signage.webp',legacyPath:'/block-address-signs/'},
   {slug:'screens-and-curtain-walling',title:'Screens and curtain walling',summary:'Bespoke aluminium side screens and curtain walling, supplied and installed to suit building entrances and project requirements.',applications:['Building entrances','Public and commercial buildings'],features:['High-strength aluminium framing','Interchangeable glazed, GRP or louvred panels','Bespoke configurations for each application','Supply and installation available'],image:'/media/screens-curtain-walling.jpg',legacyPath:'/screens-and-curtain-walling/'},
   {slug:'door-entry-control-systems',title:'Door entry and control systems',summary:'Door entry and access control options for communal and public building entrances.',applications:['Communal entrances','Public buildings'],features:['System requirements discussed in the context of the building','Contact the team to discuss available options'],image:'/media/door-entry-control.jpg',legacyPath:'/door-entry-access-control-systems/'},
@@ -176,7 +176,98 @@ function ProductCard({product}:{product:Product}) {
 function ProductIndex() {
   return <><PageHeading eyebrow="Products" title="Door and entrance systems" lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section><CTA/></>;
 }
+function MailboxesPageContent({product}:{product:Product}) {
+  const photos = [
+    {src:'/media/mailbox-entrance-02.jpg',alt:'Mailbox bank installed in a dark panel beside a communal entrance door',caption:'Mailbox bank integrated beside an entrance'},
+    {src:'/media/mailbox-entrance-03.jpg',alt:'White communal entrance with a mailbox bank built into the side panel',caption:'Mailbox layout within a wider door set'},
+    {src:'/media/mailbox-entrance-04.jpg',alt:'Freestanding bank of dark mailboxes arranged in rows',caption:'Freestanding mailbox arrangement'},
+  ];
+  return <>
+    <section className="section mailbox-overview">
+      <div className="wrap">
+        <Breadcrumbs items={[{label:'Products',href:'/products'},{label:product.title}]}/>
+        <div className="detail-layout mailbox-detail">
+          <div className="detail-image"><img src={product.image || ''} alt="Communal entrance door with an integrated mailbox bank and door-entry panel" width="751" height="1000"/></div>
+          <div className="detail-text">
+            <p className="eyebrow">Complete entrance solutions</p>
+            <h2 style={{fontSize:34}}>Mailboxes designed for complete entrance solutions.</h2>
+            <p>Bamford offers UK-manufactured mailboxes that can be incorporated into door sets to complete an entrance. Plan the mailbox position and layout alongside the door and access requirements.</p>
+            <p>Considering mailboxes as part of the wider entrance design helps shape an arrangement around the building and the people who live there.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="section section-muted" aria-labelledby="mailbox-options-title">
+      <div className="wrap">
+        <div className="section-head">
+          <div><p className="eyebrow">Flexible installation options</p><h2 id="mailbox-options-title">Plan the position around the entrance.</h2></div>
+          <p>Every entrance is unique. Choose an arrangement to suit the building layout and residents’ needs.</p>
+        </div>
+        <div className="mailbox-options-grid">
+          <article className="mailbox-option">
+            <p className="mailbox-option-index">01 / PLACEMENT</p>
+            <h3>Integrated or installed separately.</h3>
+            <p>Mailboxes can be installed on, in or through a wall or panel, or incorporated into a door set. The location and layout can be planned around the entrance.</p>
+          </article>
+          <article className="mailbox-option">
+            <p className="mailbox-option-index">02 / ACCESS</p>
+            <h3>Post and visitor access, considered together.</h3>
+            <p>Where required, mailboxes can accommodate door-entry systems. This allows post and visitor access equipment to be considered as part of the same entrance scheme.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section className="product-photo-gallery" aria-labelledby="mailbox-gallery-title">
+      <div className="wrap">
+        <div className="product-photo-gallery-heading">
+          <div><p className="eyebrow">Mailbox arrangements</p><h2 id="mailbox-gallery-title">Planned with the entrance.</h2></div>
+          <p>Examples of mailbox banks integrated into entrance layouts or installed as a separate unit.</p>
+        </div>
+        <div className="product-photo-gallery-grid mailbox-gallery-grid">
+          {photos.map((photo,index)=><figure key={photo.src}><img src={photo.src} alt={photo.alt} loading="lazy"/><figcaption><span>0{index+1} / PROJECT</span>{photo.caption}</figcaption></figure>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="section" aria-labelledby="mailbox-project-title">
+      <div className="wrap">
+        <div className="section-head">
+          <div><p className="eyebrow">Options for security and fire requirements</p><h2 id="mailbox-project-title">Confirm the specification for your project.</h2></div>
+          <p>Mailbox choice depends on the selected product and how it is incorporated into the overall entrance.</p>
+        </div>
+        <div className="mailbox-requirements-grid">
+          <article className="mailbox-requirement">
+            <h3>Security and fire performance</h3>
+            <p>Options may be suitable for projects with Secured by Design or two-hour fire-rated requirements. Confirm current supporting evidence and suitability for the selected mailbox, door or panel, and installation.</p>
+          </article>
+          <article className="mailbox-requirement">
+            <h3>Planned around your project</h3>
+            <p>Bamford designs, manufactures and installs security doors and screens for local authorities, housing associations, schools and other public-sector buildings. Mailbox requirements can be considered alongside the door set, wall or panel, and access arrangements.</p>
+            <p>Whether you are planning a new entrance or reviewing an existing one, our team can discuss the available mailbox options and their suitability for your project.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section className="mailbox-contact" aria-labelledby="mailbox-contact-title">
+      <div className="wrap mailbox-contact-inner">
+        <div>
+          <p className="eyebrow">Talk to our team</p>
+          <h2 id="mailbox-contact-title">Discuss mailboxes for your entrance project.</h2>
+          <p>Tell us about the building and the entrance requirements you are planning around.</p>
+        </div>
+        <div className="mailbox-contact-links">
+          <a href="tel:+441614806500">Call 0161 480 6500 <ArrowRight size={15}/></a>
+          <a href="mailto:sales@bamforddoors.com">Email sales@bamforddoors.com <ArrowRight size={15}/></a>
+        </div>
+      </div>
+    </section>
+  </>;
+}
 function ProductDetail({product}:{product:Product}) {
+  if(product.slug==='mailboxes') return <><PageHeading eyebrow="Products" title={product.title} lead={product.summary}/><MailboxesPageContent product={product}/><section className="section section-muted"><div className="wrap"><p className="eyebrow">More to explore</p><h2 style={{marginBottom:28}}>Related products</h2><div className="product-grid">{products.filter(p=>p.slug!==product.slug).slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section></>;
   const louveredDoor = product.slug === 'louvered-doors';
   const curtainWallingPhotos = product.slug === 'screens-and-curtain-walling' ? [
     { src: '/media/screens-curtain-walling-02.jpg', alt: 'Green entrance door within a tall aluminium-framed side screen with louvred panels', caption: 'Side screen with a mix of panel types' },
