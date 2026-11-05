@@ -9,7 +9,7 @@ const types = ['1000', '1100', '1110', '1111', '2000', '2200', '2220', '2222', '
 const doorDesigns = types.map((code, index) => ({
   code,
   index,
-  src: `${media}designs/type-${code}.svg`,
+  src: `${media}designs/type-${code}.png`,
 }));
 
 const finishes = [
