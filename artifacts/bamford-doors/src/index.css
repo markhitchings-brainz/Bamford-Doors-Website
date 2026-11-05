@@ -381,6 +381,7 @@ p { line-height:1.75; }
 .info-list li { border-top:1px solid var(--line); padding:17px 0; font-size:14px; line-height:1.65; }
 .info-list li:before { content:""; display:inline-block; width:7px; height:7px; background:var(--bamford-red); margin:0 12px 1px 0; }
 .detail-text p { color:#555; }
+.detail-text .product-claim-note { margin:18px 0 24px; padding:13px 15px; border-left:2px solid var(--bamford-red); background:#f5f5f4; color:#555; font-size:12px; line-height:1.65; }
 .filters { display:flex; gap:12px; flex-wrap:wrap; margin:24px 0 30px; }
 .filters select { padding:12px 34px 12px 13px; border:1px solid #ccc; background:#fff; min-width:190px; }
 .empty-panel { padding:48px; background:#f5f5f4; border-left:3px solid var(--bamford-red); }
