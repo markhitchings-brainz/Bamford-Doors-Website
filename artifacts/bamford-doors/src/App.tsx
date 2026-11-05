@@ -51,7 +51,7 @@ const products: Product[] = [
   {slug:'screens-and-curtain-walling',title:'Screens and curtain walling',summary:'Bespoke aluminium side screens and curtain walling, supplied and installed to suit building entrances and project requirements.',applications:['Building entrances','Public and commercial buildings'],features:['High-strength aluminium framing','Interchangeable glazed, GRP or louvred panels','Bespoke configurations for each application','Supply and installation available'],image:'/media/screens-curtain-walling.jpg',legacyPath:'/screens-and-curtain-walling/'},
   {slug:'door-entry-control-systems',title:'Door entry and control systems',summary:'Door entry and access control options for communal and public building entrances.',applications:['Communal entrances','Public buildings'],features:['System requirements discussed in the context of the building','Contact the team to discuss available options'],image:'/media/door-entry-control.jpg',legacyPath:'/door-entry-access-control-systems/'},
   {slug:'louvered-doors',title:'Louvered doors',summary:'Bespoke louvred doors and screens for service areas that need ventilation and privacy. Angled slats allow air to pass while the door is closed, with the layout and colour tailored to the opening.',applications:['Bin stores','Plant rooms','Boiler rooms and other service areas'],features:['Angled slats support airflow through the closed door','Louvred door and screen combinations','Made to suit the opening and project colour requirements'],image:'/media/louvered-doors.jpg',legacyPath:'/louvered-doors/'},
-  {slug:'secondary-security-doors',title:'Secondary security doors',summary:'Secondary security door options for project-specific building requirements.',applications:['Project-specific building applications'],features:['Discuss the existing entrance and requirements with the team'],image:'/media/secondary-security-doors.jpg',legacyPath:'/secondary-security-doors/'},
+  {slug:'secondary-security-doors',title:'Secondary security doors',summary:'A second security door can create an additional access-controlled layer between an entrance and an internal waiting, reception or secure area. Plan the layout, glazing, access and operation around the building and its users.',applications:['Concierge and reception areas','Youth and community centres','Hospitals and healthcare buildings','Student accommodation','Offices and other spaces requiring controlled access'],features:['Bespoke door, screen and porch arrangements','Mechanical or electromagnetic locking and access-control options','Glazing, finishes, closers and threshold details selected for the project'],image:'/media/secondary-security-doors.jpg',legacyPath:'/secondary-security-doors/'},
 ];
 
 const services: Service[] = [
@@ -336,9 +336,91 @@ function BlockAddressSignsContent({product}:{product:Product}) {
     </section>
   </>;
 }
+function SecondarySecurityDoorsContent({product}:{product:Product}) {
+  const photos = [
+    {src:'/media/secondary-security-doors-brown.jpg',alt:'Brown secondary security door with glazed panels separating internal areas',caption:'Brown internal door arrangement'},
+    {src:'/media/secondary-security-doors-blue.jpg',alt:'Blue security entrance door with glazed panels',caption:'Blue glazed door arrangement'},
+  ];
+  const specification = [
+    {title:'Door, screen or porch',text:'Bespoke configurations can include a second door, a porch or a screen arrangement, planned around the opening and the way people use the space.'},
+    {title:'Access, locking and operation',text:'Mechanical or electromagnetic locking and door-entry equipment can be considered. Closer, automatic operator and threshold options depend on the door and the wider access requirements.'},
+    {title:'Aluminium frame and concealed details',text:'The door leaf can be rebated into the frame and hung on a continuous hinge. Aluminium offers a lightweight, recyclable framing option; confirm construction and fixing details for the selected design.'},
+    {title:'Glazing and finish choices',text:'Laminated, toughened, double-glazed or polycarbonate glazing may be considered, with anodised or powder-coated finishes, including wood-effect options. Confirm current availability, suitability and applicable requirements for the chosen configuration.'},
+  ];
+  return <>
+    <section className="section secondary-security-overview">
+      <div className="wrap">
+        <Breadcrumbs items={[{label:'Products',href:'/products'},{label:product.title}]}/>
+        <div className="detail-layout secondary-security-detail">
+          <div className="detail-image"><img src={product.image || ''} alt="Secondary security doors and glazed screens in an internal entrance" width="983" height="1124"/></div>
+          <div className="detail-text">
+            <p className="eyebrow">A second layer of access control</p>
+            <h2 style={{fontSize:34}}>Separate the entrance from the space beyond.</h2>
+            <p>A secondary security door can provide an additional controlled boundary between a public-facing entrance and an internal waiting room, reception area or other space.</p>
+            <p>It may be configured as a second door, a porch or a door with bespoke screens. The layout and access options can be considered around the building, its users and the project requirements.</p>
+            <p className="product-claim-note">Confirm access, glazing, threshold and hardware choices against current requirements and the exact door configuration.</p>
+            <Link className="button" href={`/contact?purpose=product&product=${encodeURIComponent(product.title)}`} data-testid="link-enquire-secondary-security-doors">Discuss your entrance <ArrowRight size={15}/></Link>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="section section-muted" aria-labelledby="secondary-security-applications-title">
+      <div className="wrap">
+        <div className="section-head">
+          <div><p className="eyebrow">Where a second door may be considered</p><h2 id="secondary-security-applications-title">A further controlled transition inside the building.</h2></div>
+          <p>Suitable applications depend on the building, how visitors enter and the level of access control required.</p>
+        </div>
+        <div className="secondary-security-app-grid">
+          {product.applications.map((application,index)=><article className="secondary-security-app-card" key={application}><span>0{index+1} / APPLICATION</span><h3>{application}</h3></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="section" aria-labelledby="secondary-security-spec-title">
+      <div className="wrap">
+        <div className="section-head">
+          <div><p className="eyebrow">Designed around the project</p><h2 id="secondary-security-spec-title">Configure the door, access and finish together.</h2></div>
+          <p>Each choice needs to work with the opening and the intended use of the space.</p>
+        </div>
+        <div className="secondary-security-spec-grid">
+          {specification.map((item,index)=><article className="secondary-security-spec-card" key={item.title}><p className="secondary-security-spec-index">0{index+1} / SPECIFICATION</p><h3>{item.title}</h3><p>{item.text}</p></article>)}
+        </div>
+        <p className="secondary-security-suitability">Accessibility, security, glazing and operating requirements depend on the complete doorset and installation. Confirm current evidence and project suitability before specification.</p>
+      </div>
+    </section>
+
+    <section className="product-photo-gallery" aria-labelledby="secondary-security-gallery-title">
+      <div className="wrap">
+        <div className="product-photo-gallery-heading">
+          <div><p className="eyebrow">Door examples</p><h2 id="secondary-security-gallery-title">Different layouts for different spaces.</h2></div>
+          <p>Examples of secondary door arrangements. Final design, glazing, finish and access equipment are project-specific.</p>
+        </div>
+        <div className="product-photo-gallery-grid secondary-security-gallery-grid">
+          {photos.map((photo,index)=><figure key={photo.src}><img src={photo.src} alt={photo.alt}/><figcaption><span>0{index+1} / EXAMPLE</span>{photo.caption}</figcaption></figure>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="secondary-security-contact" aria-labelledby="secondary-security-contact-title">
+      <div className="wrap secondary-security-contact-inner">
+        <div>
+          <p className="eyebrow">Talk to our team</p>
+          <h2 id="secondary-security-contact-title">Discuss a secondary door for your building.</h2>
+          <p>Share the building type, entrance arrangement and access requirements you are considering.</p>
+        </div>
+        <div className="secondary-security-contact-links">
+          <a href="tel:+441614806500">Call 0161 480 6500 <ArrowRight size={15}/></a>
+          <a href="mailto:sales@bamforddoors.com">Email sales@bamforddoors.com <ArrowRight size={15}/></a>
+        </div>
+      </div>
+    </section>
+  </>;
+}
 function ProductDetail({product}:{product:Product}) {
   if(product.slug==='mailboxes') return <><PageHeading eyebrow="Products" title={product.title} lead={product.summary}/><MailboxesPageContent product={product}/><section className="section section-muted"><div className="wrap"><p className="eyebrow">More to explore</p><h2 style={{marginBottom:28}}>Related products</h2><div className="product-grid">{products.filter(p=>p.slug!==product.slug).slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section></>;
   if(product.slug==='block-address-signs') return <><PageHeading eyebrow="Products" title={product.title} lead={product.summary}/><BlockAddressSignsContent product={product}/><section className="section section-muted"><div className="wrap"><p className="eyebrow">More to explore</p><h2 style={{marginBottom:28}}>Related products</h2><div className="product-grid">{products.filter(p=>p.slug!==product.slug).slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section></>;
+  if(product.slug==='secondary-security-doors') return <><PageHeading eyebrow="Products" title={product.title} lead={product.summary}/><SecondarySecurityDoorsContent product={product}/><section className="section section-muted"><div className="wrap"><p className="eyebrow">More to explore</p><h2 style={{marginBottom:28}}>Related products</h2><div className="product-grid">{products.filter(p=>p.slug!==product.slug).slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section></>;
   const louveredDoor = product.slug === 'louvered-doors';
   const curtainWallingPhotos = product.slug === 'screens-and-curtain-walling' ? [
     { src: '/media/screens-curtain-walling-02.jpg', alt: 'Green entrance door within a tall aluminium-framed side screen with louvred panels', caption: 'Side screen with a mix of panel types' },
