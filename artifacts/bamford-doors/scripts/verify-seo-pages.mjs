@@ -58,6 +58,7 @@ try {
     ['/about/', 'Made for the entrance', 'Bamford'],
     ['/services/project-management/', 'Project Management', 'project'],
     ['/services/stock-condition-surveys/', 'Stock Condition Surveys', 'door entry and access systems'],
+    ['/services/warranties/', 'Warranties', 'written terms'],
     ['/sectors/social-housing/', 'Social housing', 'entrance'],
   ];
   for (const [route, heading, copy] of representative) {
