@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "build": "vite build --config vite.config.ts && node scripts/generate-seo-pages.mjs",
+    "build:analyze": "BUNDLE_ANALYZE=1 pnpm run build && node scripts/report-public-bundle.mjs",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "test:ssg": "node scripts/verify-seo-pages.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"

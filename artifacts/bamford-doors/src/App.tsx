@@ -7,8 +7,6 @@ import { PortableText } from '@portabletext/react';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { applyPageSeo, type PageSeo } from '@/lib/seo';
 import { fetchPublishedNewsStories, fetchPublishedNewsStory, type NewsStory } from '@/sanity/client';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
 import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
 import { AccreditationsPage } from '@/pages/AccreditationsPage';
 import { OurHistoryPage } from '@/pages/OurHistoryPage';
@@ -25,11 +23,16 @@ import { WoodEffectDoorsPage } from '@/pages/WoodEffectDoorsPage';
 import { HmoEntranceDoorsPage } from '@/pages/HmoEntranceDoorsPage';
 import { GrpDoorsPage } from '@/pages/GrpDoorsPage';
 import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
-import { CaseStudyDetailPage } from '@/pages/CaseStudyDetailPage';
+import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
 import { CASE_STUDIES_SEO } from '@/sanity/caseStudySeo';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
+// Detail bodies are already client-only in entry-server.tsx. Keep their
+// gallery/dialog dependencies off static pages without adding SSG boundaries.
+const CaseStudyDetailPage = lazy(() => import('@/pages/CaseStudyDetailPage').then(
+  (module) => ({ default: module.CaseStudyDetailPage }),
+));
 
 type Product = { slug:string; title:string; summary:string; applications:string[]; features:string[]; image:string|null; legacyPath:string };
 type Service = { slug:string; title:string; summary:string; howItWorks:string[]; legacyPath:string };
@@ -416,7 +419,7 @@ function RouteContent() {
   const article=path.match(/^\/news-insights\/(.+)$/);
   if(article) return <ArticleDetail slug={article[1]}/>;
   const caseDetail=path.match(/^\/case-studies\/(.+)$/);
-  if(caseDetail) return <CaseStudyDetailPage key={caseDetail[1]} slug={caseDetail[1]}/>;
+  if(caseDetail) return <Suspense fallback={<DetailSkeleton/>}><CaseStudyDetailPage key={caseDetail[1]} slug={caseDetail[1]}/></Suspense>;
   const legacyType=legacyEntries.get(path);
   if(legacyType==='news/article candidate') return <LegacyArticleDetail title={path.split('/').pop()!.split('-').map(w=>w[0]?.toUpperCase()+w.slice(1)).join(' ')}/>;
   if(legacyType==='case study candidate') return <CaseStudies/>;
@@ -494,6 +497,6 @@ function Router() {
   return <ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary>;
 }
 function App({ssrPath}:{ssrPath?:string}={}) {
-  return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')} ssrPath={ssrPath}><Router/></WouterRouter><Toaster/></TooltipProvider></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')} ssrPath={ssrPath}><Router/></WouterRouter></QueryClientProvider>;
 }
 export default App;

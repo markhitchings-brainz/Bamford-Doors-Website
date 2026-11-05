@@ -86,6 +86,9 @@ export default defineConfig(async ({ command }) => {
     build: {
       outDir: path.resolve(import.meta.dirname, 'dist/public'),
       emptyOutDir: true,
+      // Opt-in local diagnostics only; normal deploy builds expose no maps.
+      manifest: process.env.BUNDLE_ANALYZE === '1',
+      sourcemap: process.env.BUNDLE_ANALYZE === '1',
     },
     server: {
       ...(port !== undefined ? { port } : {}),

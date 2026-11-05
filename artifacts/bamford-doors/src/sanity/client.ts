@@ -1,5 +1,3 @@
-import { createClient } from '@sanity/client';
-
 export type NewsStory = {
   _id: string;
   title: string;
@@ -14,13 +12,24 @@ export type NewsStory = {
   body: Array<Record<string, unknown>>;
 };
 
-const client = createClient({
-  projectId: 'ih9rxf6u',
-  dataset: 'production',
-  apiVersion: '2025-02-19',
-  useCdn: true,
-  perspective: 'published',
-});
+// Static public pages do not query the CMS. Keep the SDK (and its transport
+// dependencies) behind the first actual request, including build-time readers.
+// Cache successful loads, but allow a failed chunk request to be retried.
+let clientPromise: Promise<import('@sanity/client').SanityClient> | undefined;
+function getClient() {
+  return clientPromise ??= import('@sanity/client')
+    .then(({ createClient }) => createClient({
+      projectId: 'ih9rxf6u',
+      dataset: 'production',
+      apiVersion: '2025-02-19',
+      useCdn: true,
+      perspective: 'published',
+    }))
+    .catch((error) => {
+      clientPromise = undefined;
+      throw error;
+    });
+}
 
 const newsProjection = `{
   _id,
@@ -40,6 +49,7 @@ const newsProjection = `{
 }`;
 
 export async function fetchPublishedNewsStories(): Promise<NewsStory[]> {
+  const client = await getClient();
   return client.fetch(
     `*[_type == "newsStory" && defined(slug.current) && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc) ${newsProjection}`,
   );
@@ -48,6 +58,7 @@ export async function fetchPublishedNewsStories(): Promise<NewsStory[]> {
 export async function fetchPublishedNewsStory(
   slug: string,
 ): Promise<NewsStory | null> {
+  const client = await getClient();
   return client.fetch(
     `*[_type == "newsStory" && slug.current == $slug && defined(publishedAt) && publishedAt <= now()][0] ${newsProjection}`,
     { slug },
@@ -108,6 +119,7 @@ const publishedCaseStudyFilter =
 export async function fetchPublishedCaseStudies(
   options: { fresh?: boolean } = {},
 ): Promise<CaseStudySummary[]> {
+  const client = await getClient();
   const reader = options.fresh ? client.withConfig({ useCdn: false, timeout: 15_000 }) : client;
   return reader.fetch(
     `*[${publishedCaseStudyFilter}] | order(publishedAt desc) { ${caseStudyFields} }`,
@@ -115,6 +127,7 @@ export async function fetchPublishedCaseStudies(
 }
 
 export async function fetchPublishedCaseStudy(slug: string): Promise<CaseStudy | null> {
+  const client = await getClient();
   return client.fetch(
     `*[${publishedCaseStudyFilter} && slug.current == $slug][0] ${caseStudyDetailProjection}`,
     { slug },

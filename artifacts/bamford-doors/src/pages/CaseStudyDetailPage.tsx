@@ -5,6 +5,7 @@ import { Link } from 'wouter';
 import { applyPageSeo } from '@/lib/seo';
 import { fetchPublishedCaseStudy, type CaseStudy } from '@/sanity/client';
 import { RichText, formatDate, hasBlocks, sanityImage, sanitySrcSet } from './case-studies/shared';
+import { DetailSkeleton } from './case-studies/DetailSkeleton';
 import './case-studies/case-studies.css';
 
 type State =
@@ -161,7 +162,6 @@ export function CaseStudyDetailPage({ slug }: { slug: string }) {
     </main>
   );
 }
-
 function Crumbs({ current }: { current: string }) {
   return (
     <nav className="cs-crumbs" aria-label="Breadcrumb">
@@ -226,20 +226,5 @@ function Gallery({ images }: { images: GalleryImage[] }) {
         </Dialog.Portal>
       </Dialog.Root>
     </section>
-  );
-}
-
-function DetailSkeleton() {
-  return (
-    <main className="cs-page" aria-busy="true" data-testid="status-cs-detail-loading">
-      <section className="cs-hero cs-detail-hero">
-        <div className="cs-wrap cs-skeleton">
-          <div className="cs-crumbs"><i style={{ width: 180 }} /></div>
-          <i className="cs-sk-title" /><i className="cs-sk-title cs-sk-short" />
-        </div>
-      </section>
-      <div className="cs-wrap cs-skeleton"><div className="cs-sk-image" /></div>
-      <span className="cs-sr">Loading case study</span>
-    </main>
   );
 }
