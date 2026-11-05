@@ -552,6 +552,37 @@ h1,h2,h3 { letter-spacing:-.055em; }
 .service-links a { min-height:50px; display:grid; grid-template-columns:34px 1fr 18px; gap:12px; align-items:center; border-bottom:1px solid #d7d5d2; text-decoration:none; font-size:11px; font-weight:600; }
 .service-links a span { color:var(--bamford-red); font-size:9px; }
 .service-links a svg { color:#777; }
+.maintenance-hero-grid { display:grid; grid-template-columns:.9fr 1.1fr; align-items:center; gap:64px; }
+.maintenance-hero-copy { max-width:520px; }
+.maintenance-hero-copy h2 { max-width:12ch; font-size:clamp(36px,4.3vw,56px); line-height:1.04; letter-spacing:-.045em; }
+.maintenance-hero-copy > p:not(.eyebrow) { color:#5c5c5c; font-size:13px; line-height:1.8; margin:18px 0; }
+.maintenance-hero-copy .button { margin-top:10px; }
+.maintenance-photo { min-height:430px; margin:0; position:relative; overflow:hidden; background:#ddd; }
+.maintenance-photo img { display:block; width:100%; height:100%; min-height:430px; object-fit:cover; object-position:center 53%; }
+.maintenance-photo figcaption { position:absolute; bottom:18px; left:18px; padding:8px 10px; color:#fff; background:rgba(20,20,20,.78); font-size:8px; letter-spacing:.16em; text-transform:uppercase; }
+.maintenance-frequency-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.maintenance-frequency-card { padding:30px; background:#fff; border-bottom:2px solid var(--bamford-red); }
+.maintenance-card-index { margin:0 0 20px; color:var(--bamford-red); font-size:9px; letter-spacing:.14em; font-weight:700; }
+.maintenance-frequency-card h3 { max-width:18ch; font-size:clamp(22px,2.6vw,31px); line-height:1.15; }
+.maintenance-frequency-card p:last-child { max-width:480px; margin:14px 0 0; color:#5c5c5c; font-size:12px; line-height:1.75; }
+.maintenance-inclusions-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:75px; align-items:start; }
+.maintenance-inclusions-grid h2 { max-width:11ch; font-size:clamp(36px,4.5vw,54px); line-height:1.06; }
+.maintenance-section-lead { max-width:420px; color:#5c5c5c; font-size:13px; line-height:1.8; }
+.maintenance-includes-list { margin-top:0; }
+.maintenance-advice-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.maintenance-advice-card { min-width:0; padding:27px; border:1px solid #dedbd8; background:#fff; }
+.maintenance-advice-card h3 { max-width:15ch; margin:0 0 14px; font-size:21px; line-height:1.2; }
+.maintenance-advice-card p:last-child { margin:0; color:#5c5c5c; font-size:12px; line-height:1.75; }
+.maintenance-advice-card--dark { color:#fff; background:#171717; border-color:#171717; }
+.maintenance-advice-card--dark .eyebrow { color:#fff; }
+.maintenance-advice-card--dark p:last-child { color:#c5c5c5; }
+.maintenance-cta { padding:72px 0; color:#fff; background:#171717; }
+.maintenance-cta-inner { display:flex; align-items:center; justify-content:space-between; gap:50px; }
+.maintenance-cta-inner > div { max-width:690px; }
+.maintenance-cta-inner .eyebrow { color:#fff; }
+.maintenance-cta-inner h2 { max-width:14ch; margin:0 0 14px; font-size:clamp(34px,4vw,49px); line-height:1.07; }
+.maintenance-cta-inner p:not(.eyebrow) { max-width:620px; margin:0; color:#c5c5c5; font-size:13px; line-height:1.8; }
+.maintenance-cta-inner .button { flex-shrink:0; }
 .process-section { padding:105px 0; }
 .process-section .split { grid-template-columns:.9fr 1.1fr; gap:10%; align-items:center; }
 .process-section h2 { max-width:10ch; font-size:clamp(38px,4.8vw,59px); }
@@ -645,6 +676,16 @@ h1,h2,h3 { letter-spacing:-.055em; }
  .service-copy h2 { font-size:clamp(37px,9vw,49px); }
  .service-copy > p:not(.eyebrow) { font-size:12px; }
  .service-links { margin-top:28px; }
+  .maintenance-hero-grid,.maintenance-inclusions-grid { grid-template-columns:1fr; gap:28px; }
+  .maintenance-hero-copy { max-width:none; }
+  .maintenance-hero-copy h2,.maintenance-inclusions-grid h2 { max-width:15ch; font-size:clamp(36px,9vw,49px); }
+  .maintenance-photo,.maintenance-photo img { min-height:280px; height:280px; }
+  .maintenance-frequency-grid,.maintenance-advice-grid { grid-template-columns:1fr; gap:10px; }
+  .maintenance-frequency-card,.maintenance-advice-card { padding:23px; }
+  .maintenance-inclusions-grid { gap:10px; }
+  .maintenance-cta { padding:52px 0; }
+  .maintenance-cta-inner { display:block; }
+  .maintenance-cta-inner .button { margin-top:22px; }
  .process-section { padding:68px 0; }
  .process-section .split { grid-template-columns:1fr; gap:28px; }
  .process-section h2 { font-size:clamp(39px,10vw,53px); }

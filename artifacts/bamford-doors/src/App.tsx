@@ -56,7 +56,7 @@ const products: Product[] = [
 
 const services: Service[] = [
   {slug:'project-management',title:'Project management',summary:'A coordinated point of contact for door and entrance system projects.',howItWorks:['Tell us about the building and the work being considered.','Our team can discuss the project scope and next steps with you.'],legacyPath:'/project-management/'},
-  {slug:'maintenance-packages',title:'Maintenance packages',summary:'Discuss maintenance requirements for entrance doors and systems with the Bamford team.',howItWorks:['Share the type of entrance system and your requirements.','The team will discuss an appropriate next step.'],legacyPath:'/maintenance-packages/'},
+  {slug:'maintenance-packages',title:'Maintenance packages',summary:'Planned inspections and minor adjustments for communal doors. Discuss visit frequency, current requirements and contract terms for your system.',howItWorks:['Share the type of entrance system and your requirements.','The team will discuss an appropriate next step.'],legacyPath:'/maintenance-packages/'},
   {slug:'stock-condition-surveys',title:'Stock condition surveys',summary:'A service to discuss the condition of door and entrance assets across a building or portfolio.',howItWorks:['Tell us about your buildings and survey requirements.','We will discuss scope and information needed.'],legacyPath:'/stock-condition-surveys/'},
   {slug:'warranties',title:'Warranties',summary:'For information about warranty terms for a specific project or product, contact our team.',howItWorks:['Provide the project or product details you have.','Our team can confirm the relevant information.'],legacyPath:'/warranties/'},
   {slug:'frameworks',title:'Frameworks',summary:'Speak to the team about framework-related enquiries and requirements.',howItWorks:['Share the framework or procurement context.','Our team will direct your enquiry to the right person.'],legacyPath:'/frameworks/'},
@@ -187,7 +187,101 @@ function ProductDetail({product}:{product:Product}) {
 }
 
 function ServiceIndex() { return <><PageHeading eyebrow="Services" title="Support around the entrance" lead="Discuss the wider requirements of your entrance system project with the Bamford team."/><section className="section"><div className="wrap tile-grid">{services.map(s=><Link className="tile" href={servicePath(s)} key={s.slug}><strong>{s.title}</strong><p>{s.summary}</p><span className="arrow"><MoveUpRight size={18}/></span></Link>)}</div></section><CTA/></>; }
+function MaintenancePackagesContent() {
+  return <>
+    <section className="section maintenance-overview">
+      <div className="wrap">
+        <Breadcrumbs items={[{label:'Services',href:'/services'},{label:'Maintenance packages'}]}/>
+        <div className="maintenance-hero-grid">
+          <div className="maintenance-hero-copy">
+            <p className="eyebrow">Preventative maintenance</p>
+            <h2>Planned checks for entrances used every day.</h2>
+            <p>Communal doors see frequent use. Scheduled inspections and minor adjustments can help keep them operating reliably and support day-to-day access for residents and visitors.</p>
+            <p>The right maintenance plan depends on the door, operator, how the entrance is used and the requirements that apply to the installation.</p>
+            <Link className="button" href="/contact?purpose=maintenance" data-testid="link-maintenance-enquire">Discuss a maintenance plan <ArrowRight size={15}/></Link>
+          </div>
+          <figure className="maintenance-photo">
+            <img src="/media/maintenance-van.jpg" alt="Bamford technical support vehicle outside a residential entrance" width="614" height="524"/>
+            <figcaption>Technical support / Maintenance</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section className="section section-muted" aria-labelledby="maintenance-visits-title">
+      <div className="wrap">
+        <div className="section-head">
+          <div><p className="eyebrow">Planned visit schedule</p><h2 id="maintenance-visits-title">Set a schedule for your doors.</h2></div>
+          <p>A typical schedule includes one annual visit for manual doors and two for automatic doors. Confirm the appropriate frequency for your installed system and current requirements.</p>
+        </div>
+        <div className="maintenance-frequency-grid">
+          <article className="maintenance-frequency-card">
+            <p className="maintenance-card-index">01 / MANUAL DOORS</p>
+            <h3>One scheduled visit per year.</h3>
+            <p>A planned inspection and minor adjustments for manual communal entrances, subject to the agreed service scope.</p>
+          </article>
+          <article className="maintenance-frequency-card">
+            <p className="maintenance-card-index">02 / AUTOMATIC DOORS</p>
+            <h3>Two scheduled visits per year.</h3>
+            <p>Automatic doors may have additional safety and servicing requirements. Confirm the current interval for the operator and its use.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section className="section" aria-labelledby="maintenance-includes-title">
+      <div className="wrap maintenance-inclusions-grid">
+        <div>
+          <p className="eyebrow">What is included</p>
+          <h2 id="maintenance-includes-title">A planned check of the entrance.</h2>
+          <p className="maintenance-section-lead">The agreed preventative maintenance visit focuses on inspection and minor adjustments. Confirm any repair work, replacement parts or additional services separately.</p>
+        </div>
+        <div>
+          <ul className="info-list maintenance-includes-list">
+            <li>Inspection in line with the agreed preventative maintenance procedures</li>
+            <li>Labour for the scheduled inspection</li>
+            <li>Minor adjustments identified during the visit</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section className="section section-muted" aria-label="Maintenance terms and requirements">
+      <div className="wrap">
+        <div className="maintenance-advice-grid">
+          <article className="maintenance-advice-card">
+            <p className="eyebrow">Automatic door safety</p>
+            <h3>Confirm current requirements.</h3>
+            <p>Automatic doors may be subject to applicable safety standards, including BS EN 16005, and machinery-safety requirements. Ask us to confirm the current edition and maintenance interval for your installed system.</p>
+          </article>
+          <article className="maintenance-advice-card">
+            <p className="eyebrow">Warranty terms</p>
+            <h3>Check what applies to your door.</h3>
+            <p>Ask whether a maintenance agreement can extend any applicable warranty. Eligibility, duration and coverage depend on the product and written agreement.</p>
+          </article>
+          <article className="maintenance-advice-card maintenance-advice-card--dark">
+            <p className="eyebrow">Package exclusions</p>
+            <h3>Know what is outside the scope.</h3>
+            <p>Damage from vandalism, malicious damage, fire, theft or other perils is not included. Cosmetic damage is also excluded. Check the current agreement for full terms and any chargeable remedial work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section className="maintenance-cta" aria-labelledby="maintenance-cta-title">
+      <div className="wrap maintenance-cta-inner">
+        <div>
+          <p className="eyebrow">Talk through your requirements</p>
+          <h2 id="maintenance-cta-title">Plan maintenance around your building.</h2>
+          <p>Tell us about the entrance, door type and how it is used. We can discuss the visit schedule and service scope to consider.</p>
+        </div>
+        <Link className="button" href="/contact?purpose=maintenance">Discuss maintenance <ArrowRight size={15}/></Link>
+      </div>
+    </section>
+  </>;
+}
 function ServiceDetail({service}:{service:Service}) {
+  if(service.slug==='maintenance-packages') return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><MaintenancePackagesContent/></>;
   return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><section className="section"><div className="wrap detail-layout"><div><Breadcrumbs items={[{label:'Services',href:'/services'},{label:service.title}]}/><h2 style={{fontSize:36}}>Let’s understand the requirement.</h2><p style={{color:'#555'}}>{service.summary}</p><h3 style={{marginTop:34}}>How to get started</h3><ul className="info-list">{service.howItWorks.map(x=><li key={x}>{x}</li>)}</ul><Link className="button" href={`/contact?purpose=${service.slug.includes('survey')?'stock-survey':service.slug==='maintenance-packages'?'maintenance':'consultation'}`}>Discuss this service <ArrowRight size={15}/></Link></div><div className="contact-aside"><p className="eyebrow">Next step</p><h3>Tell us about your building.</h3><p>Our team can discuss your requirements and the information needed to help move the enquiry forward.</p></div></div></section></>;
 }
 function SectorIndex() { return <><PageHeading eyebrow="Sectors" title="For buildings with a public purpose" lead="Bamford serves local authorities, housing associations, schools and other public-sector buildings nationally."/><section className="section"><div className="wrap tile-grid">{sectors.map(s=><Link className="tile" href={sectorPath(s)} key={s.slug}><strong>{s.title}</strong><p>{s.summary}</p><span className="arrow"><MoveUpRight size={18}/></span></Link>)}</div></section><CTA/></>; }
