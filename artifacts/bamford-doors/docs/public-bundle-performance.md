@@ -57,9 +57,24 @@ the CMS listing/detail graphs without double-counting shared chunks. Original
 source-character attribution identifies dependencies but is not a measurement
 of their minified transfer size.
 
+It also enforces cold-cache gzip ceilings with modest headroom over the current
+measurements:
+
+| Graph | Measured gzip | Maximum gzip |
+| --- | ---: | ---: |
+| Initial public pages | 143.89 kB | 160 kB |
+| CMS listing including initial graph | 184.49 kB | 205 kB |
+| CMS case-study detail including initial graph | 200.30 kB | 225 kB |
+
+If a ceiling is exceeded, the command exits unsuccessfully and names the
+affected graph, measured size, limit, and recommended direction for reducing
+eager JavaScript. The analysis build and its source maps are written under
+`generated-artifacts/bundle-analysis/`, not `dist/public`.
+
 For normal output, run `pnpm --filter @workspace/bamford-doors run build`.
 Normal builds do not emit source maps or the analysis manifest. No CMS article
-indexing or hosting configuration was changed.
+indexing or hosting configuration was changed. The named `public-bundle-size`
+validation runs the diagnostic build and enforces these budgets.
 
 ## Verification
 

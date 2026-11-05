@@ -84,7 +84,11 @@ export default defineConfig(async ({ command }) => {
     },
     root: path.resolve(import.meta.dirname),
     build: {
-      outDir: path.resolve(import.meta.dirname, 'dist/public'),
+      // Keep source maps and the manifest from diagnostic builds out of the
+      // public deployment directory.
+      outDir: process.env.BUNDLE_ANALYZE === '1'
+        ? path.resolve(import.meta.dirname, '../../generated-artifacts/bundle-analysis/public')
+        : path.resolve(import.meta.dirname, 'dist/public'),
       emptyOutDir: true,
       // Opt-in local diagnostics only; normal deploy builds expose no maps.
       manifest: process.env.BUNDLE_ANALYZE === '1',

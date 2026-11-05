@@ -5,7 +5,13 @@ import { fileURLToPath } from 'node:url';
 import { gzipSync, brotliCompressSync } from 'node:zlib';
 
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const output = path.join(packageRoot, 'dist/public');
+const output = path.resolve(packageRoot, '../../generated-artifacts/bundle-analysis/public');
+const reportDirectory = path.resolve(packageRoot, '../../generated-artifacts/bundle-analysis');
+const gzipBudgets = {
+  initial: 160_000,
+  cmsListing: 205_000,
+  cmsDetail: 225_000,
+};
 const manifest = JSON.parse(await readFile(path.join(output, '.vite/manifest.json'), 'utf8'));
 const entry = Object.keys(manifest).find((key) => manifest[key].isEntry);
 assert.ok(entry, 'Expected a browser entry');
@@ -82,7 +88,28 @@ const report = {
   cmsDetailIncludingInitial: await transferFor([entry, ...cmsReader, detail]),
   originalSourceCharacters: Object.fromEntries([...sourceCharacters].sort((a, b) => b[1] - a[1])),
 };
-const reportDirectory = path.resolve(packageRoot, '../../generated-artifacts/bundle-analysis');
+const budgetChecks = [
+  { name: 'Initial public pages', actual: report.total.gzip, limit: gzipBudgets.initial },
+  { name: 'CMS listing including initial graph', actual: report.cmsListingIncludingInitial.gzip, limit: gzipBudgets.cmsListing },
+  { name: 'CMS case-study detail including initial graph', actual: report.cmsDetailIncludingInitial.gzip, limit: gzipBudgets.cmsDetail },
+];
+report.gzipBudgets = budgetChecks.map(({ name, actual, limit }) => ({
+  name,
+  actual,
+  limit,
+  passed: actual <= limit,
+}));
 await mkdir(reportDirectory, { recursive: true });
 await writeFile(path.join(reportDirectory, 'after.json'), `${JSON.stringify(report, null, 2)}\n`);
 console.log(JSON.stringify(report, null, 2));
+const failures = budgetChecks.filter(({ actual, limit }) => actual > limit);
+if (failures.length > 0) {
+  const formatKib = (bytes) => `${(bytes / 1000).toFixed(2)} kB`;
+  throw new Error([
+    'Public JavaScript gzip budget exceeded:',
+    ...failures.map(({ name, actual, limit }) =>
+      `- ${name}: ${formatKib(actual)} exceeds ${formatKib(limit)}. Reduce eager imports or defer route-only dependencies, then rerun build:analyze.`,
+    ),
+  ].join('\n'));
+}
+console.log('All public JavaScript gzip budgets passed.');
