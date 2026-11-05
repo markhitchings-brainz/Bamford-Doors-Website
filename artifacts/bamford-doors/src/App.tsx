@@ -13,6 +13,7 @@ import { OurHistoryPage } from '@/pages/OurHistoryPage';
 import { SustainabilityPage } from '@/pages/SustainabilityPage';
 import { MeetTheTeamPage } from '@/pages/MeetTheTeamPage';
 import { CorporateSocialResponsibilityPage } from '@/pages/CorporateSocialResponsibilityPage';
+import { ProjectManagementPage } from '@/pages/ProjectManagementPage';
 import { FactoryPage } from '@/pages/FactoryPage';
 import { AluminiumVsSteelPage } from '@/pages/AluminiumVsSteelPage';
 import { ConservationAreasPage } from '@/pages/ConservationAreasPage';
@@ -55,7 +56,7 @@ const products: Product[] = [
 ];
 
 const services: Service[] = [
-  {slug:'project-management',title:'Project management',summary:'A coordinated point of contact for door and entrance system projects.',howItWorks:['Tell us about the building and the work being considered.','Our team can discuss the project scope and next steps with you.'],legacyPath:'/project-management/'},
+  {slug:'project-management',title:'Project Management',summary:'Every project has a nominated Project Manager who works closely with you and our Technical Team to develop doorset solutions tailored to your building, intended use and project brief.',howItWorks:['Tell us about the building and the work being considered.','Our team can discuss the project scope and next steps with you.'],legacyPath:'/project-management/'},
   {slug:'maintenance-packages',title:'Maintenance packages',summary:'Planned inspections and minor adjustments for communal doors. Discuss visit frequency, current requirements and contract terms for your system.',howItWorks:['Share the type of entrance system and your requirements.','The team will discuss an appropriate next step.'],legacyPath:'/maintenance-packages/'},
   {slug:'stock-condition-surveys',title:'Stock condition surveys',summary:'A service to discuss the condition of door and entrance assets across a building or portfolio.',howItWorks:['Tell us about your buildings and survey requirements.','We will discuss scope and information needed.'],legacyPath:'/stock-condition-surveys/'},
   {slug:'warranties',title:'Warranties',summary:'For information about warranty terms for a specific project or product, contact our team.',howItWorks:['Provide the project or product details you have.','Our team can confirm the relevant information.'],legacyPath:'/warranties/'},
@@ -525,6 +526,7 @@ function MaintenancePackagesContent() {
   </>;
 }
 function ServiceDetail({service}:{service:Service}) {
+  if(service.slug==='project-management') return <ProjectManagementPage/>;
   if(service.slug==='maintenance-packages') return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><MaintenancePackagesContent/></>;
   return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><section className="section"><div className="wrap detail-layout"><div><Breadcrumbs items={[{label:'Services',href:'/services'},{label:service.title}]}/><h2 style={{fontSize:36}}>Let’s understand the requirement.</h2><p style={{color:'#555'}}>{service.summary}</p><h3 style={{marginTop:34}}>How to get started</h3><ul className="info-list">{service.howItWorks.map(x=><li key={x}>{x}</li>)}</ul><Link className="button" href={`/contact?purpose=${service.slug.includes('survey')?'stock-survey':service.slug==='maintenance-packages'?'maintenance':'consultation'}`}>Discuss this service <ArrowRight size={15}/></Link></div><div className="contact-aside"><p className="eyebrow">Next step</p><h3>Tell us about your building.</h3><p>Our team can discuss your requirements and the information needed to help move the enquiry forward.</p></div></div></section></>;
 }

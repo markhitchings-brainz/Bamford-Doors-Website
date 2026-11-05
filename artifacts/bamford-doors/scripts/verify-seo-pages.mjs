@@ -56,7 +56,7 @@ try {
   const representative = [
     ['/products/aluminium-modular-doors/', 'Built around', 'aluminium'],
     ['/about/', 'Made for the entrance', 'Bamford'],
-    ['/services/project-management/', 'Project management', 'project'],
+    ['/services/project-management/', 'Project Management', 'project'],
     ['/sectors/social-housing/', 'Social housing', 'entrance'],
   ];
   for (const [route, heading, copy] of representative) {
