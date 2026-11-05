@@ -41,11 +41,11 @@ export function StockConditionSurveysPage() {
             </div>
             <figure className="sc-hero-image">
               <img
-                src="/media/stock-condition-surveys/communal-entrance-exterior.jpg"
-                alt="Communal entrance viewed from outside behind railings"
+                src="/media/stock-condition-surveys/high-rise-residential-block.webp"
+                alt="High-rise residential apartment block viewed from outside"
                 fetchPriority="high"
               />
-              <figcaption><span>01 / COMMUNAL ENTRANCE</span>Door sets and access systems, in context.</figcaption>
+              <figcaption><span>01 / RESIDENTIAL BLOCK</span>Door sets and access systems, in context.</figcaption>
             </figure>
           </div>
           <div className="sc-hero-index" aria-hidden="true">

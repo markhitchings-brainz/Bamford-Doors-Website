@@ -172,13 +172,13 @@ function Home() {
   );
 }
 
-function ProductCard({product}:{product:Product}) {
-  const cardImage=product.cardImage||product.image;
+function ProductCard({product,imageOverride}:{product:Product;imageOverride?:string}) {
+  const cardImage=imageOverride||product.cardImage||product.image;
   return <Link className="product-card" href={productPath(product)} data-testid={`card-product-${product.slug}`}>{cardImage?<img src={cardImage} alt={product.title}/>:<div className="product-image-pending" aria-label={`Approved image not yet supplied for ${product.title}`}><span>Product image to be supplied</span></div>}<div className="product-card-copy"><h3>{product.title}</h3><p>{product.summary}</p><span className="text-link">Explore product <ArrowRight size={13}/></span></div></Link>;
 }
 
 function ProductIndex() {
-  return <><PageHeading eyebrow="Products" title="Door and entrance systems" lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section><CTA/></>;
+  return <><PageHeading eyebrow="Products" title="Door and entrance systems" lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p} imageOverride={p.slug==='thermally-broken-doors'?'/media/thermal-door-card.webp':undefined}/>)}</div></div></section><CTA/></>;
 }
 function MailboxesPageContent({product}:{product:Product}) {
   const photos = [
