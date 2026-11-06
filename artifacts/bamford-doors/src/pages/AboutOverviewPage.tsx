@@ -1,5 +1,6 @@
 import { ArrowRight, MoveUpRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './aboutOverview.css';
 
 type AboutOverviewLink = { href: string; title: string; lead: string };
@@ -33,7 +34,7 @@ export function AboutOverviewPage({ pages }: { pages: AboutOverviewLink[] }) {
           <div className="ar-hero-foot"><span>01 / ABOUT BAMFORD</span><span>Stockport, UK</span></div>
         </div>
         <div className="ar-hero-image">
-          <img src="/media/bamford-project-team-reviewing-workshop.jpg" alt="Bamford team members reviewing work together in the workshop" />
+          <ResponsiveImage src="/media/bamford-project-team-reviewing-workshop.jpg" alt="Bamford team members reviewing work together in the workshop" sizes="(max-width: 760px) 100vw, 52vw" />
           <span className="ar-image-caption">People, process, and the work in between.</span>
           <span className="ar-image-index">A closer look <i /> Bamford Doors</span>
         </div>
@@ -56,7 +57,7 @@ export function AboutOverviewPage({ pages }: { pages: AboutOverviewLink[] }) {
           </div>
           <div className="ar-making-story">
             <div className="ar-making-photo">
-              <img src="/media/factory-hero-poster.jpg" alt="Materials and components arranged along the Bamford workshop production line" loading="lazy" />
+              <ResponsiveImage src="/media/factory-hero-poster.jpg" alt="Materials and components arranged along the Bamford workshop production line" loading="lazy" sizes="(max-width: 760px) 100vw, 48vw" />
               <span>01 — Workshop production</span>
             </div>
             <div className="ar-making-note">
@@ -77,7 +78,7 @@ export function AboutOverviewPage({ pages }: { pages: AboutOverviewLink[] }) {
           <div className="ar-directory-layout">
             <div className="ar-directory-aside">
               <div className="ar-profile-image">
-                <img src="/media/bamford-aluminium-profiles-workshop.jpg" alt="Aluminium profiles used in door and screen manufacture" loading="lazy" />
+                <ResponsiveImage src="/media/bamford-aluminium-profiles-workshop.jpg" alt="Aluminium profiles used in door and screen manufacture" loading="lazy" sizes="(max-width: 760px) 100vw, 30vw" />
               </div>
               <p className="ar-aside-count"><strong>{pages.length}</strong><span>ways to find out more</span></p>
               <p className="ar-aside-copy">From company history to specific building settings, find the right detail for your next decision.</p>

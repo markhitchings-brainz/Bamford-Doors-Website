@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './stock-condition-surveys.css';
 
 const surveyImages = [
@@ -40,9 +41,10 @@ export function StockConditionSurveysPage() {
               <p className="sc-intro">Our team carries out a detailed inspection, looking at door sets internally and externally. The survey helps assess the age and condition of each element, giving you useful information to plan any improvements that may be needed in the future.</p>
             </div>
             <figure className="sc-hero-image">
-              <img
+              <ResponsiveImage
                 src="/media/stock-condition-surveys/high-rise-residential-block.webp"
                 alt="High-rise residential apartment block viewed from outside"
+                sizes="(max-width: 760px) 100vw, 50vw"
                 fetchPriority="high"
               />
               <figcaption><span>01 / RESIDENTIAL BLOCK</span>Door sets and access systems, in context.</figcaption>
@@ -78,7 +80,7 @@ export function StockConditionSurveysPage() {
           <div className="sc-estate-grid">
             {surveyImages.map((image, index) => (
               <figure className={`sc-estate-photo sc-estate-photo-${index + 1}`} key={image.src}>
-                <img src={image.src} alt={image.alt} loading="lazy" />
+                <ResponsiveImage src={image.src} alt={image.alt} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw" />
                 <figcaption><span>0{index + 2} / HOUSING CONTEXT</span>{image.label}</figcaption>
               </figure>
             ))}
@@ -89,10 +91,11 @@ export function StockConditionSurveysPage() {
       <section className="sc-planning">
         <div className="wrap sc-planning-grid">
           <figure className="sc-planning-image">
-            <img
+            <ResponsiveImage
               src="/media/stock-condition-surveys/apartment-entrances-through-brickwork.jpg"
               alt="View through brickwork toward apartment entrances"
               loading="lazy"
+              sizes="(max-width: 760px) 100vw, 50vw"
             />
             <figcaption><span>05 / ENTRANCE DETAIL</span>Looking through to a shared residential entrance.</figcaption>
           </figure>

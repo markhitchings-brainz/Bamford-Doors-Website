@@ -234,7 +234,7 @@ function Gallery({ images }: { images: GalleryImage[] }) {
             </div>
             {current && (
               <figure className="cs-lightbox-figure">
-                <img src={sanityImage(current.url, 2400)} alt={current.alt || ''} data-testid="img-cs-lightbox" />
+                <img src={sanityImage(current.url, 1600)} srcSet={sanitySrcSet(current.url, [800, 1200, 1600, 2000, 2400])} sizes="(max-width: 760px) 96vw, 90vw" alt={current.alt || ''} data-testid="img-cs-lightbox" />
                 {current.caption && <figcaption>{current.caption}</figcaption>}
               </figure>
             )}

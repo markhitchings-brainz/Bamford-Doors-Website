@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, Layers3, Ruler, Scale, ShieldCheck, Thermometer, Waves, X } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './grp-doors.css';
 
 const materialProperties = [
@@ -139,7 +140,7 @@ export function GrpDoorsPage() {
               <div className="grp-hero-meta"><span>01 / Glass reinforced plastic</span><span>Start with the opening</span></div>
             </div>
             <figure className="grp-hero-image">
-              <img src="/media/grp-doors/hero.webp" alt="Brown textured communal entrance door and matching glazed side panel in a brick building" />
+              <ResponsiveImage src="/media/grp-doors/hero.webp" alt="Brown textured communal entrance door and matching glazed side panel in a brick building" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" />
               <figcaption>Textured brown communal entrance</figcaption>
             </figure>
           </div>
@@ -272,7 +273,7 @@ export function GrpDoorsPage() {
           <div className="grp-gallery-grid">
             {gallery.map((item, index) => (
               <figure className="grp-gallery-card" key={item.src}>
-                <div className="grp-gallery-image"><img src={item.src} alt={item.alt} loading="lazy" /></div>
+                <div className="grp-gallery-image"><ResponsiveImage src={item.src} alt={item.alt} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw" /></div>
                 <figcaption><small>0{index + 1} / {item.detail}</small><strong>{item.caption}</strong></figcaption>
               </figure>
             ))}

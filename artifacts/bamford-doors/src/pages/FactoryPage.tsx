@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, ChevronRight, Mail, Phone } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './factory-page.css';
 
 const factoryHeroVideo =
@@ -138,7 +139,7 @@ export function FactoryPage() {
     <main className="factory-page">
       <section className="factory-hero" aria-labelledby="factory-hero-title">
         <div className="factory-hero-media" aria-hidden="true">
-          <img className="factory-hero-poster" src={factoryHeroPoster} alt="" />
+          <ResponsiveImage className="factory-hero-poster" src={factoryHeroPoster} alt="" sizes="100vw" />
           {shouldLoadVideo && (
             <video
               className="factory-hero-video"

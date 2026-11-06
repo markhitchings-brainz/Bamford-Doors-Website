@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './reference-led-home.css';
 
 const navItems = [
@@ -50,7 +51,7 @@ function Header() {
 
 function ProductCard({ item, index }: { item: typeof products[number]; index: number }) {
   return <Link className={`rl-product rl-product-${index + 1}`} href={`/products/${item.slug}`}>
-    <div className="rl-product-image"><img src={`/media/${item.image}`} alt={`${item.title} entrance door`} /><span>{item.tag}</span><i><ArrowUpRight size={18} /></i></div>
+    <div className="rl-product-image"><ResponsiveImage src={`/media/${item.image}`} alt={`${item.title} entrance door`} loading="lazy" sizes="(max-width: 760px) 50vw, 25vw" /><span>{item.tag}</span><i><ArrowUpRight size={18} /></i></div>
     <div className="rl-product-copy"><h3>{item.title}</h3><p>{item.copy}</p><span className="rl-link">Explore product <ArrowRight size={14} /></span></div>
   </Link>;
 }
@@ -72,7 +73,7 @@ export function ReferenceLedHome() {
       <Header />
       <main>
         <section className="rl-hero">
-          <div className="rl-hero-image"><img src="/media/grp.webp" alt="Bamford entrance door installed at a shared residential building" /><div className="rl-image-caption"><span>01</span><i /> ENTRANCE SYSTEMS</div></div>
+          <div className="rl-hero-image"><ResponsiveImage src="/media/grp.webp" alt="Bamford entrance door installed at a shared residential building" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" /><div className="rl-image-caption"><span>01</span><i /> ENTRANCE SYSTEMS</div></div>
           <div className="rl-hero-panel">
             <p className="rl-kicker">Bamford Doors <b>/</b> Bespoke Doors for Lasting Security</p>
             <h1>Secure your<br />tenants<br /><em>Elevate Your Spaces.</em></h1>
@@ -94,7 +95,7 @@ export function ReferenceLedHome() {
           <div className="rl-wrap">
             <div className="rl-section-heading"><div><p className="rl-kicker">Who we work with</p><h2>Built around<br /><em>real buildings.</em></h2></div><p>Different buildings bring different considerations. Find information shaped around your sector and the entrance it needs.</p></div>
             <div className="rl-sector-layout">
-              <Link className="rl-sector-feature" href="/sectors/social-housing"><img src="/media/wood-effect.webp" alt="Wood-effect entrance door in a shared residential building" /><span className="rl-sector-shade" /><span className="rl-sector-label">SECTOR / 01</span><div><small>For communities and shared homes</small><h3>Social<br />housing</h3><span className="rl-round-arrow"><ArrowUpRight /></span></div></Link>
+              <Link className="rl-sector-feature" href="/sectors/social-housing"><ResponsiveImage src="/media/wood-effect.webp" alt="Wood-effect entrance door in a shared residential building" loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" /><span className="rl-sector-shade" /><span className="rl-sector-label">SECTOR / 01</span><div><small>For communities and shared homes</small><h3>Social<br />housing</h3><span className="rl-round-arrow"><ArrowUpRight /></span></div></Link>
               <div className="rl-sector-list">{sectors.slice(1).map(sector => <Link href={`/sectors/${sector.slug}`} key={sector.slug}><span>{sector.code}</span><div><h3>{sector.name}</h3><p>{sector.note}</p></div><ArrowUpRight className="rl-sector-arrow" size={19} /></Link>)}<Link className="rl-all-sectors" href="/sectors">All sectors <ArrowRight size={15} /></Link></div>
             </div>
           </div>
@@ -106,7 +107,7 @@ export function ReferenceLedHome() {
         </section>
 
         <section className="rl-service">
-          <div className="rl-service-photo"><img src="/media/aluminium.webp" alt="Aluminium modular entrance door and screen" /><span>DETAIL STUDY <i>—</i> MODULAR ENTRANCE</span></div>
+          <div className="rl-service-photo"><img src="/media/aluminium.webp" alt="Aluminium modular entrance door and screen" loading="lazy" /><span>DETAIL STUDY <i>—</i> MODULAR ENTRANCE</span></div>
           <div className="rl-service-content"><p className="rl-kicker">More than a product</p><h2>Good work takes<br /><em>good support.</em></h2><p>There is more to an entrance project than the door itself. Explore services for the wider requirement, from early conversations to ongoing maintenance discussions.</p><Link className="rl-button" href="/services">Explore our services <ArrowRight size={15} /></Link>
             <div className="rl-service-links"><Link href="/services/project-management"><span>01</span>Project management<ArrowUpRight size={16} /></Link><Link href="/services/stock-condition-surveys"><span>02</span>Stock condition surveys<ArrowUpRight size={16} /></Link><Link href="/services/maintenance-packages"><span>03</span>Maintenance packages<ArrowUpRight size={16} /></Link></div>
           </div>

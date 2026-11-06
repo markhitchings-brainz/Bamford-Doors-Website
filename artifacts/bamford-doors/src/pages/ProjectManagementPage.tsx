@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './project-management.css';
 
 export function ProjectManagementPage() {
@@ -22,7 +23,7 @@ export function ProjectManagementPage() {
               <p className="pm-intro">From the first discussions through design, manufacture and installation, your Project Manager helps coordinate the work and keeps communication clear as the project progresses.</p>
             </div>
             <figure className="pm-hero-image">
-              <img src="/media/bamford-project-team-reviewing-workshop.jpg" alt="Two Bamford colleagues reviewing work together at a factory bench" fetchPriority="high" />
+              <ResponsiveImage src="/media/bamford-project-team-reviewing-workshop.jpg" alt="Two Bamford colleagues reviewing work together at a factory bench" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" />
               <figcaption><span>01 / IN THE WORKSHOP</span>People, process and production.</figcaption>
             </figure>
           </div>
@@ -47,7 +48,7 @@ export function ProjectManagementPage() {
       <section className="pm-production">
         <div className="wrap pm-production-grid">
           <figure className="pm-production-image">
-            <img src="/media/bamford-aluminium-profiles-workshop.jpg" alt="Aluminium profiles arranged on a workbench in the Bamford workshop" loading="lazy" />
+            <ResponsiveImage src="/media/bamford-aluminium-profiles-workshop.jpg" alt="Aluminium profiles arranged on a workbench in the Bamford workshop" loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" />
             <figcaption><span>02 / MATERIAL & DETAIL</span>Production begins with the project requirements.</figcaption>
           </figure>
           <div className="pm-production-copy">

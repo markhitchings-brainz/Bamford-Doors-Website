@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './warranties.css';
 
 const images = [
@@ -41,7 +42,7 @@ export function WarrantiesPage() {
               <Link className="wr-inline-link" href="/contact">Discuss your product or project warranty <ArrowRight size={15} /></Link>
             </div>
             <figure className="wr-hero-image">
-              <img src="/media/warranties/red-door-frames-in-production.jpg" alt="Red door and screen frames in production at the Bamford workshop" fetchPriority="high" />
+              <ResponsiveImage src="/media/warranties/red-door-frames-in-production.jpg" alt="Red door and screen frames in production at the Bamford workshop" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" />
               <figcaption><span>01 / MADE IN THE WORKSHOP</span>Built around the doorset specification.</figcaption>
             </figure>
           </div>
@@ -85,7 +86,7 @@ export function WarrantiesPage() {
           <div className="wr-gallery-grid">
             {images.map((image, index) => (
               <figure className={`wr-photo wr-photo-${index + 1}`} key={image.src}>
-                <img src={image.src} alt={image.alt} loading="lazy" />
+                <ResponsiveImage src={image.src} alt={image.alt} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw" />
                 <figcaption><span>0{index + 2} / ENTRANCE DETAILS</span>{image.label}</figcaption>
               </figure>
             ))}
@@ -143,7 +144,7 @@ export function WarrantiesPage() {
       <section className="wr-long-life">
         <div className="wrap wr-long-life-grid">
           <figure className="wr-long-life-image">
-            <img src="/media/warranties/blue-grp-entrance-door.jpg" alt="Blue GRP entrance door set in a brick communal building" loading="lazy" />
+            <ResponsiveImage src="/media/warranties/blue-grp-entrance-door.jpg" alt="Blue GRP entrance door set in a brick communal building" loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" />
             <figcaption><span>05 / IN SERVICE</span>A Bamford communal entrance.</figcaption>
           </figure>
           <div className="wr-long-life-copy">

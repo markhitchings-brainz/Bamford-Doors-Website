@@ -5,6 +5,7 @@ import { Menu, X, ArrowRight, ChevronRight, MoveUpRight } from 'lucide-react';
 import { Link, Route, Router as WouterRouter, Switch, useLocation } from 'wouter';
 import { PortableText } from '@portabletext/react';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import { applyPageSeo, type PageSeo } from '@/lib/seo';
 import { fetchPublishedNewsStories, fetchPublishedNewsStory, type NewsStory } from '@/sanity/client';
 import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
@@ -163,12 +164,12 @@ function CTA({title='Discuss your requirements',text='Tell us about your buildin
 function Home() {
   return (
     <><main className="main">
-            <section className="text-[15px]"><div className="wrap hero-grid"><div className="hero-copy"><p className="eyebrow">Bamford Doors <span className="eyebrow-divider">/</span> Made for the entrance</p><h1>Quality Bespoke Security Doors for Social Housing Providers and Landlords</h1><p className="hero-question">Entrances matter. Make yours fit the building.</p><p>Bamford designs, manufactures and installs custom-made security doors and screens for housing providers, councils and building teams.</p><div className="hero-actions"><Link href="/contact?purpose=consultation" className="button" data-testid="link-request-consultation">Request a Consultation <ArrowRight size={16}/></Link><Link href="/products" className="button button-outline" data-testid="link-explore-products">Explore products</Link></div><span className="hero-note">For shared entrances and public buildings</span></div><div className="hero-photo"><img src="/media/grp.webp" alt="Bamford security entrance door at a shared residential building" /><span className="hero-photo-index">01 <i/> ENTRANCE SYSTEMS</span></div></div></section>
+            <section className="text-[15px]"><div className="wrap hero-grid"><div className="hero-copy"><p className="eyebrow">Bamford Doors <span className="eyebrow-divider">/</span> Made for the entrance</p><h1>Quality Bespoke Security Doors for Social Housing Providers and Landlords</h1><p className="hero-question">Entrances matter. Make yours fit the building.</p><p>Bamford designs, manufactures and installs custom-made security doors and screens for housing providers, councils and building teams.</p><div className="hero-actions"><Link href="/contact?purpose=consultation" className="button" data-testid="link-request-consultation">Request a Consultation <ArrowRight size={16}/></Link><Link href="/products" className="button button-outline" data-testid="link-explore-products">Explore products</Link></div><span className="hero-note">For shared entrances and public buildings</span></div><div className="hero-photo"><ResponsiveImage src="/media/grp.webp" alt="Bamford security entrance door at a shared residential building" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" /><span className="hero-photo-index">01 <i/> ENTRANCE SYSTEMS</span></div></div></section>
             <section className="font-semibold text-[15px]"><div className="wrap audience-inner"><span>Built around the needs of</span><Link href="/sectors/social-housing">Social housing</Link><Link href="/sectors/local-authorities">Local authorities</Link><Link href="/sectors/housing-associations">Housing associations</Link><Link href="/sectors/apartment-blocks">Building teams</Link></div></section>
             <section className="section intro-section"><div className="wrap split"><div><p className="eyebrow">An entrance is a working part of the building</p><h2>One entrance.<br/><em>Many considerations.</em></h2></div><div className="intro-copy"><p className="section-lead">Every shared entrance has its own context: the building, the people who use it and the work planned around it.</p><p>Bamford can help you explore door and screen options, alongside services that support your project. Start with the requirement; the team can discuss what comes next.</p><Link className="text-link" href="/contact?purpose=consultation">Talk through your project <ArrowRight size={14}/></Link></div></div></section>
             <section className="section sector-section"><div className="wrap"><div className="section-head"><div><p className="eyebrow">Who we work with</p><h2>For buildings serving people.</h2></div><p>Explore information shaped around your building type and the entrance it needs.</p></div><div className="sector-feature-grid">{sectors.filter(s=>['social-housing','local-authorities','housing-associations','apartment-blocks'].includes(s.slug)).map((s,i)=><Link className={`sector-feature sector-feature-${i+1}`} key={s.slug} href={sectorPath(s)} data-testid={`card-sector-${s.slug}`}><span className="sector-number">0{i+1} / SECTOR</span><strong>{s.title}</strong><p>{s.summary}</p><span className="sector-arrow"><MoveUpRight size={18}/></span></Link>)}</div><Link className="text-link sector-all-link" href="/sectors">View all sectors <ArrowRight size={14}/></Link></div></section>
             <section className="section product-section"><div className="wrap"><div className="section-head"><div><p className="eyebrow">Product range</p><h2>Made for the entrance.</h2></div><p>Explore door and entrance system options, then talk with the team about your building and project requirements.</p></div><div className="product-grid">{products.slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div><div className="product-index-link"><span>Door systems, screens and entrance details.</span><Link className="text-link" href="/products">Explore all products <ArrowRight size={14}/></Link></div></div></section>
-            <section className="service-spotlight"><div className="service-visual"><img src="/media/wood-effect.webp" alt="Wood-effect entrance door in a residential building" /><span>DETAIL / 02</span></div><div className="service-copy"><p className="eyebrow">More than a product</p><h2>Support for the work around the door.</h2><p>From project management to maintenance discussions and stock condition surveys, explore services for the wider entrance requirement.</p><Link className="button" href="/services">Explore services <ArrowRight size={15}/></Link><div className="service-links">{services.slice(0,3).map((s,i)=><Link key={s.slug} href={servicePath(s)}><span>0{i+1}</span>{s.title}<ArrowRight size={14}/></Link>)}</div></div></section>
+            <section className="service-spotlight"><div className="service-visual"><ResponsiveImage src="/media/wood-effect.webp" alt="Wood-effect entrance door in a residential building" loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" /><span>DETAIL / 02</span></div><div className="service-copy"><p className="eyebrow">More than a product</p><h2>Support for the work around the door.</h2><p>From project management to maintenance discussions and stock condition surveys, explore services for the wider entrance requirement.</p><Link className="button" href="/services">Explore services <ArrowRight size={15}/></Link><div className="service-links">{services.slice(0,3).map((s,i)=><Link key={s.slug} href={servicePath(s)}><span>0{i+1}</span>{s.title}<ArrowRight size={14}/></Link>)}</div></div></section>
             <section className="section process-section"><div className="wrap split"><div><p className="eyebrow">Start with a conversation</p><h2>Bring the building into focus.</h2><p className="process-intro">Share what you know. The team can discuss the building, the entrance and the details needed to explore a suitable next step.</p><Link className="text-link" href="/contact">What to include in an enquiry <ArrowRight size={14}/></Link></div><ol className="process-list">{['Tell us about the building','Discuss the requirement','Agree a way forward'].map((step,index)=><li key={step}><span>0{index+1}</span><strong>{step}</strong></li>)}</ol></div></section>
             <section className="feature-band home-cta"><div className="wrap"><p className="eyebrow">Start here</p><h2>Let’s talk about your entrance.</h2><p>Tell us what you are looking to discuss. Share only the project information you have to hand.</p><div className="hero-actions"><Link className="button" href="/contact?purpose=consultation">Request a Consultation <ArrowRight size={15}/></Link><Link className="button button-outline" href="/contact?purpose=stock-survey">Request a Stock Condition Survey</Link><Link className="text-link" href="/contact?purpose=product">Enquire about a product <ArrowRight size={14}/></Link><Link className="text-link" href="/contact?purpose=callback">Request a callback <ArrowRight size={14}/></Link></div></div></section>
           </main></>
@@ -177,7 +178,7 @@ function Home() {
 
 function ProductCard({product,imageOverride}:{product:Product;imageOverride?:string}) {
   const cardImage=imageOverride||product.cardImage||product.image;
-  return <Link className="product-card" href={productPath(product)} data-testid={`card-product-${product.slug}`}>{cardImage?<img src={cardImage} alt={product.title}/>:<div className="product-image-pending" aria-label={`Approved image not yet supplied for ${product.title}`}><span>Product image to be supplied</span></div>}<div className="product-card-copy"><h3>{product.title}</h3><p>{product.summary}</p><span className="text-link">Explore product <ArrowRight size={13}/></span></div></Link>;
+  return <Link className="product-card" href={productPath(product)} data-testid={`card-product-${product.slug}`}>{cardImage?<ResponsiveImage src={cardImage} alt={product.title} loading="lazy" sizes="(max-width: 760px) 50vw, 33vw"/>:<div className="product-image-pending" aria-label={`Approved image not yet supplied for ${product.title}`}><span>Product image to be supplied</span></div>}<div className="product-card-copy"><h3>{product.title}</h3><p>{product.summary}</p><span className="text-link">Explore product <ArrowRight size={13}/></span></div></Link>;
 }
 
 function ProductIndex() {
@@ -194,7 +195,7 @@ function MailboxesPageContent({product}:{product:Product}) {
       <div className="wrap">
         <Breadcrumbs items={[{label:'Products',href:'/products'},{label:product.title}]}/>
         <div className="detail-layout mailbox-detail">
-          <div className="detail-image"><img src={product.image || ''} alt="Communal entrance door with an integrated mailbox bank and door-entry panel" width="751" height="1000"/></div>
+          <div className="detail-image"><ResponsiveImage src={product.image || ''} alt="Communal entrance door with an integrated mailbox bank and door-entry panel" width="751" height="1000" sizes="(max-width: 760px) 100vw, 50vw"/></div>
           <div className="detail-text">
             <p className="eyebrow">Complete entrance solutions</p>
             <h2 style={{fontSize:34}}>Mailboxes designed for complete entrance solutions.</h2>
@@ -233,7 +234,7 @@ function MailboxesPageContent({product}:{product:Product}) {
           <p>Examples of mailbox banks integrated into entrance layouts or installed as a separate unit.</p>
         </div>
         <div className="product-photo-gallery-grid mailbox-gallery-grid">
-          {photos.map((photo,index)=><figure key={photo.src}><img src={photo.src} alt={photo.alt} loading="lazy"/><figcaption><span>0{index+1} / PROJECT</span>{photo.caption}</figcaption></figure>)}
+          {photos.map((photo,index)=><figure key={photo.src}><ResponsiveImage src={photo.src} alt={photo.alt} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw"/><figcaption><span>0{index+1} / PROJECT</span>{photo.caption}</figcaption></figure>)}
         </div>
       </div>
     </section>
@@ -279,7 +280,7 @@ function BlockAddressSignsContent({product}:{product:Product}) {
       <div className="wrap">
         <Breadcrumbs items={[{label:'Products',href:'/products'},{label:product.title}]}/>
         <div className="detail-layout signage-detail">
-          <div className="detail-image"><img src={product.image || ''} alt="Block address sign displayed beside a communal entrance door" width="758" height="1024"/></div>
+          <div className="detail-image"><ResponsiveImage src={product.image || ''} alt="Block address sign displayed beside a communal entrance door" width="758" height="1024" sizes="(max-width: 760px) 100vw, 50vw"/></div>
           <div className="detail-text">
             <p className="eyebrow">Entrance signage</p>
             <h2 style={{fontSize:34}}>Useful information. A considered entrance detail.</h2>
@@ -321,7 +322,7 @@ function BlockAddressSignsContent({product}:{product:Product}) {
           <p>Share the opening dimensions and the wording you need, and the team can discuss a suitable sign and installation.</p>
         </div>
         <figure className="signage-proof-image">
-          <img src="/media/block-address-signs-detail.jpg" alt="Close-up of a block address sign showing building numbers and street name" width="758" height="1024" loading="lazy"/>
+          <ResponsiveImage src="/media/block-address-signs-detail.jpg" alt="Close-up of a block address sign showing building numbers and street name" width="758" height="1024" loading="lazy" sizes="(max-width: 760px) 100vw, 50vw"/>
           <figcaption>Block number and street name displayed on a made-to-measure sign.</figcaption>
         </figure>
       </div>
@@ -358,7 +359,7 @@ function SecondarySecurityDoorsContent({product}:{product:Product}) {
       <div className="wrap">
         <Breadcrumbs items={[{label:'Products',href:'/products'},{label:product.title}]}/>
         <div className="detail-layout secondary-security-detail">
-          <div className="detail-image"><img src={product.image || ''} alt="Secondary security doors and glazed screens in an internal entrance" width="983" height="1124"/></div>
+          <div className="detail-image"><ResponsiveImage src={product.image || ''} alt="Secondary security doors and glazed screens in an internal entrance" width="983" height="1124" sizes="(max-width: 760px) 100vw, 50vw"/></div>
           <div className="detail-text">
             <p className="eyebrow">A second layer of access control</p>
             <h2 style={{fontSize:34}}>Separate the entrance from the space beyond.</h2>
@@ -403,7 +404,7 @@ function SecondarySecurityDoorsContent({product}:{product:Product}) {
           <p>Examples of secondary door arrangements. Final design, glazing, finish and access equipment are project-specific.</p>
         </div>
         <div className="product-photo-gallery-grid secondary-security-gallery-grid">
-          {photos.map((photo,index)=><figure key={photo.src}><img src={photo.src} alt={photo.alt}/><figcaption><span>0{index+1} / EXAMPLE</span>{photo.caption}</figcaption></figure>)}
+          {photos.map((photo,index)=><figure key={photo.src}><ResponsiveImage src={photo.src} alt={photo.alt} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw"/><figcaption><span>0{index+1} / EXAMPLE</span>{photo.caption}</figcaption></figure>)}
         </div>
       </div>
     </section>
@@ -617,7 +618,7 @@ function NewsPage() {
         {!loading && !failed && stories.length === 0 && <p className="news-state">New stories from Bamford Doors will appear here.</p>}
         {!failed && stories.length > 0 && <div className="news-grid">
           {stories.map((story) => <Link className="news-card" href={`/news-insights/${story.slug}`} key={story._id}>
-            {story.mainImage?.url ? <img src={imageUrl(story.mainImage.url, 900)} alt={story.mainImage.alt || ''} loading="lazy"/> : <div className="news-card-image-placeholder" aria-hidden="true"/>}
+            {story.mainImage?.url ? <img src={imageUrl(story.mainImage.url, 640)} srcSet={imageSrcSet(story.mainImage.url, [320, 480, 640, 960], story.mainImage.dimensions?.width)} sizes="(max-width: 760px) 100vw, 33vw" width={story.mainImage.dimensions?.width} height={story.mainImage.dimensions?.height} alt={story.mainImage.alt || ''} loading="lazy" decoding="async"/> : <div className="news-card-image-placeholder" aria-hidden="true"/>}
             <div className="news-card-copy">
               <div className="news-card-meta"><span>{story.category || 'News'}</span><time dateTime={story.publishedAt}>{formatNewsDate(story.publishedAt)}</time></div>
               <h2>{story.title}</h2>
@@ -690,15 +691,15 @@ function ArticleDetail({slug}:{slug:string}) {
     <article className="news-article">
       <div className="wrap news-article-wrap">
         <Breadcrumbs items={[{label:'News & insights',href:'/news-insights'},{label:story.title}]}/>
-        {story.mainImage?.url && <img className="news-article-image" src={imageUrl(story.mainImage.url, 1600)} alt={story.mainImage.alt || ''}/>}
+        {story.mainImage?.url && <img className="news-article-image" src={imageUrl(story.mainImage.url, 1280)} srcSet={imageSrcSet(story.mainImage.url, [480, 760, 1000, 1280, 1600], story.mainImage.dimensions?.width)} sizes="(max-width: 760px) 100vw, 1100px" width={story.mainImage.dimensions?.width} height={story.mainImage.dimensions?.height} alt={story.mainImage.alt || ''} fetchPriority="high" decoding="async"/>}
         <div className="news-article-meta">
           {story.author && <span>By {story.author}</span>}
           <time dateTime={story.publishedAt}>{formatNewsDate(story.publishedAt)}</time>
         </div>
         <div className="news-article-body">
           <PortableText value={story.body as never[]} components={{
-            types: {
-              image: ({ value }) => value?.url ? <figure><img src={imageUrl(value.url, 1200)} alt={value.alt || ''} loading="lazy"/></figure> : null,
+              types: {
+                image: ({ value }) => value?.url ? <figure><img src={imageUrl(value.url, 960)} srcSet={imageSrcSet(value.url, [480, 720, 960, 1200], value.dimensions?.width)} sizes="(max-width: 760px) 100vw, 720px" width={value.dimensions?.width} height={value.dimensions?.height} alt={value.alt || ''} loading="lazy" decoding="async"/></figure> : null,
             },
             marks: {
               link: ({ children, value }) => <a href={value?.href} rel="noopener noreferrer">{children}</a>,
@@ -722,6 +723,12 @@ function imageUrl(url:string, width:number) {
   image.searchParams.set('auto', 'format');
   image.searchParams.set('fit', 'max');
   return image.toString();
+}
+
+function imageSrcSet(url:string, widths:number[], maxWidth?:number) {
+  const candidates = widths.filter((width) => !maxWidth || width <= maxWidth);
+  if (maxWidth && !candidates.includes(maxWidth)) candidates.push(maxWidth);
+  return candidates.sort((a,b) => a-b).map((width) => `${imageUrl(url, width)} ${width}w`).join(', ');
 }
 
 function LegacyInfo({title}:{title:string}) {

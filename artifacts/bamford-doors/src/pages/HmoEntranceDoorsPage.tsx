@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, DoorOpen, KeyRound, Ruler, ShieldCheck, Wrench } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './hmo-entrance-doors.css';
 
 const gallery = [
@@ -70,7 +71,7 @@ export function HmoEntranceDoorsPage() {
               <div className="hmo-hero-meta"><span>01 / Houses in multiple occupation</span><span>Designed around the entrance</span></div>
             </div>
             <figure className="hmo-hero-image">
-              <img src="/media/hmo/entrance-03.jpg" alt="Dark blue-grey entrance door and glazed side panel set within a brick and stone arched opening" width="1158" height="1560" />
+              <ResponsiveImage src="/media/hmo/entrance-03.jpg" alt="Dark blue-grey entrance door and glazed side panel set within a brick and stone arched opening" width="1158" height="1560" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" />
               <figcaption>Door + side panel / Shared entrance</figcaption>
             </figure>
           </div>
@@ -137,7 +138,7 @@ export function HmoEntranceDoorsPage() {
           <div className="hmo-gallery-grid" data-testid="gallery-hmo-entrances">
             {gallery.map((item, index) => (
               <figure className="hmo-gallery-card" key={item.src}>
-                <div className="hmo-gallery-image"><img src={item.src} alt={item.alt} /></div>
+                <div className="hmo-gallery-image"><ResponsiveImage src={item.src} alt={item.alt} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw" /></div>
                 <figcaption><small>0{index + 1} / {item.detail}</small><strong>{item.caption}</strong></figcaption>
               </figure>
             ))}

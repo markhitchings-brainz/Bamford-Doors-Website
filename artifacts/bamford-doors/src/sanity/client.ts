@@ -8,7 +8,7 @@ export type NewsStory = {
   publishedAt: string;
   seoTitle?: string;
   seoDescription?: string;
-  mainImage?: { url: string; alt?: string } | null;
+  mainImage?: { url: string; alt?: string; dimensions?: { width: number; height: number } } | null;
   body: Array<Record<string, unknown>>;
 };
 
@@ -41,10 +41,10 @@ const newsProjection = `{
   publishedAt,
   seoTitle,
   seoDescription,
-  "mainImage": mainImage { "url": asset->url, alt },
+  "mainImage": mainImage { "url": asset->url, alt, "dimensions": asset->metadata.dimensions { width, height } },
   "body": body[] {
     ...,
-    _type == "image" => { ..., "url": asset->url }
+    _type == "image" => { ..., "url": asset->url, "dimensions": asset->metadata.dimensions { width, height } }
   }
 }`;
 

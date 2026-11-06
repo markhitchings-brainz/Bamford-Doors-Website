@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, Layers3, Paintbrush, ShieldCheck, Wrench } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './wood-effect-doors.css';
 
 const gallery = [
@@ -76,7 +77,7 @@ export function WoodEffectDoorsPage() {
               <div className="we-hero-meta"><span>01 / Wood-effect finish</span><span>Made around the building</span></div>
             </div>
             <figure className="we-hero-image">
-              <img src="/media/wood-effect/entrance-01.jpeg" alt="Woodgrain-effect aluminium communal entrance door with glazed panels and matching top lights" width="783" height="855" />
+              <ResponsiveImage src="/media/wood-effect/entrance-01.jpeg" alt="Woodgrain-effect aluminium communal entrance door with glazed panels and matching top lights" width="783" height="855" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" />
               <figcaption>Woodgrain finish / Bespoke entrance</figcaption>
             </figure>
           </div>
@@ -133,7 +134,7 @@ export function WoodEffectDoorsPage() {
           <div className="we-gallery-grid">
             {gallery.map((item, index) => (
               <figure className="we-gallery-card" key={item.src}>
-                <div className="we-gallery-image"><img src={item.src} alt={item.alt} loading="lazy" /></div>
+                <div className="we-gallery-image"><ResponsiveImage src={item.src} alt={item.alt} loading="lazy" sizes="(max-width: 760px) 100vw, 33vw" /></div>
                 <figcaption><small>0{index + 2} / {item.detail}</small><strong>{item.caption}</strong></figcaption>
               </figure>
             ))}

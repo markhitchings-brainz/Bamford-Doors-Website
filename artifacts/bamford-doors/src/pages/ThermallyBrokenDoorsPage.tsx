@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, Layers3, ShieldCheck, Thermometer } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './thermally-broken-doors.css';
 
 const testing = [
@@ -62,7 +63,7 @@ export function ThermallyBrokenDoorsPage() {
               <div className="tb-hero-meta"><span>01 / Thermally broken door sets</span><span>Made around the entrance</span></div>
             </div>
             <figure className="tb-hero-image">
-              <img src="/media/thermally-broken/hero-door.jpg" alt="White thermally broken entrance door and glazed screen in a brick communal entrance" width="773" height="827" />
+              <ResponsiveImage src="/media/thermally-broken/hero-door.jpg" alt="White thermally broken entrance door and glazed screen in a brick communal entrance" width="773" height="827" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" />
               <figcaption>Thermally broken entrance system</figcaption>
             </figure>
           </div>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, Cog, Layers3, LockKeyhole, Palette, ScanLine, X } from 'lucide-react';
 import { Link } from 'wouter';
+import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './aluminium-modular-doors.css';
 
 const media = '/media/aluminium-modular/';
@@ -242,9 +243,9 @@ export function AluminiumModularDoorsPage() {
         <div className="amd-wrap">
           <div className="amd-gallery-top"><div><p className="amd-eyebrow">See the system in context</p><h2>Different openings.<br /><em>One bespoke approach.</em></h2></div><p>Examples of modular aluminium entrances. Images illustrate appearance only, not certification or project suitability.</p></div>
           <div className="amd-gallery-grid" data-testid="gallery-amd-examples">
-            <figure className="amd-gallery-main"><img src={`${media}context-entrance-01.jpg`} alt="Blue-grey aluminium door and glazed side screen within a stone-faced entrance" width="794" height="838" /><figcaption>01 / Blue-grey modular entrance <small>Door, glazed sidelights and infill panels</small></figcaption></figure>
-            <figure><img src={`${media}context-entrance-02.jpg`} alt="Dark blue aluminium communal entrance in a yellow-brick lobby with side screens and access controls" width="793" height="918" /><figcaption>02 / Shared residential entrance <small>Door, glazed side panels and access control</small></figcaption></figure>
-            <figure><img src={`${media}context-entrance-03.jpg`} alt="Green aluminium door and glazed screen set into a brick communal entrance" width="795" height="893" /><figcaption>03 / Green door and screen <small>Contrasting door and glazed side panels</small></figcaption></figure>
+            <figure className="amd-gallery-main"><ResponsiveImage src={`${media}context-entrance-01.jpg`} alt="Blue-grey aluminium door and glazed side screen within a stone-faced entrance" width="794" height="838" loading="lazy" sizes="(max-width: 760px) 100vw, 50vw" /><figcaption>01 / Blue-grey modular entrance <small>Door, glazed sidelights and infill panels</small></figcaption></figure>
+            <figure><ResponsiveImage src={`${media}context-entrance-02.jpg`} alt="Dark blue aluminium communal entrance in a yellow-brick lobby with side screens and access controls" width="793" height="918" loading="lazy" sizes="(max-width: 760px) 100vw, 25vw" /><figcaption>02 / Shared residential entrance <small>Door, glazed side panels and access control</small></figcaption></figure>
+            <figure><ResponsiveImage src={`${media}context-entrance-03.jpg`} alt="Green aluminium door and glazed screen set into a brick communal entrance" width="795" height="893" loading="lazy" sizes="(max-width: 760px) 100vw, 25vw" /><figcaption>03 / Green door and screen <small>Contrasting door and glazed side panels</small></figcaption></figure>
           </div>
         </div>
       </section>
