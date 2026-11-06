@@ -1,10 +1,11 @@
-# Public JavaScript transfer audit
+# Public asset transfer audit
 
 Production builds measured with the same dependency lockfile and Vite settings,
 using source maps for attribution and the manifest's full static import graph.
 Sizes are decimal kB; gzip uses Node's default gzip settings, matching Vite's
 build-size estimates. These are cold-cache compression estimates, not measured
-network timings. HTML, CSS, images, video, headers and source maps are excluded.
+network timings. The JavaScript totals below exclude HTML, CSS, images, video,
+headers and source maps.
 
 | Route / required JavaScript | Before raw | After raw | Before gzip | After gzip |
 | --- | ---: | ---: | ---: | ---: |
@@ -70,6 +71,43 @@ If a ceiling is exceeded, the command exits unsuccessfully and names the
 affected graph, measured size, limit, and recommended direction for reducing
 eager JavaScript. The analysis build and its source maps are written under
 `generated-artifacts/bundle-analysis/`, not `dist/public`.
+
+## Public CSS and font budgets
+
+The analyzer also walks the emitted CSS listed by the Vite manifest for the
+initial public graph, CMS listing graph, and CMS case-study detail graph. It
+counts each reachable emitted stylesheet once, follows external CSS `@import`s,
+and measures font files referenced by `@font-face`. The imported Montserrat
+stylesheet is fetched using a fixed modern Chrome user agent; if the CDN cannot
+be reached or an asset fails to load, the analysis exits with an error instead
+of silently omitting it.
+
+Current measurements (November 5, 2026):
+
+| Public route graph | CSS gzip | Font payload |
+| --- | ---: | ---: |
+| Initial public pages | 52.06 kB | 108.64 kB |
+| CMS listing including initial graph | 52.06 kB | 108.64 kB |
+| CMS case-study detail including initial graph | 52.06 kB | 108.64 kB |
+
+The CSS measurement includes the emitted stylesheet (51.40 kB gzip) and the
+imported Google Fonts stylesheet (0.66 kB gzip). The font measurement sums the
+unique Latin and Latin-ext Montserrat WOFF2 files, which cover the English
+public pages and accented Latin text. It is the sum of their delivered WOFF2
+file bytes; WOFF2 is already compressed, so it is not meaningfully reduced by
+gzip.
+
+Each public route graph has these ceilings:
+
+| Asset group | Measured | Maximum |
+| --- | ---: | ---: |
+| CSS and imported stylesheets (gzip) | 52.06 kB | 65 kB |
+| Latin and Latin-ext font payloads (WOFF2) | 108.64 kB | 125 kB |
+
+The analyzer reports the CSS and font totals and each asset URL/file in
+`generated-artifacts/bundle-analysis/after.json`. If either ceiling is exceeded,
+the command exits unsuccessfully and names the route graph and asset group,
+measured size, and limit.
 
 For normal output, run `pnpm --filter @workspace/bamford-doors run build`.
 Normal builds do not emit source maps or the analysis manifest. No CMS article

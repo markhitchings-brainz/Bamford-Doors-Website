@@ -6,3 +6,4 @@
 - [Warranty terms source](warranty-terms-source.md) — retain the selected warranty periods and conditions; don't treat conflicting website copy as current without confirmation.
 - [Static SEO routing](seo-static-routing.md) — retain directory-style canonical URLs, static page bodies and an empty client-only fallback for unknown routes.
 - [Static rendering dependency identity](static-rendering-dependencies.md) — workspace peer resolutions can split React or provider contexts during server rendering.
+- [Public asset budgets](public-assets-audit.md) — include imported remote CSS and the public site's Latin font subsets in transfer checks; do not silently skip CDN failures.
