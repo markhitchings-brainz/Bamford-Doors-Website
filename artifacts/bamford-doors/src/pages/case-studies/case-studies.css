@@ -102,6 +102,14 @@
 .cs-quote figcaption { margin-top:24px; display:flex; flex-direction:column; gap:3px; font-size:12px; }
 .cs-quote figcaption span { color:#bdbdbd; }
 
+/* Optional YouTube or Vimeo project video */
+.cs-video-section { padding-bottom:84px; }
+.cs-video-head { display:flex; justify-content:space-between; align-items:flex-end; gap:32px; margin-bottom:24px; padding-top:24px; border-top:1px solid var(--cs-line); }
+.cs-video-head h2 { margin:0; font-size:clamp(30px,4vw,48px); line-height:1; letter-spacing:-.065em; }
+.cs-video-head > p { max-width:360px; margin:0; color:var(--cs-muted); font-size:12px; line-height:1.6; }
+.cs-video-frame { position:relative; aspect-ratio:16/9; overflow:hidden; background:#000; }
+.cs-video-frame iframe { position:absolute; inset:0; display:block; width:100%; height:100%; border:0; }
+
 /* Gallery */
 .cs-gallery { padding:96px 0; background:var(--cs-paper); }
 .cs-gallery-head { display:flex; justify-content:space-between; align-items:flex-end; gap:32px; margin-bottom:34px; }
@@ -152,6 +160,9 @@
   .cs-listing { padding:44px 0 64px; }
   .cs-grid { grid-template-columns:1fr; gap:36px; }
   .cs-body { padding:44px 0 64px; }
+  .cs-video-section { padding-bottom:60px; }
+  .cs-video-head { display:block; }
+  .cs-video-head > p { margin-top:12px; }
   .cs-gallery { padding:60px 0; }
   .cs-gallery-head { display:block; } .cs-gallery-head > p { margin-top:12px; }
   .cs-gallery-grid { grid-template-columns:1fr; }

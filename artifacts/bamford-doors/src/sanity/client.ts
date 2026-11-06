@@ -88,6 +88,7 @@ export type CaseStudySummary = {
 };
 
 export type CaseStudy = CaseStudySummary & {
+  videoUrl?: string | null;
   brief: Array<Record<string, unknown>>;
   solution: Array<Record<string, unknown>>;
   outcome: Array<Record<string, unknown>>;
@@ -107,6 +108,7 @@ const richTextProjection = `[] {
 }`;
 const caseStudyDetailProjection = `{
   ${caseStudyFields},
+  videoUrl,
   "brief": coalesce(brief${richTextProjection}, []),
   "solution": coalesce(solution${richTextProjection}, []),
   "outcome": coalesce(outcome${richTextProjection}, []),

@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { getCaseStudyVideoEmbed } from '../caseStudyVideo';
 
 const imageFields = [
   defineField({
@@ -54,7 +55,7 @@ export const caseStudy = defineType({
   groups: [
     { name: 'story', title: 'Project story', default: true },
     { name: 'details', title: 'Project details' },
-    { name: 'images', title: 'Images' },
+    { name: 'images', title: 'Project media' },
     { name: 'seo', title: 'Search & publishing' },
   ],
   fields: [
@@ -114,6 +115,14 @@ export const caseStudy = defineType({
       name: 'gallery', title: 'Project gallery', type: 'array', group: 'images',
       description: 'Reorder images by dragging them. Each image needs a description; captions are optional.',
       of: [{ type: 'image', options: { hotspot: true }, fields: imageFields }],
+    }),
+    defineField({
+      name: 'videoUrl', title: 'YouTube or Vimeo video URL', type: 'url', group: 'images',
+      description: 'Optional. Paste a YouTube or Vimeo link to embed the project video on this case study.',
+      validation: (rule) => rule.uri({ scheme: ['https'] }).custom((value) =>
+        !value || getCaseStudyVideoEmbed(value)
+          ? true
+          : 'Enter a valid YouTube or Vimeo video URL.'),
     }),
     defineField({
       name: 'publishedAt', title: 'Publication date', type: 'datetime', group: 'seo',

@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Expand, RotateCw, X }
 import { Link } from 'wouter';
 import { applyPageSeo } from '@/lib/seo';
 import { fetchPublishedCaseStudy, type CaseStudy } from '@/sanity/client';
+import { getCaseStudyVideoEmbed } from '@/sanity/caseStudyVideo';
 import { RichText, formatDate, hasBlocks, sanityImage, sanitySrcSet } from './case-studies/shared';
 import { DetailSkeleton } from './case-studies/DetailSkeleton';
 import './case-studies/case-studies.css';
@@ -77,6 +78,7 @@ export function CaseStudyDetailPage({ slug }: { slug: string }) {
   }
 
   const item = state.item;
+  const video = getCaseStudyVideoEmbed(item.videoUrl);
   const facts = [
     ['Client', item.clientName],
     ['Sector', item.sector],
@@ -143,6 +145,26 @@ export function CaseStudyDetailPage({ slug }: { slug: string }) {
           )}
         </article>
       </div>
+
+      {video && (
+        <section className="cs-video-section cs-wrap" aria-labelledby="cs-video-title" data-testid="section-cs-video">
+          <div className="cs-video-head">
+            <div><p className="cs-eyebrow">Project video</p><h2 id="cs-video-title">See the project.</h2></div>
+            <p>Watch this project video on {video.provider}.</p>
+          </div>
+          <div className="cs-video-frame">
+            <iframe
+              src={video.src}
+              title={`${item.title} project video on ${video.provider}`}
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              data-testid="embed-cs-video"
+            />
+          </div>
+        </section>
+      )}
 
       {gallery.length > 0 && <Gallery images={gallery} />}
 
