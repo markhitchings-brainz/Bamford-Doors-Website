@@ -3,11 +3,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useCreateInquiry } from '@workspace/api-client-react';
 import { Menu, X, ArrowRight, ChevronRight, MoveUpRight } from 'lucide-react';
 import { Link, Route, Router as WouterRouter, Switch, useLocation } from 'wouter';
-import { PortableText } from '@portabletext/react';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import { applyPageSeo, type PageSeo } from '@/lib/seo';
-import { fetchPublishedNewsStories, fetchPublishedNewsStory, type NewsStory } from '@/sanity/client';
 import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
 import { AccreditationsPage } from '@/pages/AccreditationsPage';
 import { OurHistoryPage } from '@/pages/OurHistoryPage';
@@ -28,13 +26,16 @@ import { WoodEffectDoorsPage } from '@/pages/WoodEffectDoorsPage';
 import { HmoEntranceDoorsPage } from '@/pages/HmoEntranceDoorsPage';
 import { GrpDoorsPage } from '@/pages/GrpDoorsPage';
 import { AutomaticOperatorsPage } from '@/pages/AutomaticOperatorsPage';
-import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
 import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
 import { AboutOverviewPage } from '@/pages/AboutOverviewPage';
 import { SectorsOverviewPage } from '@/pages/SectorsOverviewPage';
 import { CASE_STUDIES_SEO } from '@/sanity/caseStudySeo';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
+const NewsInsightsPage = lazy(() => import('@/pages/NewsInsightsPage'));
+const CaseStudiesIndexPage = lazy(() => import('@/pages/CaseStudiesPage').then(
+  (module) => ({ default: module.CaseStudiesPage }),
+));
 // Detail bodies are already client-only in entry-server.tsx. Keep their
 // gallery/dialog dependencies off static pages without adding SSG boundaries.
 const CaseStudyDetailPage = lazy(() => import('@/pages/CaseStudyDetailPage').then(
@@ -589,50 +590,6 @@ function CaseStudies() {
   return <><PageHeading eyebrow="Case studies" title="Project experience" lead="Every building has its own entrance requirements. Tell us about yours and ask the team about relevant project experience."/><section className="service-spotlight"><div className="service-visual"><img src="/media/grp.webp" alt="Bamford entrance door at a shared residential building" /><span>ENTRANCE SYSTEMS</span></div><div className="service-copy"><p className="eyebrow">Your building. Your brief.</p><h2>Looking for a project like yours?</h2><p>Share the building type, entrance and work you are considering. The Bamford team can discuss relevant experience and the information needed for your project.</p><Link className="button" href="/contact?purpose=consultation">Discuss your project <ArrowRight size={15}/></Link></div></section></>;
 }
 
-function NewsPage() {
-  const [stories, setStories] = useState<NewsStory[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    fetchPublishedNewsStories()
-      .then((items) => {
-        if (active) setStories(items);
-      })
-      .catch(() => {
-        if (active) setFailed(true);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  return <>
-    <PageHeading eyebrow="News & insights" title="News and insights" lead="Updates and practical information from Bamford Doors."/>
-    <section className="section">
-      <div className="wrap">
-        {loading && <p className="news-state" role="status">Loading stories…</p>}
-        {failed && <p className="news-state" role="alert">News stories are temporarily unavailable. Please try again shortly.</p>}
-        {!loading && !failed && stories.length === 0 && <p className="news-state">New stories from Bamford Doors will appear here.</p>}
-        {!failed && stories.length > 0 && <div className="news-grid">
-          {stories.map((story) => <Link className="news-card" href={`/news-insights/${story.slug}`} key={story._id}>
-            {story.mainImage?.url ? <img src={imageUrl(story.mainImage.url, 640)} srcSet={imageSrcSet(story.mainImage.url, [320, 480, 640, 960], story.mainImage.dimensions?.width)} sizes="(max-width: 760px) 100vw, 33vw" width={story.mainImage.dimensions?.width} height={story.mainImage.dimensions?.height} alt={story.mainImage.alt || ''} loading="lazy" decoding="async"/> : <div className="news-card-image-placeholder" aria-hidden="true"/>}
-            <div className="news-card-copy">
-              <div className="news-card-meta"><span>{story.category || 'News'}</span><time dateTime={story.publishedAt}>{formatNewsDate(story.publishedAt)}</time></div>
-              <h2>{story.title}</h2>
-              <p>{story.excerpt}</p>
-              <span className="news-card-link">Read story <ArrowRight size={15}/></span>
-            </div>
-          </Link>)}
-        </div>}
-      </div>
-    </section>
-  </>;
-}
 function FAQPage() {
   const questions=[
     {q:'Which security door is right for my building?',a:'The answer depends on the entrance, how it is used and the project requirements. Share those details with the Bamford team to discuss the product options.'},
@@ -648,76 +605,6 @@ function AboutDetail({page,path}:{page:{title:string;lead:string;body:string[]};
   return <><PageHeading eyebrow="About Bamford" title={page.title} lead={page.lead}/><section className="section"><div className="wrap split"><div><Breadcrumbs items={[{label:'About',href:'/about'},{label:page.title}]}/><h2 style={{fontSize:36}}>Straightforward information.</h2></div><div>{page.body.map((line,i)=><p key={i} style={{color:'#555'}}>{line}</p>)}<p className="eyebrow" style={{marginTop:30}}>More about Bamford</p><div className="tile-grid" style={{gridTemplateColumns:'1fr 1fr'}}>{Object.entries(companyPages).filter(([p])=>p!==path).map(([href,data])=><Link key={href} href={href} className="tile" style={{minHeight:120,padding:20}}><strong>{data.title}</strong><span className="arrow"><MoveUpRight size={16}/></span></Link>)}</div></div></div></section><CTA/></>;
 }
 function LegacyArticleDetail({title}:{title:string}) { return <><PageHeading eyebrow="News & insights" title={title} lead="Information for teams planning, maintaining or improving a shared entrance."/><section className="section"><div className="wrap"><p>For current information about products, services or a project requirement, explore the relevant pages or contact the Bamford team.</p><div className="hero-actions"><Link href="/products" className="button button-outline">Explore products</Link><Link href="/contact" className="button">Ask the team <ArrowRight size={15}/></Link></div></div></section></>; }
-
-function ArticleDetail({slug}:{slug:string}) {
-  const [story, setStory] = useState<NewsStory | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    setLoading(true);
-    setFailed(false);
-    fetchPublishedNewsStory(slug)
-      .then((item) => {
-        if (active) setStory(item);
-      })
-      .catch(() => {
-        if (active) setFailed(true);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
-  }, [slug]);
-
-  useEffect(() => {
-    if (!story) return;
-    applyPageSeo({
-      title: story.seoTitle || story.title,
-      description: story.seoDescription || story.excerpt,
-      path: `/news-insights/${story.slug}`,
-      image: story.mainImage?.url,
-      noindex: true,
-    });
-  }, [story]);
-
-  if (loading) return <><PageHeading eyebrow="News & insights" title="Loading story…"/><section className="section"><div className="wrap"><p className="news-state" role="status">Loading article…</p></div></section></>;
-  if (failed) return <><PageHeading eyebrow="News & insights" title="Story unavailable"/><section className="section"><div className="wrap"><p className="news-state" role="alert">We couldn’t load this story. Please try again shortly.</p><Link href="/news-insights" className="button button-outline">Back to news</Link></div></section></>;
-  if (!story) return <NotFound/>;
-
-  return <>
-    <PageHeading eyebrow={`${story.category || 'News'} · ${formatNewsDate(story.publishedAt)}`} title={story.title} lead={story.excerpt}/>
-    <article className="news-article">
-      <div className="wrap news-article-wrap">
-        <Breadcrumbs items={[{label:'News & insights',href:'/news-insights'},{label:story.title}]}/>
-        {story.mainImage?.url && <img className="news-article-image" src={imageUrl(story.mainImage.url, 1280)} srcSet={imageSrcSet(story.mainImage.url, [480, 760, 1000, 1280, 1600], story.mainImage.dimensions?.width)} sizes="(max-width: 760px) 100vw, 1100px" width={story.mainImage.dimensions?.width} height={story.mainImage.dimensions?.height} alt={story.mainImage.alt || ''} fetchPriority="high" decoding="async"/>}
-        <div className="news-article-meta">
-          {story.author && <span>By {story.author}</span>}
-          <time dateTime={story.publishedAt}>{formatNewsDate(story.publishedAt)}</time>
-        </div>
-        <div className="news-article-body">
-          <PortableText value={story.body as never[]} components={{
-              types: {
-                image: ({ value }) => value?.url ? <figure><img src={imageUrl(value.url, 960)} srcSet={imageSrcSet(value.url, [480, 720, 960, 1200], value.dimensions?.width)} sizes="(max-width: 760px) 100vw, 720px" width={value.dimensions?.width} height={value.dimensions?.height} alt={value.alt || ''} loading="lazy" decoding="async"/></figure> : null,
-            },
-            marks: {
-              link: ({ children, value }) => <a href={value?.href} rel="noopener noreferrer">{children}</a>,
-            },
-          }}/>
-        </div>
-        <div className="news-article-back"><Link href="/news-insights" className="button button-outline">Back to news & insights</Link></div>
-      </div>
-    </article>
-  </>;
-}
-
-function formatNewsDate(value:string) {
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat('en-GB', { day:'numeric', month:'long', year:'numeric' }).format(date);
-}
 
 function imageUrl(url:string, width:number) {
   const image = new URL(url);
@@ -745,8 +632,8 @@ function RouteContent() {
   if(path==='/products') return <ProductIndex/>;
   if(path==='/services') return <ServiceIndex/>;
   if(path==='/sectors') return <SectorsOverviewPage sectors={sectors}/>;
-  if(path==='/case-studies') return <CaseStudiesPage/>;
-  if(path==='/news-insights') return <NewsPage/>;
+  if(path==='/case-studies') return <Suspense fallback={<PageHeading eyebrow="Case studies" title="Loading projects…"/>}><CaseStudiesIndexPage/></Suspense>;
+  if(path==='/news-insights') return <Suspense fallback={<PageHeading eyebrow="News & insights" title="Loading stories…"/>}><NewsInsightsPage/></Suspense>;
   if(path==='/faq') return <FAQPage/>;
   if(path==='/contact'||path==='/contact-us') return <ContactPage/>;
   if(path==='/about'||path==='/about-5') return <AboutOverviewPage pages={aboutOverviewLinks}/>;
@@ -761,7 +648,7 @@ function RouteContent() {
   if(companyPath==='/about/conservation-areas') return <ConservationAreasPage/>;
   if(companyPath==='/about/coastal-applications') return <CoastalApplicationsPage/>;
   if(companyPages[companyPath]) return <AboutDetail path={companyPath} page={companyPages[companyPath]}/>;
-  if(path==='/blog'||path==='/blog-2-2'||path==='/more-news') return <NewsPage/>;
+  if(path==='/blog'||path==='/blog-2-2'||path==='/more-news') return <Suspense fallback={<PageHeading eyebrow="News & insights" title="Loading stories…"/>}><NewsInsightsPage/></Suspense>;
   if(path==='/downloads') return <LegacyInfo title="Downloads and technical information"/>;
   const alias=legacyAliases[path];
   const product=products.find(p=>path===productPath(p)||path===p.legacyPath.replace(/\/$/,'')||path===alias);
@@ -778,7 +665,7 @@ function RouteContent() {
   if(sector) return <SectorDetail sector={sector}/>;
   if(path==='/door-entry-access-control') return <LegacyInfo title="Door entry and access control"/>;
   const article=path.match(/^\/news-insights\/(.+)$/);
-  if(article) return <ArticleDetail slug={article[1]}/>;
+  if(article) return <Suspense fallback={<PageHeading eyebrow="News & insights" title="Loading story…"/>}><NewsInsightsPage slug={article[1]}/></Suspense>;
   const caseDetail=path.match(/^\/case-studies\/(.+)$/);
   if(caseDetail) return <Suspense fallback={<DetailSkeleton/>}><CaseStudyDetailPage key={caseDetail[1]} slug={caseDetail[1]}/></Suspense>;
   return <Suspense fallback={<div className="wrap" role="status" aria-live="polite">Loading page…</div>}><LegacyRouteFallback path={path}/></Suspense>;

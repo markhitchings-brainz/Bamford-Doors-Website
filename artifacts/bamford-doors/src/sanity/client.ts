@@ -10,6 +10,14 @@ export type NewsStory = {
   seoDescription?: string;
   mainImage?: { url: string; alt?: string; dimensions?: { width: number; height: number } } | null;
   body: Array<Record<string, unknown>>;
+  videoUrl?: string | null;
+  gallery?: Array<{
+    _key: string;
+    url: string;
+    alt?: string;
+    caption?: string;
+    dimensions?: { width: number; height: number };
+  }>;
 };
 
 // Static public pages do not query the CMS. Keep the SDK (and its transport
@@ -41,11 +49,13 @@ const newsProjection = `{
   publishedAt,
   seoTitle,
   seoDescription,
+  videoUrl,
   "mainImage": mainImage { "url": asset->url, alt, "dimensions": asset->metadata.dimensions { width, height } },
   "body": body[] {
     ...,
     _type == "image" => { ..., "url": asset->url, "dimensions": asset->metadata.dimensions { width, height } }
-  }
+  },
+  "gallery": coalesce(gallery[defined(asset._ref)] { _key, "url": asset->url, alt, caption, "dimensions": asset->metadata.dimensions { width, height } }, [])
 }`;
 
 export async function fetchPublishedNewsStories(): Promise<NewsStory[]> {

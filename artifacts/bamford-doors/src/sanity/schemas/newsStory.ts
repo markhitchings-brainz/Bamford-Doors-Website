@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { getCaseStudyVideoEmbed } from '../caseStudyVideo';
 
 export const newsStory = defineType({
   name: 'newsStory',
@@ -37,6 +38,41 @@ export const newsStory = defineType({
           type: 'string',
           validation: (rule) => rule.required(),
         }),
+      ],
+    }),
+    defineField({
+      name: 'videoUrl',
+      title: 'YouTube or Vimeo video URL',
+      type: 'url',
+      description: 'Optional. Add a YouTube or Vimeo link to show an embedded video on the published story.',
+      validation: (rule) => rule.uri({ scheme: ['https'] }).custom((value) =>
+        !value || getCaseStudyVideoEmbed(value)
+          ? true
+          : 'Enter a valid YouTube or Vimeo video URL.'),
+    }),
+    defineField({
+      name: 'gallery',
+      title: 'Article gallery',
+      type: 'array',
+      description: 'Optional. Add and reorder supporting images. Each image needs a description; captions are optional.',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Image description',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+            }),
+          ],
+        },
       ],
     }),
     defineField({

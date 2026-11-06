@@ -25,17 +25,22 @@ function graph(key, seen = new Set()) {
 
 const studio = Object.keys(manifest).find((key) => manifest[key].name === 'StudioPage' && manifest[key].isDynamicEntry);
 const detail = Object.keys(manifest).find((key) => manifest[key].name === 'CaseStudyDetailPage' && manifest[key].isDynamicEntry);
+const newsPage = Object.keys(manifest).find((key) => manifest[key].name === 'NewsInsightsPage' && manifest[key].isDynamicEntry);
+const caseStudiesIndex = Object.keys(manifest).find((key) => manifest[key].name === 'CaseStudiesPage' && manifest[key].isDynamicEntry);
 const legacyInventory = Object.keys(manifest).find((key) => {
   const item = manifest[key];
   return item.isDynamicEntry && [key, item.name, item.src, item.file]
     .some((value) => typeof value === 'string' && value.includes('legacy-route-inventory'));
 });
-assert.ok(studio && detail && legacyInventory, 'Expected deferred Studio, case-study detail, and legacy inventory entries');
+assert.ok(studio && detail && newsPage && caseStudiesIndex && legacyInventory, 'Expected deferred Studio, detail pages, listings, and legacy inventory entries');
 const initialGraph = graph(entry);
 assert.ok(!initialGraph.has(legacyInventory), 'Legacy route inventory must not enter the initial graph');
-const cmsReader = (manifest[entry].dynamicImports || [])
-  .filter((key) => key !== studio && key !== detail && key !== legacyInventory);
-assert.equal(cmsReader.length, 1, 'Expected one deferred CMS SDK entry');
+assert.ok(!initialGraph.has(newsPage), 'News pages must not enter the initial graph');
+assert.ok(!initialGraph.has(caseStudiesIndex), 'Case study listing must not enter the initial graph');
+const newsClient = (manifest[newsPage].imports || [])
+  .find((key) => manifest[key]?.name === 'client');
+assert.ok(newsClient, 'News route must load the deferred Sanity client chunk');
+assert.ok(!initialGraph.has(newsClient), 'Sanity client code must not enter the initial public graph');
 
 const graphSpecs = [
   {
@@ -46,13 +51,13 @@ const graphSpecs = [
   },
   {
     name: 'CMS listing including initial graph',
-    keys: [entry, ...cmsReader],
+    keys: [entry, newsPage],
     reportValue: report.cmsListingIncludingInitial,
     budgetName: 'CMS listing including initial graph',
   },
   {
     name: 'CMS case-study detail including initial graph',
-    keys: [entry, ...cmsReader, detail],
+    keys: [entry, detail],
     reportValue: report.cmsDetailIncludingInitial,
     budgetName: 'CMS case-study detail including initial graph',
   },
