@@ -129,7 +129,7 @@ try {
   await writeFile(path.join(outputDirectory, "sitemap.xml"), sitemap);
 
   for (const route of routes) {
-    const body = renderPage(route.requestPath);
+    const body = await renderPage(route.requestPath);
     if (body && !/<h1\b/.test(body)) {
       throw new Error(`Pre-rendered page has no H1: ${route.requestPath}`);
     }

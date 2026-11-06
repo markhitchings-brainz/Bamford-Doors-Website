@@ -212,6 +212,8 @@ const newsClient = (manifest[newsPage].imports || [])
   .find((key) => manifest[key]?.name === 'client');
 assert.ok(newsClient, 'News route must load the deferred Sanity client chunk');
 assert.ok(!initial.has(newsClient), 'Sanity client code must not enter the initial public graph');
+const cmsReader = manifest[newsClient].dynamicImports || [];
+assert.equal(cmsReader.length, 1, 'Expected one deferred CMS SDK dependency');
 async function transferFor(keys) {
   const reachable = new Set(keys.flatMap((key) => [...graph(key)]));
   const total = { bytes: 0, gzip: 0, brotli: 0 };
@@ -226,8 +228,8 @@ async function transferFor(keys) {
 }
 const publicStyleGroups = {
   initialPublicPages: await stylesFor([entry]),
-  cmsListing: await stylesFor([entry, newsPage]),
-  cmsCaseStudyDetail: await stylesFor([entry, detail]),
+  cmsListing: await stylesFor([entry, newsPage, ...cmsReader]),
+  cmsCaseStudyDetail: await stylesFor([entry, detail, ...cmsReader]),
 };
 const report = {
   note: 'Cold-cache JavaScript compression estimates, excluding headers, HTML, CSS, images and video. Initial totals exclude dynamic imports; CMS route totals include their required deferred graphs. Source attribution is not transfer size.',
@@ -238,8 +240,8 @@ const report = {
     brotli: sum.brotli + chunk.brotli,
   }), { bytes: 0, gzip: 0, brotli: 0 }),
   deferredEntries: { studio: manifest[studio].file, detail: manifest[detail].file, news: manifest[newsPage].file },
-  cmsListingIncludingInitial: await transferFor([entry, newsPage]),
-  cmsDetailIncludingInitial: await transferFor([entry, detail]),
+  cmsListingIncludingInitial: await transferFor([entry, newsPage, ...cmsReader]),
+  cmsDetailIncludingInitial: await transferFor([entry, detail, ...cmsReader]),
   originalSourceCharacters: Object.fromEntries([...sourceCharacters].sort((a, b) => b[1] - a[1])),
   publicStyles: {
     note: 'Stylesheet totals include reachable emitted CSS and imported external CSS. Font totals count unique Latin and Latin-ext font payloads required by the English public pages; WOFF/WOFF2 are already compressed and are measured by their delivered file bytes.',

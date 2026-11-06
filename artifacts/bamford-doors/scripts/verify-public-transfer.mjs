@@ -41,6 +41,8 @@ const newsClient = (manifest[newsPage].imports || [])
   .find((key) => manifest[key]?.name === 'client');
 assert.ok(newsClient, 'News route must load the deferred Sanity client chunk');
 assert.ok(!initialGraph.has(newsClient), 'Sanity client code must not enter the initial public graph');
+const cmsReader = manifest[newsClient].dynamicImports || [];
+assert.equal(cmsReader.length, 1, 'Expected one deferred CMS SDK dependency');
 
 const graphSpecs = [
   {
@@ -51,13 +53,13 @@ const graphSpecs = [
   },
   {
     name: 'CMS listing including initial graph',
-    keys: [entry, newsPage],
+    keys: [entry, newsPage, ...cmsReader],
     reportValue: report.cmsListingIncludingInitial,
     budgetName: 'CMS listing including initial graph',
   },
   {
     name: 'CMS case-study detail including initial graph',
-    keys: [entry, detail],
+    keys: [entry, detail, ...cmsReader],
     reportValue: report.cmsDetailIncludingInitial,
     budgetName: 'CMS case-study detail including initial graph',
   },
