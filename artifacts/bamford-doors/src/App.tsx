@@ -733,6 +733,7 @@ function Router() {
   useEffect(()=>{
     const page=getPageSeo(path);
     applyPageSeo(page);
+    window.scrollTo(0,0);
   },[path]);
   if(path==='/admin'||path.startsWith('/admin/')) return <ErrorBoundary resetKey={location}><Suspense fallback={<div className="studio-loading">Loading content editor…</div>}><StudioPage/></Suspense></ErrorBoundary>;
   if(path==='/') return <ErrorBoundary resetKey={location}><ReferenceLedHome/></ErrorBoundary>;
