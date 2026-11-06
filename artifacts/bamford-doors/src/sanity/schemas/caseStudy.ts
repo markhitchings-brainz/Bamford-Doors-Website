@@ -76,6 +76,14 @@ export const caseStudy = defineType({
       description: 'A short introduction for the project page and its listing card.',
       validation: (rule) => rule.required().max(240),
     }),
+    defineField({
+      name: 'videoUrl', title: 'YouTube or Vimeo video URL', type: 'url', group: 'story',
+      description: 'Optional. Add a YouTube or Vimeo link here; it will appear as an embedded video on the published project page.',
+      validation: (rule) => rule.uri({ scheme: ['https'] }).custom((value) =>
+        !value || getCaseStudyVideoEmbed(value)
+          ? true
+          : 'Enter a valid YouTube or Vimeo video URL.'),
+    }),
     projectSection('brief', 'The brief'),
     projectSection('solution', 'Our solution'),
     projectSection('outcome', 'The outcome'),
@@ -115,14 +123,6 @@ export const caseStudy = defineType({
       name: 'gallery', title: 'Project gallery', type: 'array', group: 'images',
       description: 'Reorder images by dragging them. Each image needs a description; captions are optional.',
       of: [{ type: 'image', options: { hotspot: true }, fields: imageFields }],
-    }),
-    defineField({
-      name: 'videoUrl', title: 'YouTube or Vimeo video URL', type: 'url', group: 'images',
-      description: 'Optional. Paste a YouTube or Vimeo link to embed the project video on this case study.',
-      validation: (rule) => rule.uri({ scheme: ['https'] }).custom((value) =>
-        !value || getCaseStudyVideoEmbed(value)
-          ? true
-          : 'Enter a valid YouTube or Vimeo video URL.'),
     }),
     defineField({
       name: 'publishedAt', title: 'Publication date', type: 'datetime', group: 'seo',
