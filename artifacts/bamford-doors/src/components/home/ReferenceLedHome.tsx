@@ -79,7 +79,7 @@ export function ReferenceLedHome() {
             <h1>Secure your<br />tenants<br /><em>Elevate Your Spaces.</em></h1>
             <p className="rl-hero-lead">Custom-made security doors and entrance systems for the buildings people rely on.</p>
           <p className="rl-hero-body">Your building needs stronger, reliable security doors. Bamford Doors provides bespoke premium reinforced aluminum doors that keep your residents safe and secure, whilst enhancing living spaces giving you peace of mind and a proven reputation for safety and durability.</p>
-            <div className="text-[10px]"><Link className="rl-button" href="/contact?purpose=consultation">Discuss your project <ArrowRight size={16} /></Link><Link className="rl-quiet-link" href="/products">Explore products <ArrowUpRight size={16} /></Link></div>
+            <div className="rl-hero-actions"><Link className="rl-button" href="/contact?purpose=consultation">Discuss your project <ArrowRight size={16} /></Link><Link className="rl-quiet-link" href="/products">Explore products <ArrowUpRight size={16} /></Link></div>
           <span className="rl-panel-mark">Security through design</span>
           </div>
           <div className="rl-hero-side-label">A dependable first impression <span>—</span> since the first detail</div>
