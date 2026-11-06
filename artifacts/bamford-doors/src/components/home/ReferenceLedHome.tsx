@@ -84,7 +84,12 @@ export function ReferenceLedHome() {
           </div>
           <div className="rl-hero-side-label">A dependable first impression <span>—</span> since the first detail</div>
         </section>
-        <section className="rl-capabilities" aria-label="How we work"><Link href="/sectors"><span>01</span><strong>Understand</strong><small>The building and its use</small><ArrowUpRight /></Link><Link href="/products"><span>02</span><strong>Design</strong><small>Door and screen options</small><ArrowUpRight /></Link><Link href="/services"><span>03</span><strong>Make</strong><small>Custom-made in the UK</small><ArrowUpRight /></Link><Link href="/services"><span>04</span><strong>Install</strong><small>Support for the project</small><ArrowUpRight /></Link></section>
+        <section className="rl-capabilities" aria-label="Explore Bamford Doors">
+          <Link href="/products"><span>01</span><strong>Products</strong><small>Explore doors and screens</small><ArrowUpRight /></Link>
+          <Link href="/services"><span>02</span><strong>Services</strong><small>Project and maintenance support</small><ArrowUpRight /></Link>
+          <Link href="/sectors"><span>03</span><strong>Sectors</strong><small>Buildings and organisations we serve</small><ArrowUpRight /></Link>
+          <Link href="/case-studies"><span>04</span><strong>Case Studies</strong><small>See our work in context</small><ArrowUpRight /></Link>
+        </section>
 
         <section className="rl-intro rl-wrap">
           <div className="rl-intro-heading"><p className="rl-kicker">An entrance is part of the building</p><h2>Good design begins<br />with <em>good questions.</em></h2></div>
