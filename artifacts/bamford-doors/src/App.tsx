@@ -30,13 +30,27 @@ import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
 import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
 import { AboutOverviewPage } from '@/pages/AboutOverviewPage';
 import { CASE_STUDIES_SEO } from '@/sanity/caseStudySeo';
-import migrationInventory from '../content/migration-inventory.csv?raw';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
 // Detail bodies are already client-only in entry-server.tsx. Keep their
 // gallery/dialog dependencies off static pages without adding SSG boundaries.
 const CaseStudyDetailPage = lazy(() => import('@/pages/CaseStudyDetailPage').then(
   (module) => ({ default: module.CaseStudyDetailPage }),
+));
+// Legacy URL metadata is needed only when a path misses the current routes.
+// Keep its migration inventory out of the initial public JavaScript graph.
+const LegacyRouteFallback = lazy(() => import('@/lib/legacy-route-inventory').then(
+  ({ legacyEntries }) => ({
+    default: function LegacyRouteFallback({ path }: { path: string }) {
+      const legacyType = legacyEntries.get(path);
+      if(legacyType==='news/article candidate') return <LegacyArticleDetail title={path.split('/').pop()!.split('-').map(w=>w[0]?.toUpperCase()+w.slice(1)).join(' ')}/>;
+      if(legacyType==='case study candidate') return <CaseStudies/>;
+      if(legacyType==='team profile') return <LegacyInfo title="Bamford team"/>;
+      if(legacyType==='testimonial') return <LegacyInfo title="Customer feedback"/>;
+      if(legacyType==='page') return <LegacyInfo title={path.split('/').pop()!.split('-').map(w=>w[0]?.toUpperCase()+w.slice(1)).join(' ')}/>;
+      return <NotFound/>;
+    },
+  }),
 ));
 
 type Product = { slug:string; title:string; summary:string; applications:string[]; features:string[]; image:string|null; cardImage?:string; legacyPath:string };
@@ -120,21 +134,6 @@ const servicePath=(s:Service)=>`/services/${s.slug}`;
 const sectorPath=(s:Sector)=>`/sectors/${s.slug}`;
 const normalizePath=(path:string)=>decodeURI(path).replace(/\/+$/,'')||'/';
 const queryClient=new QueryClient();
-const legacyEntries = new Map<string,string>(
-  migrationInventory
-    .split(/\r?\n/)
-    .slice(1)
-    .filter(Boolean)
-    .map((row): [string,string] => {
-      const [url,type] = row.split(',',2);
-      try {
-        return [new URL(url).pathname.replace(/\/+$/,'')||'/', type];
-      } catch {
-        return ['', ''];
-      }
-    })
-    .filter(([path]) => Boolean(path)),
-);
 
 function Header() {
   const [open,setOpen]=useState(false);
@@ -773,13 +772,7 @@ function RouteContent() {
   if(article) return <ArticleDetail slug={article[1]}/>;
   const caseDetail=path.match(/^\/case-studies\/(.+)$/);
   if(caseDetail) return <Suspense fallback={<DetailSkeleton/>}><CaseStudyDetailPage key={caseDetail[1]} slug={caseDetail[1]}/></Suspense>;
-  const legacyType=legacyEntries.get(path);
-  if(legacyType==='news/article candidate') return <LegacyArticleDetail title={path.split('/').pop()!.split('-').map(w=>w[0]?.toUpperCase()+w.slice(1)).join(' ')}/>;
-  if(legacyType==='case study candidate') return <CaseStudies/>;
-  if(legacyType==='team profile') return <LegacyInfo title="Bamford team"/>;
-  if(legacyType==='testimonial') return <LegacyInfo title="Customer feedback"/>;
-  if(legacyType==='page') return <LegacyInfo title={path.split('/').pop()!.split('-').map(w=>w[0]?.toUpperCase()+w.slice(1)).join(' ')}/>;
-  return <NotFound/>;
+  return <Suspense fallback={<div className="wrap" role="status" aria-live="polite">Loading page…</div>}><LegacyRouteFallback path={path}/></Suspense>;
 }
 
 export function getPageSeo(path:string): PageSeo {

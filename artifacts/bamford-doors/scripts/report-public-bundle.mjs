@@ -187,15 +187,23 @@ for (const key of initial) {
 // Rollup may use generated keys rather than source paths for shared chunks.
 const studio = Object.keys(manifest).find((key) => manifest[key].name === 'StudioPage' && manifest[key].isDynamicEntry);
 const detail = Object.keys(manifest).find((key) => manifest[key].name === 'CaseStudyDetailPage' && manifest[key].isDynamicEntry);
+const legacyInventory = Object.keys(manifest).find((key) => {
+  const item = manifest[key];
+  return item.isDynamicEntry && [key, item.name, item.src, item.file]
+    .some((value) => typeof value === 'string' && value.includes('legacy-route-inventory'));
+});
 assert.ok(studio && manifest[studio].isDynamicEntry, 'Studio must stay lazy');
 assert.ok(!initial.has(studio), 'Studio must not enter the public static graph');
 assert.ok(detail && manifest[detail].isDynamicEntry, 'Case study detail must stay lazy');
 assert.ok(!initial.has(detail), 'Detail viewer must not enter the public static graph');
+assert.ok(legacyInventory, 'Legacy route inventory must stay deferred');
+assert.ok(!initial.has(legacyInventory), 'Legacy route inventory must not enter the public static graph');
 for (const source of initialSources) {
   assert.ok(!/node_modules\/(?:\.pnpm\/[^/]+\/node_modules\/)?(?:sanity|@sanity\/client|@radix-ui\/react-(?:toast|tooltip|dialog))\//.test(source),
     `Unexpected deferred dependency in initial graph: ${source}`);
 }
-const cmsReader = (manifest[entry].dynamicImports || []).filter((key) => key !== studio && key !== detail);
+const cmsReader = (manifest[entry].dynamicImports || [])
+  .filter((key) => key !== studio && key !== detail && key !== legacyInventory);
 assert.equal(cmsReader.length, 1, 'Expected one deferred CMS SDK entry');
 async function transferFor(keys) {
   const reachable = new Set(keys.flatMap((key) => [...graph(key)]));

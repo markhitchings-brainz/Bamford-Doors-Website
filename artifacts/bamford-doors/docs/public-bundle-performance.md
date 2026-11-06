@@ -9,12 +9,13 @@ headers and source maps.
 
 | Route / required JavaScript | Before raw | After raw | Before gzip | After gzip |
 | --- | ---: | ---: | ---: | ---: |
-| Home, products, Factory, contact and other static pages | 801.34 kB | 537.87 kB | 227.82 kB | 143.89 kB |
-| CMS listing (including deferred SDK) | 801.34 kB | 669.65 kB | 227.82 kB | 184.49 kB |
-| CMS case-study detail (including SDK and viewer) | 801.34 kB | 716.40 kB | 227.82 kB | 200.30 kB |
+| Home, products, Factory, contact and other static pages | 801.34 kB | 578.28 kB | 227.82 kB | 156.89 kB |
+| CMS listing (including deferred SDK) | 801.34 kB | 710.05 kB | 227.82 kB | 197.50 kB |
+| CMS case-study detail (including SDK and viewer) | 801.34 kB | 756.81 kB | 227.82 kB | 213.31 kB |
 
-The initial graph saves **263,469 raw bytes (32.9%)** and **83,931 gzip bytes
-(36.8%)**. Map-reference comments add a few bytes to diagnostic builds only.
+Against the original bundle, the current initial graph saves **223,065 raw bytes
+(27.8%)** and **70,926 gzip bytes (31.1%)**. Map-reference comments add a few
+bytes to diagnostic builds only.
 
 ## Findings and changes
 
@@ -28,6 +29,8 @@ The initial graph saves **263,469 raw bytes (32.9%)** and **83,931 gzip bytes
 - The app mounted a toast host and tooltip provider with no consumers. Removing
   those unused wrappers removes their Radix, positioning and style utilities.
   Contact uses its existing inline errors and receipt, not toast notifications.
+- The legacy-route CSV is now loaded only for fallback paths, so normal public
+  pages do not transfer route inventory they do not use.
 - Case-study details already have empty client-only HTML. Their viewer/dialog
   now loads only on that route. The existing skeleton is shared with the
   Suspense fallback, preserving the loading design.
@@ -58,18 +61,34 @@ the CMS listing/detail graphs without double-counting shared chunks. Original
 source-character attribution identifies dependencies but is not a measurement
 of their minified transfer size.
 
-It also enforces cold-cache gzip ceilings with modest headroom over the current
-measurements:
+It then starts Vite's production preview and requests every JavaScript file in
+the initial, CMS listing, and CMS detail graphs through a local gzip-enabled
+static-host proxy. The check verifies `Content-Encoding: gzip`, `Vary:
+Accept-Encoding`, `Content-Length`, the response body after decompression, and
+the total downloaded gzip bytes against the build estimate and the budgets
+above. It requests only graph JavaScript: HTML, CSS, images, video, hydration,
+and enquiry behavior are outside this transfer check. The local proxy models
+the compression response expected from a production static host; it does not
+make a request to the deployed domain.
+
+Run the entire analysis and response check with:
+
+```sh
+NODE_ENV=production pnpm --filter @workspace/bamford-doors run build:analyze
+```
+
+It also enforces the cold-cache gzip ceilings:
 
 | Graph | Measured gzip | Maximum gzip |
 | --- | ---: | ---: |
-| Initial public pages | 143.89 kB | 160 kB |
-| CMS listing including initial graph | 184.49 kB | 205 kB |
-| CMS case-study detail including initial graph | 200.30 kB | 225 kB |
+| Initial public pages | 156.89 kB | 160 kB |
+| CMS listing including initial graph | 197.50 kB | 205 kB |
+| CMS case-study detail including initial graph | 213.31 kB | 225 kB |
 
 If a ceiling is exceeded, the command exits unsuccessfully and names the
 affected graph, measured size, limit, and recommended direction for reducing
-eager JavaScript. The analysis build and its source maps are written under
+eager JavaScript. All three current graphs are within budget. The analysis
+build and its source maps are written under
 `generated-artifacts/bundle-analysis/`, not `dist/public`.
 
 ## Public CSS and font budgets
@@ -82,7 +101,7 @@ stylesheet is fetched using a fixed modern Chrome user agent; if the CDN cannot
 be reached or an asset fails to load, the analysis exits with an error instead
 of silently omitting it.
 
-Current measurements (November 5, 2026):
+Current measurements (November 6, 2026):
 
 | Public route graph | CSS gzip | Font payload |
 | --- | ---: | ---: |
@@ -116,9 +135,13 @@ validation runs the diagnostic build and enforces these budgets.
 
 ## Verification
 
-- TypeScript and the normal production build pass. All 48 served canonical
-  sitemap URLs pass the static-body/metadata checks; 84 URL variants are built.
+- TypeScript and the normal production build pass. All 50 served canonical
+  sitemap URLs pass the static-body/metadata checks.
   Normal output has no source maps or analysis manifest.
+- Production-mode preview transfer checks pass for the initial, CMS listing,
+  and CMS detail JavaScript graphs through the local gzip static-host proxy.
+  Downloaded sizes exactly match the gzip estimates; the published domain was
+  not queried.
 - A production-browser pass confirmed homepage and Factory hydration without
   mismatch errors, contact query defaults, required-field validation, submission
   payload, receipt rendering and form reset. Submission was intercepted with a
