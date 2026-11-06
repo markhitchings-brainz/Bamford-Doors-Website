@@ -54,6 +54,8 @@ const photoDimensions: Record<string, [number, number]> = {
   '/media/warranties/door-frame-assembly-at-workshop.jpg': [998, 1500],
   '/media/warranties/grey-aluminium-entrance.jpg': [794, 838],
   '/media/warranties/blue-grp-entrance-door.jpg': [1620, 970],
+  '/media/resident-involvement/resident-man-pink-jumper-outdoors.jpg': [1024, 576],
+  '/media/resident-involvement/resident-woman-outside-building.jpg': [1024, 683],
 };
 
 const candidateWidths = [320, 640, 960, 1280, 1600];
