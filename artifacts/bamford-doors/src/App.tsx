@@ -28,6 +28,7 @@ import { GrpDoorsPage } from '@/pages/GrpDoorsPage';
 import { AutomaticOperatorsPage } from '@/pages/AutomaticOperatorsPage';
 import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
 import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
+import { AboutOverviewPage } from '@/pages/AboutOverviewPage';
 import { CASE_STUDIES_SEO } from '@/sanity/caseStudySeo';
 import migrationInventory from '../content/migration-inventory.csv?raw';
 
@@ -110,6 +111,9 @@ const companyPages: Record<string,{title:string;lead:string;body:string[]}> = {
   '/about/conservation-areas':{title:'Conservation areas',lead:'Explore bespoke communal entrance design for conservation areas, with guidance on finishes, planning context and access.',body:['Review design options for heritage settings and confirm local planning requirements before specifying or installing.']},
   '/about/coastal-applications':{title:'Coastal applications',lead:'Plan communal entrances for salt-laden air, wind-driven rain and demanding coastal exposure.',body:['Compare material considerations, finishes and practical specification questions for coastal properties.']},
 };
+const aboutOverviewLinks = Object.entries(companyPages)
+  .filter(([href]) => href !== '/about')
+  .map(([href, page]) => ({ href, title: page.title, lead: page.lead }));
 const navItems = [['Products','/products'],['Services','/services'],['Sectors','/sectors'],['Case studies','/case-studies'],['News','/news-insights'],['About','/about']] as const;
 const productPath=(p:Product)=>`/products/${p.slug}`;
 const servicePath=(s:Service)=>`/services/${s.slug}`;
@@ -641,9 +645,6 @@ function FAQPage() {
 function AboutDetail({page,path}:{page:{title:string;lead:string;body:string[]};path:string}) {
   return <><PageHeading eyebrow="About Bamford" title={page.title} lead={page.lead}/><section className="section"><div className="wrap split"><div><Breadcrumbs items={[{label:'About',href:'/about'},{label:page.title}]}/><h2 style={{fontSize:36}}>Straightforward information.</h2></div><div>{page.body.map((line,i)=><p key={i} style={{color:'#555'}}>{line}</p>)}<p className="eyebrow" style={{marginTop:30}}>More about Bamford</p><div className="tile-grid" style={{gridTemplateColumns:'1fr 1fr'}}>{Object.entries(companyPages).filter(([p])=>p!==path).map(([href,data])=><Link key={href} href={href} className="tile" style={{minHeight:120,padding:20}}><strong>{data.title}</strong><span className="arrow"><MoveUpRight size={16}/></span></Link>)}</div></div></div></section><CTA/></>;
 }
-function AboutIndex() {
-  return <><PageHeading eyebrow="About Bamford" title="Made for the entrance" lead="Bamford designs, manufactures and installs custom-made, vandal-resistant security doors and screens."/><section className="section"><div className="wrap split"><div><p className="eyebrow">Who we serve</p><h2 style={{fontSize:38}}>For public buildings across the UK.</h2></div><div><p style={{color:'#555'}}>Bamford works with local authorities, housing associations, schools and other public and commercial building teams.</p><div className="tile-grid" style={{gridTemplateColumns:'1fr 1fr'}}>{Object.entries(companyPages).filter(([href])=>href!=='/about').map(([href,page])=><Link className="tile" key={href} href={href} style={{minHeight:130,padding:22}}><strong>{page.title}</strong><p>{page.lead}</p></Link>)}</div></div></div></section><CTA/></>;
-}
 function LegacyArticleDetail({title}:{title:string}) { return <><PageHeading eyebrow="News & insights" title={title} lead="Information for teams planning, maintaining or improving a shared entrance."/><section className="section"><div className="wrap"><p>For current information about products, services or a project requirement, explore the relevant pages or contact the Bamford team.</p><div className="hero-actions"><Link href="/products" className="button button-outline">Explore products</Link><Link href="/contact" className="button">Ask the team <ArrowRight size={15}/></Link></div></div></section></>; }
 
 function ArticleDetail({slug}:{slug:string}) {
@@ -740,7 +741,7 @@ function RouteContent() {
   if(path==='/news-insights') return <NewsPage/>;
   if(path==='/faq') return <FAQPage/>;
   if(path==='/contact'||path==='/contact-us') return <ContactPage/>;
-  if(path==='/about'||path==='/about-5') return <AboutIndex/>;
+  if(path==='/about'||path==='/about-5') return <AboutOverviewPage pages={aboutOverviewLinks}/>;
   const companyPath=legacyCompanyRoutes[path]||path;
   if(companyPath==='/about/meet-the-team') return <MeetTheTeamPage/>;
   if(companyPath==='/about/sustainability') return <SustainabilityPage/>;
