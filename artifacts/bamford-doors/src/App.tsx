@@ -30,6 +30,7 @@ import { AutomaticOperatorsPage } from '@/pages/AutomaticOperatorsPage';
 import { CaseStudiesPage } from '@/pages/CaseStudiesPage';
 import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
 import { AboutOverviewPage } from '@/pages/AboutOverviewPage';
+import { SectorsOverviewPage } from '@/pages/SectorsOverviewPage';
 import { CASE_STUDIES_SEO } from '@/sanity/caseStudySeo';
 
 const StudioPage = lazy(() => import('@/sanity/StudioPage'));
@@ -538,7 +539,6 @@ function ServiceDetail({service}:{service:Service}) {
   if(service.slug==='maintenance-packages') return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><MaintenancePackagesContent/></>;
   return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><section className="section"><div className="wrap detail-layout"><div><Breadcrumbs items={[{label:'Services',href:'/services'},{label:service.title}]}/><h2 style={{fontSize:36}}>Let’s understand the requirement.</h2><p style={{color:'#555'}}>{service.summary}</p><h3 style={{marginTop:34}}>How to get started</h3><ul className="info-list">{service.howItWorks.map(x=><li key={x}>{x}</li>)}</ul><Link className="button" href={`/contact?purpose=${service.slug.includes('survey')?'stock-survey':service.slug==='maintenance-packages'?'maintenance':'consultation'}`}>Discuss this service <ArrowRight size={15}/></Link></div><div className="contact-aside"><p className="eyebrow">Next step</p><h3>Tell us about your building.</h3><p>Our team can discuss your requirements and the information needed to help move the enquiry forward.</p></div></div></section></>;
 }
-function SectorIndex() { return <><PageHeading eyebrow="Sectors" title="For buildings with a public purpose" lead="Bamford serves local authorities, housing associations, schools and other public-sector buildings nationally."/><section className="section"><div className="wrap tile-grid">{sectors.map(s=><Link className="tile" href={sectorPath(s)} key={s.slug}><strong>{s.title}</strong><p>{s.summary}</p><span className="arrow"><MoveUpRight size={18}/></span></Link>)}</div></section><CTA/></>; }
 function SectorDetail({sector}:{sector:Sector}) {
   const related=products.filter(p=>sector.relatedProducts.includes(p.slug));
   return <><PageHeading eyebrow="Sectors" title={sector.title} lead={sector.summary}/><section className="section"><div className="wrap split"><div><Breadcrumbs items={[{label:'Sectors',href:'/sectors'},{label:sector.title}]}/><h2 style={{fontSize:36}}>Start with the building.</h2><p style={{color:'#555'}}>{sector.summary} The right entrance solution depends on the building and project requirements.</p><h3 style={{fontSize:18,marginTop:30}}>Points to discuss</h3><ul className="info-list">{sector.considerations.map(x=><li key={x}>{x}</li>)}</ul><Link className="button" href={`/contact?purpose=consultation`}>Discuss your project <ArrowRight size={15}/></Link></div><div><p className="eyebrow">Product options</p><h3>Explore related products</h3><ul className="info-list">{related.map(p=><li key={p.slug}><Link href={productPath(p)} className="text-link">{p.title} <ArrowRight size={13}/></Link></li>)}</ul></div></div></section></>;
@@ -742,7 +742,7 @@ function RouteContent() {
   if(path==='/') return <Home/>;
   if(path==='/products') return <ProductIndex/>;
   if(path==='/services') return <ServiceIndex/>;
-  if(path==='/sectors') return <SectorIndex/>;
+  if(path==='/sectors') return <SectorsOverviewPage sectors={sectors}/>;
   if(path==='/case-studies') return <CaseStudiesPage/>;
   if(path==='/news-insights') return <NewsPage/>;
   if(path==='/faq') return <FAQPage/>;
