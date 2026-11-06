@@ -16,6 +16,7 @@ import { ProjectManagementPage } from '@/pages/ProjectManagementPage';
 import { ResidentInvolvementPage } from '@/pages/ResidentInvolvementPage';
 import { StockConditionSurveysPage } from '@/pages/StockConditionSurveysPage';
 import { WarrantiesPage } from '@/pages/WarrantiesPage';
+import { FrameworksPage } from '@/pages/FrameworksPage';
 import { FactoryPage } from '@/pages/FactoryPage';
 import { AluminiumVsSteelPage } from '@/pages/AluminiumVsSteelPage';
 import { ConservationAreasPage } from '@/pages/ConservationAreasPage';
@@ -81,7 +82,7 @@ const services: Service[] = [
   {slug:'maintenance-packages',title:'Maintenance packages',summary:'Planned inspections and minor adjustments for communal doors. Discuss visit frequency, current requirements and contract terms for your system.',howItWorks:['Share the type of entrance system and your requirements.','The team will discuss an appropriate next step.'],legacyPath:'/maintenance-packages/'},
   {slug:'stock-condition-surveys',title:'Stock Condition Surveys',summary:'Bamford Doors provides a free stock condition survey to give you a clearer picture of your communal door sets, door entry and access systems.',howItWorks:['Tell us about your buildings and survey requirements.','We will discuss scope and information needed.'],legacyPath:'/stock-condition-surveys/'},
   {slug:'warranties',title:'Warranties',summary:'Clear, project-specific warranty periods, technical-fault coverage and maintenance conditions for Bamford communal entrance doors and screens.',howItWorks:['Share the product reference or project details you have.','Confirm the written terms, eligibility and maintenance requirements for your doorset.'],legacyPath:'/warranties/'},
-  {slug:'frameworks',title:'Frameworks',summary:'Speak to the team about framework-related enquiries and requirements.',howItWorks:['Share the framework or procurement context.','Our team will direct your enquiry to the right person.'],legacyPath:'/frameworks/'},
+  {slug:'frameworks',title:'Frameworks',summary:'A straightforward route to communal door procurement.',howItWorks:['Share the framework or procurement context.','Our team will direct your enquiry to the right person.'],legacyPath:'/frameworks/'},
   {slug:'resident-involvement',title:'Resident Involvement',summary:'Keeping residents informed and reducing disruption. We agree with the client how residents will be kept informed, from a documented programme of works to letters at agreed intervals and, where requested, resident involvement meetings.',howItWorks:['Before work begins, we prepare a documented programme of works and issue it to the client for approval.','Where the client asks Bamfords to communicate directly with residents, we send letters at agreed intervals.'],legacyPath:'/resident-involvement/'},
   {slug:'door-entry-access-control',title:'Door entry and access control',summary:'Door entry and access control requirements for communal and public building entrances.',howItWorks:['Share the building and access requirements you are considering.','Our team can discuss the information needed to explore a suitable system.'],legacyPath:'/door-entry-access-control/'},
 ];
@@ -539,6 +540,7 @@ function ServiceDetail({service}:{service:Service}) {
   if(service.slug==='resident-involvement') return <ResidentInvolvementPage/>;
   if(service.slug==='stock-condition-surveys') return <StockConditionSurveysPage/>;
   if(service.slug==='warranties') return <WarrantiesPage/>;
+  if(service.slug==='frameworks') return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><FrameworksPage/></>;
   if(service.slug==='maintenance-packages') return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><MaintenancePackagesContent/></>;
   return <><PageHeading eyebrow="Services" title={service.title} lead={service.summary}/><section className="section"><div className="wrap detail-layout"><div><Breadcrumbs items={[{label:'Services',href:'/services'},{label:service.title}]}/><h2 style={{fontSize:36}}>Let’s understand the requirement.</h2><p style={{color:'#555'}}>{service.summary}</p><h3 style={{marginTop:34}}>How to get started</h3><ul className="info-list">{service.howItWorks.map(x=><li key={x}>{x}</li>)}</ul><Link className="button" href={`/contact?purpose=${service.slug.includes('survey')?'stock-survey':service.slug==='maintenance-packages'?'maintenance':'consultation'}`}>Discuss this service <ArrowRight size={15}/></Link></div><div className="contact-aside"><p className="eyebrow">Next step</p><h3>Tell us about your building.</h3><p>Our team can discuss your requirements and the information needed to help move the enquiry forward.</p></div></div></section></>;
 }
