@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArrowRight, ChevronRight, Linkedin, Mail, Phone } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './meet-the-team.css';
 
 const mediaBase = 'https://bamforddoors.com/wp-content/uploads';
@@ -157,7 +158,7 @@ export function MeetTheTeamPage() {
           </nav>
           <div className="team-hero-copy">
             <p className="eyebrow">The people behind the work</p>
-            <h1>Meet the team</h1>
+            <EditablePageHeadline>Meet the team</EditablePageHeadline>
             <p>
               From production and installation to regional project support, meet the people who help
               deliver Bamford’s entrance solutions.

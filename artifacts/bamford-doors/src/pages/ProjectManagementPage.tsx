@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './project-management.css';
 
@@ -16,7 +17,7 @@ export function ProjectManagementPage() {
           <div className="pm-hero-grid">
             <div className="pm-hero-copy">
               <p className="eyebrow">Services / Project Management</p>
-              <h1>Project<br /><em>Management</em></h1>
+              <EditablePageHeadline>Project<br /><em>Management</em></EditablePageHeadline>
               <p className="pm-hero-deck">A doorset solution shaped around your project</p>
               <span className="pm-rule" aria-hidden="true" />
               <p className="pm-intro">Every project has a nominated Project Manager who works closely with you and our Technical Team. Together, we develop doorset solutions tailored to the requirements of your building, its intended use and your project brief.</p>

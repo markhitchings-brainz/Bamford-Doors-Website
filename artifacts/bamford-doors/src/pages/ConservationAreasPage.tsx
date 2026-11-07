@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, CircleHelp, Landmark } from "lucide-react";
 import { Link } from "wouter";
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import "./conservation-areas.css";
 
 const settingExamples = [
@@ -50,7 +51,7 @@ export function ConservationAreasPage() {
           <div className="ca-hero-grid">
             <div className="ca-hero-copy">
               <p className="ca-eyebrow">A project guide · Heritage settings</p>
-              <h1 id="ca-page-title">Character,<br /><span>considered.</span></h1>
+              <EditablePageHeadline id="ca-page-title">Character,<br /><span>considered.</span></EditablePageHeadline>
               <p className="ca-hero-lead">A communal entrance can feel secure and practical while responding carefully to the place it serves.</p>
               <a className="ca-scroll-link" href="#starting-point" data-testid="link-explore-conservation">
                 Begin with the setting <ArrowDown size={15} aria-hidden="true" />

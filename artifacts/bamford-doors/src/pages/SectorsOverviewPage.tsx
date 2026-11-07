@@ -1,5 +1,6 @@
 import { ArrowRight, MoveUpRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './sectorsOverview.css';
 
@@ -25,7 +26,7 @@ export function SectorsOverviewPage({ sectors }: { sectors: SectorLink[] }) {
       <section className="sr-hero">
         <div className="sr-hero-copy">
           <p className="eyebrow"><span className="sr-mark" /> Sectors</p>
-          <h1>Every building<br />has its <em>people.</em></h1>
+          <EditablePageHeadline>Every building<br />has its <em>people.</em></EditablePageHeadline>
           <p className="sr-hero-lead">Bamford serves local authorities, housing associations, schools and other public-sector buildings nationally. Find the information shaped around yours.</p>
           <nav className="sr-jump" aria-label="Jump to audience">
             {visible.map((g, i) => (

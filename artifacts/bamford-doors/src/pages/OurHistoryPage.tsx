@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './our-history.css';
 
 const imageBase = 'https://bamforddoors.com/wp-content/uploads/2021/04';
@@ -50,7 +51,7 @@ export function OurHistoryPage() {
           <div className="history-hero-grid">
             <div className="history-hero-copy">
               <p className="eyebrow">A story that began in 1903</p>
-              <h1>Our history</h1>
+              <EditablePageHeadline>Our history</EditablePageHeadline>
               <p className="history-hero-lead">
                 From a small marine engine named “Ajax” to the security entrances we make today,
                 Bamford’s story has always been shaped by engineering and family.

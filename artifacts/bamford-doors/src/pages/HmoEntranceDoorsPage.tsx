@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, DoorOpen, KeyRound, Ruler, ShieldCheck, Wrench } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './hmo-entrance-doors.css';
 
@@ -62,7 +63,7 @@ export function HmoEntranceDoorsPage() {
           <div className="hmo-hero-grid">
             <div className="hmo-hero-copy">
               <p className="hmo-eyebrow">Bamford Doors / Shared residential entrances</p>
-              <h1 id="hmo-title">HMO entrance<br /><span>doors.</span></h1>
+              <EditablePageHeadline id="hmo-title">HMO entrance<br /><span>doors.</span></EditablePageHeadline>
               <p className="hmo-hero-lead">A made-to-measure entrance for shared living—planned around your building, residents and access requirements.</p>
               <div className="hmo-actions">
                 <Link className="hmo-button" href="/contact?purpose=product&product=HMO%20entrance%20doors" data-testid="link-hmo-enquire">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>

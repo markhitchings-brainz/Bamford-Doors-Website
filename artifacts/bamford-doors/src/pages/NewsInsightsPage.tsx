@@ -7,6 +7,7 @@ import {
   fetchPublishedNewsStory,
   type NewsStory,
 } from '@/sanity/client';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import NewsStoryArticlePage from './NewsStoryArticlePage';
 
 type NewsInsightsPageProps = {
@@ -114,7 +115,7 @@ function ArticleDetail({ slug }: { slug: string }) {
 }
 
 function NewsHeading({ eyebrow, title, lead }: { eyebrow: string; title: string; lead?: string }) {
-  return <div className="page-hero"><div className="wrap"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1>{lead && <p className="lead">{lead}</p>}</div></div>;
+  return <div className="page-hero"><div className="wrap"><p className="eyebrow">{eyebrow}</p><EditablePageHeadline>{title}</EditablePageHeadline>{lead && <p className="lead">{lead}</p>}</div></div>;
 }
 
 function formatNewsDate(value: string) {

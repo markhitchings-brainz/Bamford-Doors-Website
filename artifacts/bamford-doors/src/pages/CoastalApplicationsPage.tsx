@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, ChevronRight, Droplets, KeyRound, Layers, Palette, PanelTop, Ruler, ShieldCheck, Waves, Wind } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './coastal-applications.css';
 
 const materials = [
@@ -55,7 +56,7 @@ export function CoastalApplicationsPage() {
           <div className="co-hero-grid">
             <div className="co-reveal">
               <p className="co-eyebrow">A project guide · Coastal properties</p>
-              <h1 id="co-page-title">For coastal<br /><span>entrances.</span></h1>
+              <EditablePageHeadline id="co-page-title">For coastal<br /><span>entrances.</span></EditablePageHeadline>
               <p className="co-hero-lead">Coastal exposure changes how an entrance ages. Specify the material, finish and details for the place it stands.</p>
               <a className="co-scroll-link" href="#exposure" data-testid="link-explore-coastal">
                 Why exposure matters <ArrowDown size={15} aria-hidden="true" />

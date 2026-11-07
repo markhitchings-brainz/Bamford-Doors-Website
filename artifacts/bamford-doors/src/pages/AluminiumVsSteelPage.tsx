@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, CircleHelp, Scale, ShieldCheck } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './aluminium-vs-steel.css';
 
 const materialPoints = [
@@ -95,7 +96,7 @@ export function AluminiumVsSteelPage() {
           <div className="avs-hero-grid">
             <div className="avs-hero-copy">
               <p className="avs-eyebrow">A practical guide for building teams</p>
-              <h1>Aluminium<br /><span>versus</span> steel.</h1>
+              <EditablePageHeadline>Aluminium<br /><span>versus</span> steel.</EditablePageHeadline>
               <p className="avs-hero-lead">
                 Two useful materials. Different considerations. A clear way to weigh them for your entrance.
               </p>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, ChevronRight, Mail, Phone } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './factory-page.css';
 
@@ -166,7 +167,7 @@ export function FactoryPage() {
           </nav>
           <div className="factory-hero-copy">
             <p className="eyebrow">Design · Manufacture · Install</p>
-            <h1 id="factory-hero-title">Our Factory</h1>
+            <EditablePageHeadline id="factory-hero-title">Our Factory</EditablePageHeadline>
             <p className="factory-hero-subtitle">
               Made in Stockport, <em>built around your project.</em>
             </p>

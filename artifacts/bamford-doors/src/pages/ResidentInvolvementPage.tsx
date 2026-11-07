@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './resident-involvement.css';
 
@@ -16,7 +17,7 @@ export function ResidentInvolvementPage() {
           <div className="ri-hero-grid">
             <div className="ri-hero-copy ri-rise">
               <p className="eyebrow">Services / Resident Involvement</p>
-              <h1>Resident<br /><em>Involvement</em></h1>
+              <EditablePageHeadline>Resident<br /><em>Involvement</em></EditablePageHeadline>
               <p className="ri-hero-deck">Keeping residents informed and reducing disruption</p>
               <span className="ri-rule" aria-hidden="true" />
             </div>

@@ -1,5 +1,6 @@
 import { ArrowRight, MoveUpRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './aboutOverview.css';
 
@@ -25,7 +26,7 @@ export function AboutOverviewPage({ pages }: { pages: AboutOverviewLink[] }) {
       <section className="ar-hero">
         <div className="ar-hero-copy">
           <p className="eyebrow"><span className="ar-mark" /> About Bamford</p>
-          <h1>Made for<br />the <em>entrance.</em></h1>
+          <EditablePageHeadline>Made for<br />the <em>entrance.</em></EditablePageHeadline>
           <p className="ar-hero-lead">Custom-made, vandal-resistant security doors and screens—designed, manufactured and installed for public and commercial buildings.</p>
           <div className="ar-hero-actions">
             <Link className="button" href="/about/factory">Inside our factory <ArrowRight size={16} /></Link>

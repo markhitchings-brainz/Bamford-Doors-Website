@@ -5,6 +5,7 @@ import { Menu, X, ArrowRight, ChevronRight, MoveUpRight } from 'lucide-react';
 import { Link, Route, Router as WouterRouter, Switch, useLocation } from 'wouter';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
+import { EditablePageHeadline, PageHeadlinesProvider } from '@/components/EditablePageHeadline';
 import { applyPageSeo, type PageSeo } from '@/lib/seo';
 import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
 import { AccreditationsPage } from '@/pages/AccreditationsPage';
@@ -138,6 +139,21 @@ const productPath=(p:Product)=>`/products/${p.slug}`;
 const servicePath=(s:Service)=>`/services/${s.slug}`;
 const sectorPath=(s:Sector)=>`/sectors/${s.slug}`;
 const normalizePath=(path:string)=>decodeURI(path).replace(/\/+$/,'')||'/';
+function editableHeadlinePath(path:string) {
+  const normalized=normalizePath(path);
+  if(normalized==='/contact-us') return '/contact';
+  if(['/blog','/blog-2-2','/more-news'].includes(normalized)) return '/news-insights';
+  const product=products.find(p=>normalized===productPath(p)||normalized===p.legacyPath.replace(/\/$/,''));
+  if(product) return productPath(product);
+  const service=services.find(s=>normalized===servicePath(s)||normalized===s.legacyPath.replace(/\/$/,''));
+  if(service) return servicePath(service);
+  const sector=sectors.find(s=>normalized===sectorPath(s));
+  if(sector) return sectorPath(sector);
+  const companyPath=legacyCompanyRoutes[normalized]||normalized;
+  if(companyPages[companyPath]) return companyPath;
+  if(normalized==='/glass-reinforced-plastic-grp-doors') return '/products/grp-doors';
+  return normalized;
+}
 const queryClient=new QueryClient();
 
 function Header() {
@@ -159,7 +175,7 @@ function Breadcrumbs({items}:{items:{label:string;href?:string}[]}) {
   return <nav className="crumbs" aria-label="Breadcrumb"><Link href="/">Home</Link>{items.map((item,i)=><span key={`${item.label}-${i}`} style={{display:'contents'}}><ChevronRight size={12}/>{item.href?<Link href={item.href}>{item.label}</Link>:<span aria-current="page">{item.label}</span>}</span>)}</nav>;
 }
 function PageHeading({eyebrow,title,lead}:{eyebrow?:string;title:string;lead?:string}) {
-  return <div className="page-hero"><div className="wrap"><p className="eyebrow">{eyebrow||'Bamford Doors'}</p><h1>{title}</h1>{lead&&<p className="lead">{lead}</p>}</div></div>;
+  return <div className="page-hero"><div className="wrap"><p className="eyebrow">{eyebrow||'Bamford Doors'}</p><EditablePageHeadline>{title}</EditablePageHeadline>{lead&&<p className="lead">{lead}</p>}</div></div>;
 }
 function CTA({title='Discuss your requirements',text='Tell us about your building, entrance or project and our team can help with the next step.'}:{title?:string;text?:string}) {
   return <section className="feature-band"><div className="wrap" style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:30,flexWrap:'wrap'}}><div><p className="eyebrow">Talk to Bamford</p><h2 style={{fontSize:'clamp(28px,4vw,42px)'}}>{title}</h2><p style={{color:'#c5c5c5',maxWidth:610,marginBottom:0}}>{text}</p></div><Link href="/contact" className="button" data-testid="link-contact-cta">Contact our team <ArrowRight size={16}/></Link></div></section>;
@@ -168,7 +184,7 @@ function CTA({title='Discuss your requirements',text='Tell us about your buildin
 function Home() {
   return (
     <><main className="main">
-            <section className="text-[15px]"><div className="wrap hero-grid"><div className="hero-copy"><p className="eyebrow">Bamford Doors <span className="eyebrow-divider">/</span> Made for the entrance</p><h1>Quality Bespoke Security Doors for Social Housing Providers and Landlords</h1><p className="hero-question">Entrances matter. Make yours fit the building.</p><p>Bamford designs, manufactures and installs custom-made security doors and screens for housing providers, councils and building teams.</p><div className="hero-actions"><Link href="/contact?purpose=consultation" className="button" data-testid="link-request-consultation">Request a Consultation <ArrowRight size={16}/></Link><Link href="/products" className="button button-outline" data-testid="link-explore-products">Explore products</Link></div><span className="hero-note">For shared entrances and public buildings</span></div><div className="hero-photo"><ResponsiveImage src="/media/grp.webp" alt="Bamford security entrance door at a shared residential building" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" /><span className="hero-photo-index">01 <i/> ENTRANCE SYSTEMS</span></div></div></section>
+            <section className="text-[15px]"><div className="wrap hero-grid"><div className="hero-copy"><p className="eyebrow">Bamford Doors <span className="eyebrow-divider">/</span> Made for the entrance</p><EditablePageHeadline>Quality Bespoke Security Doors for Social Housing Providers and Landlords</EditablePageHeadline><p className="hero-question">Entrances matter. Make yours fit the building.</p><p>Bamford designs, manufactures and installs custom-made security doors and screens for housing providers, councils and building teams.</p><div className="hero-actions"><Link href="/contact?purpose=consultation" className="button" data-testid="link-request-consultation">Request a Consultation <ArrowRight size={16}/></Link><Link href="/products" className="button button-outline" data-testid="link-explore-products">Explore products</Link></div><span className="hero-note">For shared entrances and public buildings</span></div><div className="hero-photo"><ResponsiveImage src="/media/grp.webp" alt="Bamford security entrance door at a shared residential building" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" /><span className="hero-photo-index">01 <i/> ENTRANCE SYSTEMS</span></div></div></section>
             <section className="font-semibold text-[15px]"><div className="wrap audience-inner"><span>Built around the needs of</span><Link href="/sectors/social-housing">Social housing</Link><Link href="/sectors/local-authorities">Local authorities</Link><Link href="/sectors/housing-associations">Housing associations</Link><Link href="/sectors/apartment-blocks">Building teams</Link></div></section>
             <section className="section intro-section"><div className="wrap split"><div><p className="eyebrow">An entrance is a working part of the building</p><h2>One entrance.<br/><em>Many considerations.</em></h2></div><div className="intro-copy"><p className="section-lead">Every shared entrance has its own context: the building, the people who use it and the work planned around it.</p><p>Bamford can help you explore door and screen options, alongside services that support your project. Start with the requirement; the team can discuss what comes next.</p><Link className="text-link" href="/contact?purpose=consultation">Talk through your project <ArrowRight size={14}/></Link></div></div></section>
             <section className="section sector-section"><div className="wrap"><div className="section-head"><div><p className="eyebrow">Who we work with</p><h2>For buildings serving people.</h2></div><p>Explore information shaped around your building type and the entrance it needs.</p></div><div className="sector-feature-grid">{sectors.filter(s=>['social-housing','local-authorities','housing-associations','apartment-blocks'].includes(s.slug)).map((s,i)=><Link className={`sector-feature sector-feature-${i+1}`} key={s.slug} href={sectorPath(s)} data-testid={`card-sector-${s.slug}`}><span className="sector-number">0{i+1} / SECTOR</span><strong>{s.title}</strong><p>{s.summary}</p><span className="sector-arrow"><MoveUpRight size={18}/></span></Link>)}</div><Link className="text-link sector-all-link" href="/sectors">View all sectors <ArrowRight size={14}/></Link></div></section>
@@ -738,8 +754,8 @@ function Router() {
     window.scrollTo(0,0);
   },[path]);
   if(path==='/admin'||path.startsWith('/admin/')) return <ErrorBoundary resetKey={location}><Suspense fallback={<div className="studio-loading">Loading content editor…</div>}><StudioPage/></Suspense></ErrorBoundary>;
-  if(path==='/') return <ErrorBoundary resetKey={location}><ReferenceLedHome/></ErrorBoundary>;
-  return <ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary>;
+  if(path==='/') return <PageHeadlinesProvider pagePath="/"><ErrorBoundary resetKey={location}><ReferenceLedHome/></ErrorBoundary></PageHeadlinesProvider>;
+  return <PageHeadlinesProvider pagePath={editableHeadlinePath(path)}><ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary></PageHeadlinesProvider>;
 }
 function App({ssrPath}:{ssrPath?:string}={}) {
   return <QueryClientProvider client={queryClient}><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')} ssrPath={ssrPath}><Router/></WouterRouter></QueryClientProvider>;

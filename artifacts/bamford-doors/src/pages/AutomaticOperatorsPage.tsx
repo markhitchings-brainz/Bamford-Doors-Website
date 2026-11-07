@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, DoorOpen, Gauge, ShieldCheck, Volume2, Wrench, Zap } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './automatic-operators.css';
 
 const operatorFeatures = [
@@ -40,7 +41,7 @@ export function AutomaticOperatorsPage() {
           <div className="ao-hero-grid">
             <div className="ao-hero-copy">
               <p className="ao-eyebrow">Bamford Doors / Entrance automation</p>
-              <h1 id="ao-title">Automatic door <span>operators.</span></h1>
+              <EditablePageHeadline id="ao-title">Automatic door <span>operators.</span></EditablePageHeadline>
               <p className="ao-hero-lead">A well-planned automatic entrance can make everyday access easier. Choose an operator around the door, how the entrance is used and the needs of the people using it.</p>
               <div className="ao-actions">
                 <Link className="ao-button" href="/contact?purpose=product&product=Automatic%20door%20operators" data-testid="link-ao-enquire">Discuss your entrance <ArrowRight size={16} aria-hidden="true" /></Link>

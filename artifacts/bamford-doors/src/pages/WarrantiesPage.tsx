@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './warranties.css';
 
@@ -34,7 +35,7 @@ export function WarrantiesPage() {
           <div className="wr-hero-grid">
             <div className="wr-hero-copy">
               <p className="eyebrow">Services / Warranties</p>
-              <h1>Warranties.<br /><em>Clear terms.</em></h1>
+              <EditablePageHeadline>Warranties.<br /><em>Clear terms.</em></EditablePageHeadline>
               <p className="wr-hero-deck">Warranty and maintenance information for Bamford doorsets</p>
               <span className="wr-rule" aria-hidden="true" />
               <p className="wr-intro">Every entrance has its own specification and project history. Here is a practical guide to the warranty periods, coverage and conditions to check for your Bamford doors and screens.</p>

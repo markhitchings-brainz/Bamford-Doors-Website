@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight, Factory, Recycle, Truck, Users } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './sustainability.css';
 
 const mediaBase = 'https://bamforddoors.com/wp-content/uploads/2023/06';
@@ -89,7 +90,7 @@ export function SustainabilityPage() {
           <div className="sus-hero-grid">
             <div className="sus-hero-copy">
               <p className="eyebrow">Responsibility in practice</p>
-              <h1>Sustainability</h1>
+              <EditablePageHeadline>Sustainability</EditablePageHeadline>
               <p className="sus-hero-lead">
                 We recognise our responsibility to procure and manufacture goods and services
                 sustainably, and to protect the environment.

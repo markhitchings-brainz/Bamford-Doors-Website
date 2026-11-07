@@ -20,6 +20,11 @@ export type NewsStory = {
   }>;
 };
 
+export type PageHeading = {
+  pagePath: string;
+  headline: string;
+};
+
 // Static public pages do not query the CMS. Keep the SDK (and its transport
 // dependencies) behind the first actual request, including build-time readers.
 // Cache successful loads, but allow a failed chunk request to be retried.
@@ -37,6 +42,13 @@ function getClient() {
       clientPromise = undefined;
       throw error;
     });
+}
+
+export async function fetchPublishedPageHeadlines(): Promise<PageHeading[]> {
+  const client = await getClient();
+  return client.fetch(
+    `*[_type == "pageHeading" && defined(pagePath) && defined(headline)]{pagePath, headline}`,
+  );
 }
 
 const newsProjection = `{

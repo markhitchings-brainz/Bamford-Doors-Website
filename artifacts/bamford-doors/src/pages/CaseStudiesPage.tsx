@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronRight, RotateCw } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { applyPageSeo } from '@/lib/seo';
 import { fetchPublishedCaseStudies, type CaseStudySummary } from '@/sanity/client';
 import { CASE_STUDIES_SEO as SEO } from '@/sanity/caseStudySeo';
@@ -48,7 +49,7 @@ export function CaseStudiesPage() {
           <div className="cs-hero-grid">
             <div>
               <p className="cs-eyebrow">Bamford Doors / Project record</p>
-              <h1 id="cs-title">Case<br /><span>studies.</span></h1>
+              <EditablePageHeadline id="cs-title">Case<br /><span>studies.</span></EditablePageHeadline>
             </div>
             <div className="cs-hero-side">
               <p className="cs-hero-lead">Real entrances, from first brief to finished doorset. See what each building needed, how the entrance was resolved and what changed for the people using it.</p>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './corporate-social-responsibility.css';
 
 const videos = {
@@ -97,7 +98,7 @@ export function CorporateSocialResponsibilityPage() {
           <div className="csr-hero-grid">
             <div className="csr-hero-copy">
               <p className="eyebrow">Social value</p>
-              <h1>Corporate Social Responsibility</h1>
+              <EditablePageHeadline>Corporate Social Responsibility</EditablePageHeadline>
             </div>
             <div className="csr-hero-intro">
               <p className="csr-hero-lead">

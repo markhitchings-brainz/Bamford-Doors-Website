@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './accreditations.css';
 
 const credentials = [
@@ -81,7 +82,7 @@ export function AccreditationsPage() {
             <span aria-current="page">Accreditations</span>
           </nav>
           <p className="eyebrow">Quality · Safety · Accountability</p>
-          <h1>Accreditations</h1>
+          <EditablePageHeadline>Accreditations</EditablePageHeadline>
           <p className="acc-hero-lead">
             Recognised standards and independent assessment underpin the way we work.
           </p>

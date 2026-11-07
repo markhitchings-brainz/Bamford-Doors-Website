@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, Layers3, ShieldCheck, Thermometer } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './thermally-broken-doors.css';
 
@@ -54,7 +55,7 @@ export function ThermallyBrokenDoorsPage() {
           <div className="tb-hero-grid">
             <div className="tb-hero-copy">
               <p className="tb-eyebrow">Bamford Doors / Aluminium entrance systems</p>
-              <h1 id="tb-title">Thermal performance.<br /><span>Security in detail.</span></h1>
+              <EditablePageHeadline id="tb-title">Thermal performance.<br /><span>Security in detail.</span></EditablePageHeadline>
               <p className="tb-hero-lead">A thermally broken door set based on Bamford’s modular entrance system, bringing thermal performance and physical security into one considered specification.</p>
               <div className="tb-hero-actions">
                 <Link className="tb-button" href="/contact?purpose=product&product=Thermally%20broken%20doors" data-testid="link-tb-enquire">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>

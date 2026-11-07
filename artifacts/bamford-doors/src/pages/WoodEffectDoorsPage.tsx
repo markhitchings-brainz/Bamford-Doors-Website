@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, Check, ChevronRight, Layers3, Paintbrush, ShieldCheck, Wrench } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './wood-effect-doors.css';
 
@@ -68,7 +69,7 @@ export function WoodEffectDoorsPage() {
           <div className="we-hero-grid">
             <div className="we-hero-copy">
               <p className="we-eyebrow">Bamford Doors / Aluminium entrance systems</p>
-              <h1 id="we-title">Woodgrain character.<br /><span>Made for the entrance.</span></h1>
+              <EditablePageHeadline id="we-title">Woodgrain character.<br /><span>Made for the entrance.</span></EditablePageHeadline>
               <p className="we-hero-lead">A timber-inspired finish for bespoke aluminium doors and screens, bringing a warmer look to shared entrances and public buildings.</p>
               <div className="we-actions">
                 <Link className="we-button" href="/contact?purpose=product&product=Wood%20effect%20doors" data-testid="link-we-enquire">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>

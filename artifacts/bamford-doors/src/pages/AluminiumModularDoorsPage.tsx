@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, Cog, Layers3, LockKeyhole, Palette, ScanLine, X } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './aluminium-modular-doors.css';
 
@@ -90,7 +91,7 @@ export function AluminiumModularDoorsPage() {
           <div className="amd-hero-grid">
             <div className="amd-hero-copy amd-reveal">
               <p className="amd-eyebrow">Bamford Doors / Aluminium entrance systems</p>
-              <h1 id="amd-title">Built around<br />the <span>entrance.</span></h1>
+              <EditablePageHeadline id="amd-title">Built around<br />the <span>entrance.</span></EditablePageHeadline>
               <p className="amd-lead">Bespoke aluminium doors and screens for communal buildings, public spaces and the people who use them every day.</p>
               <div className="amd-actions">
                 <Link href="/contact?purpose=product&product=Aluminium%20modular%20doors" className="amd-button" data-testid="link-amd-enquire">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>

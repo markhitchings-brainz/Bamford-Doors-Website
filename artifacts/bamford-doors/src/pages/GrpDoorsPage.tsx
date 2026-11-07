@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, Layers3, Ruler, Scale, ShieldCheck, Thermometer, Waves, X } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './grp-doors.css';
 
@@ -131,7 +132,7 @@ export function GrpDoorsPage() {
           <div className="grp-hero-grid">
             <div className="grp-hero-copy">
               <p className="grp-eyebrow">Bamford Doors / Made-to-order entrances</p>
-              <h1 id="grp-title">GRP doors.<br /><span>Material in focus.</span></h1>
+              <EditablePageHeadline id="grp-title">GRP doors.<br /><span>Material in focus.</span></EditablePageHeadline>
               <p className="grp-hero-lead">A practical introduction to glass reinforced plastic—and the entrance designs it can help shape for communal and public buildings.</p>
               <div className="grp-actions">
                 <Link className="grp-button" href={enquiryHref} data-testid="link-grp-enquire">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>

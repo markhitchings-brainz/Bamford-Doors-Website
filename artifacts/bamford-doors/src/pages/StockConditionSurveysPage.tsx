@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
+import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import './stock-condition-surveys.css';
 
@@ -34,7 +35,7 @@ export function StockConditionSurveysPage() {
           <div className="sc-hero-grid">
             <div className="sc-hero-copy">
               <p className="eyebrow">Services / Stock Condition Surveys</p>
-              <h1>Stock Condition <em>Surveys</em></h1>
+              <EditablePageHeadline>Stock Condition <em>Surveys</em></EditablePageHeadline>
               <p className="sc-hero-deck">Know the condition of your communal doors and access systems</p>
               <span className="sc-rule" aria-hidden="true" />
               <p className="sc-intro">Bamford Doors provides a free stock condition survey to give you a clearer picture of your communal door sets, door entry and access systems.</p>
