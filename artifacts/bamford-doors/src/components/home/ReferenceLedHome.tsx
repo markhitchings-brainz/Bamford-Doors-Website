@@ -77,7 +77,7 @@ export function ReferenceLedHome() {
           <div className="rl-hero-image"><ResponsiveImage src="/media/grp.webp" alt="Bamford entrance door installed at a shared residential building" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" /><div className="rl-image-caption"><span>01</span><i /> ENTRANCE SYSTEMS</div></div>
           <div className="rl-hero-panel">
             <p className="rl-kicker">Bamford Doors <b>/</b> Bespoke Doors for Lasting Security</p>
-            <EditablePageHeadline>Secure your<br />tenants<br /><em>Elevate Your Spaces.</em></EditablePageHeadline>
+            <EditablePageHeadline>Communal Security Doors and Entrance Systems</EditablePageHeadline>
             <p className="rl-hero-lead">Custom-made security doors and entrance systems for the buildings people rely on.</p>
           <p className="rl-hero-body">Your building needs stronger, reliable security doors. Bamford Doors provides bespoke premium reinforced aluminum doors that keep your residents safe and secure, whilst enhancing living spaces giving you peace of mind and a proven reputation for safety and durability.</p>
             <div className="rl-hero-actions"><Link className="rl-button" href="/contact?purpose=consultation">Discuss your project <ArrowRight size={16} /></Link><Link className="rl-quiet-link" href="/products">Explore products <ArrowUpRight size={16} /></Link></div>

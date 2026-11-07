@@ -202,7 +202,7 @@ function ProductCard({product,imageOverride}:{product:Product;imageOverride?:str
 }
 
 function ProductIndex() {
-  return <><PageHeading eyebrow="Products" title="Door and entrance systems" lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p} imageOverride={p.slug==='thermally-broken-doors'?'/media/thermal-door-card.webp':undefined}/>)}</div></div></section><CTA/></>;
+  return <><PageHeading eyebrow="Products" title={"Aluminium Modular\nSecurity Doors"} lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p} imageOverride={p.slug==='thermally-broken-doors'?'/media/thermal-door-card.webp':undefined}/>)}</div></div></section><CTA/></>;
 }
 function MailboxesPageContent({product}:{product:Product}) {
   const photos = [

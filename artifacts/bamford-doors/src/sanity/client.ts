@@ -46,7 +46,7 @@ function getClient() {
 
 export async function fetchPublishedPageHeadlines(): Promise<PageHeading[]> {
   const client = await getClient();
-  return client.fetch(
+  return client.withConfig({ useCdn: false }).fetch(
     `*[_type == "pageHeading" && defined(pagePath) && defined(headline)]{pagePath, headline}`,
   );
 }
