@@ -113,7 +113,7 @@ export function ReferenceLedHome() {
         </section>
 
         <section className="rl-service">
-          <div className="rl-service-photo"><img src="/media/aluminium.webp" alt="Aluminium modular entrance door and screen" loading="lazy" /><span>DETAIL STUDY <i>—</i> MODULAR ENTRANCE</span></div>
+          <div className="rl-service-photo"><img src="/media/good-work-support.webp" alt="Bamford communal entrance door with integrated access control" loading="lazy" /><span>DETAIL STUDY <i>—</i> COMMUNAL ENTRANCE</span></div>
           <div className="rl-service-content"><p className="rl-kicker">More than a product</p><h2>Good work takes<br /><em>good support.</em></h2><p>There is more to an entrance project than the door itself. Explore services for the wider requirement, from early conversations to ongoing maintenance discussions.</p><Link className="rl-button" href="/services">Explore our services <ArrowRight size={15} /></Link>
             <div className="rl-service-links"><Link href="/services/project-management"><span>01</span>Project management<ArrowUpRight size={16} /></Link><Link href="/services/stock-condition-surveys"><span>02</span>Stock condition surveys<ArrowUpRight size={16} /></Link><Link href="/services/maintenance-packages"><span>03</span>Maintenance packages<ArrowUpRight size={16} /></Link></div>
           </div>
