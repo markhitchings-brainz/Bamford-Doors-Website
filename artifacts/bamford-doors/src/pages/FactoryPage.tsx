@@ -105,6 +105,50 @@ const productTypes = [
   },
 ];
 
+function getLondonDateKey(date: Date) {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/London',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function getDailyIllustrativeOutput(dateKey: string) {
+  let hash = 2166136261;
+
+  for (const character of dateKey) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return 60 + ((hash >>> 0) % 25);
+}
+
+function useDailyIllustrativeOutput() {
+  const [output, setOutput] = useState<number | null>(null);
+
+  useEffect(() => {
+    let activeDate = '';
+    const updateOutput = () => {
+      const dateKey = getLondonDateKey(new Date());
+      if (dateKey === activeDate) return;
+
+      activeDate = dateKey;
+      setOutput(getDailyIllustrativeOutput(dateKey));
+    };
+
+    updateOutput();
+    const interval = window.setInterval(updateOutput, 60_000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return output;
+}
+
 type NetworkInformation = EventTarget & {
   effectiveType?: string;
   saveData?: boolean;
@@ -137,6 +181,7 @@ function useFactoryHeroVideoPreference() {
 
 export function FactoryPage() {
   const shouldLoadVideo = useFactoryHeroVideoPreference();
+  const dailyIllustrativeOutput = useDailyIllustrativeOutput();
   const renovationVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -303,11 +348,20 @@ export function FactoryPage() {
                 Our factory can produce around 60 doors and screens in a standard working week, with
                 capacity to increase to around 90 when required.
               </p>
-              <div className="factory-capacity-number">
-                <strong>~60</strong>
+              <div className="factory-capacity-number" aria-live="polite">
+                <strong>{dailyIllustrativeOutput ?? '—'}</strong>
                 <span>doors and screens / standard working week</span>
               </div>
-              <div className="factory-capacity-scale" aria-hidden="true"><span /></div>
+              <p className="factory-capacity-figure-note">
+                Illustrative figure, not a live production count.
+              </p>
+              <div className="factory-capacity-scale" aria-hidden="true">
+                <span
+                  style={{
+                    width: `${Math.round(((dailyIllustrativeOutput ?? 60) / 90) * 100)}%`,
+                  }}
+                />
+              </div>
               <div className="factory-capacity-range">
                 <span>Standard <strong>~60</strong></span>
                 <span>When required <strong>~90</strong></span>

@@ -101,6 +101,7 @@
 .factory-capacity-number { display:flex; align-items:baseline; gap:10px; margin:27px 0 10px; }
 .factory-capacity-number strong { color:var(--factory-red); font-size:clamp(54px,8vw,92px); line-height:.9; letter-spacing:-.09em; }
 .factory-capacity-number span { max-width:100px; color:#66625d; font-size:9px; font-weight:700; line-height:1.5; letter-spacing:.1em; text-transform:uppercase; }
+.factory-capacity-copy > .factory-capacity-figure-note { margin:-2px 0 12px; color:#77736e; font-size:10px; line-height:1.5; }
 .factory-capacity-scale { height:5px; margin:17px 0 12px; background:#dedbd5; }
 .factory-capacity-scale span { display:block; width:66.66%; height:100%; background:var(--factory-red); }
 .factory-capacity-range { display:flex; justify-content:space-between; gap:12px; color:#77736e; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
