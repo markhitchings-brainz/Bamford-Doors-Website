@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowRight, ChevronRight, Mail, Phone } from 'lucide-react';
 import { Link } from 'wouter';
 import { EditablePageHeadline } from '@/components/EditablePageHeadline';
@@ -137,6 +137,25 @@ function useFactoryHeroVideoPreference() {
 
 export function FactoryPage() {
   const shouldLoadVideo = useFactoryHeroVideoPreference();
+  const renovationVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = renovationVideoRef.current;
+    if (!video || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        void video.play().catch(() => {
+          // Native controls remain available if the browser requires a user gesture.
+        });
+      } else {
+        video.pause();
+      }
+    }, { threshold: 0.25 });
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <main className="factory-page">
@@ -244,7 +263,11 @@ export function FactoryPage() {
             </div>
             <figure className="factory-renovation-video">
               <video
+                ref={renovationVideoRef}
                 controls
+                autoPlay
+                muted
+                loop
                 playsInline
                 preload="metadata"
                 poster={getFactoryImageUrl(factoryImages[15].url, 1200)}
