@@ -76,7 +76,11 @@
 .factory-photo figcaption { position:absolute; z-index:1; right:18px; bottom:16px; left:18px; display:flex; justify-content:space-between; gap:12px; color:#fff; font-size:9px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
 .factory-photo figcaption span:first-child { color:#f19aa0; }
 .factory-overview-photo { aspect-ratio:2.35/1; }
-.factory-renovation-photo { grid-column:1/-1; aspect-ratio:2.55/1; }
+.factory-renovation-video { grid-column:1/-1; min-width:0; margin:0; background:#181817; }
+.factory-renovation-video video { display:block; width:100%; aspect-ratio:16/9; max-height:640px; background:#111; object-fit:contain; }
+.factory-renovation-video figcaption { display:flex; justify-content:space-between; gap:12px; padding:12px 2px 0; color:#d1cec8; font-size:9px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+.factory-renovation-video figcaption span:first-child { color:#ed858b; }
+.factory-renovation-video video:focus-visible { outline:2px solid #fff; outline-offset:4px; }
 
 .factory-renovation { padding:83px 0 88px; background:#252523; color:#f8f7f4; }
 .factory-renovation-grid { display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); gap:clamp(40px,8vw,110px); align-items:center; }

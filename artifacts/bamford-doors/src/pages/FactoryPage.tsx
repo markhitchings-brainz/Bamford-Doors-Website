@@ -8,6 +8,8 @@ import './factory-page.css';
 const factoryHeroVideo =
   'https://cdn.sanity.io/files/ih9rxf6u/production/66878f6c0ca8cfed1259d697024cb7f8a125db78.mp4';
 const factoryHeroPoster = `${import.meta.env.BASE_URL}media/factory-hero-poster.jpg`;
+const factoryRenovationVideo =
+  'https://cdn.sanity.io/files/ih9rxf6u/production/ab133e08a808ec532e60c2aa9399572753ebec10.mp4';
 
 const factoryImages = [
   { url: 'https://cdn.sanity.io/images/ih9rxf6u/production/7bda16eb48df16be95e463bf54f66684dca6ea2c-1500x998.webp', label: 'Entrance doors and screens', alt: 'Finished entrance door and screen system in the factory' },
@@ -240,7 +242,22 @@ export function FactoryPage() {
               <span>02 / RENOVATION</span>
               <strong>New side walling</strong>
             </div>
-            <FactoryPhoto image={factoryImages[15]} className="factory-renovation-photo" />
+            <figure className="factory-renovation-video">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster={getFactoryImageUrl(factoryImages[15].url, 1200)}
+                aria-label="Bamford factory renovation video"
+              >
+                <source src={factoryRenovationVideo} type="video/mp4" />
+                Your browser does not support embedded video.
+              </video>
+              <figcaption>
+                <span>03</span>
+                <span>Factory renovation · Stockport</span>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
