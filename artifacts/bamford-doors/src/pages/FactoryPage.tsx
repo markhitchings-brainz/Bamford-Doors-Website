@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowDown, ArrowRight, ChevronRight, Mail, Phone } from 'lucide-react';
+import { ArrowDown, ArrowRight, ChevronRight, Mail, Phone, X } from 'lucide-react';
 import { Link } from 'wouter';
 import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
@@ -53,9 +53,11 @@ function getFactoryImageUrl(url: string, width: number) {
 function FactoryPhoto({
   image,
   className = '',
+  onOpen,
 }: {
   image: (typeof factoryImages)[number];
   className?: string;
+  onOpen: (image: (typeof factoryImages)[number]) => void;
 }) {
   const sizes = className.includes('factory-gallery-item')
     ? '(max-width: 635px) calc((100vw - 46px) / 2), (max-width: 700px) 295px, (max-width: 760px) 189px, (max-width: 1368px) calc((100vw - 120px) / 3), 416px'
@@ -68,16 +70,25 @@ function FactoryPhoto({
 
   return (
     <figure className={`factory-photo ${className}`}>
-      <img
-        src={getFactoryImageUrl(image.url, Math.min(640, image.width))}
-        srcSet={srcSet}
-        sizes={sizes}
-        width={image.width}
-        height={image.height}
-        alt={image.alt}
-        loading="lazy"
-        decoding="async"
-      />
+      <button
+        className="factory-photo-trigger"
+        type="button"
+        aria-label={`View larger photo: ${image.label}`}
+        aria-haspopup="dialog"
+        data-testid={`button-factory-photo-${image.number}`}
+        onClick={() => onOpen(image)}
+      >
+        <img
+          src={getFactoryImageUrl(image.url, Math.min(640, image.width))}
+          srcSet={srcSet}
+          sizes={sizes}
+          width={image.width}
+          height={image.height}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
       <figcaption>
         <span>{String(image.number).padStart(2, '0')}</span>
         <span>{image.label}</span>
@@ -138,6 +149,15 @@ function useFactoryHeroVideoPreference() {
 export function FactoryPage() {
   const shouldLoadVideo = useFactoryHeroVideoPreference();
   const renovationVideoRef = useRef<HTMLVideoElement>(null);
+  const photoDialogRef = useRef<HTMLDialogElement>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<(typeof factoryImages)[number] | null>(null);
+
+  useEffect(() => {
+    const dialog = photoDialogRef.current;
+    if (!dialog) return;
+    if (selectedPhoto && !dialog.open) dialog.showModal();
+    if (!selectedPhoto && dialog.open) dialog.close();
+  }, [selectedPhoto]);
 
   useEffect(() => {
     const video = renovationVideoRef.current;
@@ -239,7 +259,7 @@ export function FactoryPage() {
       </section>
 
       <section className="factory-intro-showcase wrap" aria-label="Inside the Stockport factory">
-        <FactoryPhoto image={factoryImages[14]} className="factory-overview-photo" />
+        <FactoryPhoto image={factoryImages[14]} className="factory-overview-photo" onOpen={setSelectedPhoto} />
       </section>
 
       <section className="factory-renovation" aria-labelledby="factory-renovation-title">
@@ -344,7 +364,7 @@ export function FactoryPage() {
         </div>
         <div className="factory-gallery-grid">
           {factoryGalleryImages.map((image) => (
-            <FactoryPhoto image={image} key={image.url} className="factory-gallery-item" />
+            <FactoryPhoto image={image} key={image.url} className="factory-gallery-item" onOpen={setSelectedPhoto} />
           ))}
         </div>
       </section>
@@ -392,6 +412,40 @@ export function FactoryPage() {
           </Link>
         </div>
       </section>
+
+      <dialog
+        ref={photoDialogRef}
+        className="factory-photo-dialog"
+        aria-label={selectedPhoto ? `Enlarged photo: ${selectedPhoto.label}` : 'Enlarged factory photo'}
+        data-testid="dialog-factory-photo"
+        onClose={() => setSelectedPhoto(null)}
+        onClick={(event) => {
+          if (event.target === photoDialogRef.current) setSelectedPhoto(null);
+        }}
+      >
+        {selectedPhoto && (
+          <div className="factory-photo-dialog-content">
+            <button
+              className="factory-photo-dialog-close"
+              type="button"
+              aria-label="Close enlarged photo"
+              data-testid="button-close-factory-photo"
+              autoFocus
+              onClick={() => setSelectedPhoto(null)}
+            >
+              <X size={21} aria-hidden="true" />
+            </button>
+            <img
+              src={getFactoryImageUrl(selectedPhoto.url, selectedPhoto.width)}
+              alt={selectedPhoto.alt}
+              width={selectedPhoto.width}
+              height={selectedPhoto.height}
+              decoding="async"
+            />
+            <p>{selectedPhoto.label}</p>
+          </div>
+        )}
+      </dialog>
     </main>
   );
 }
