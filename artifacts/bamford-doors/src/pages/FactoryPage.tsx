@@ -42,8 +42,8 @@ const factoryImages = [
   };
 });
 
-const featuredImageNumbers = new Set([15, 16]);
-const factoryGalleryImages = factoryImages.filter((image) => !featuredImageNumbers.has(image.number));
+const hiddenFromFactoryGalleryNumbers = new Set([7, 8, 15, 16]);
+const factoryGalleryImages = factoryImages.filter((image) => !hiddenFromFactoryGalleryNumbers.has(image.number));
 const factoryImageWidths = [320, 480, 640, 800, 960, 1200, 1440, 1600, 1920];
 
 function getFactoryImageUrl(url: string, width: number) {
