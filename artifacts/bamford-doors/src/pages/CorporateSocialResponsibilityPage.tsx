@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'wouter';
 import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import './corporate-social-responsibility.css';
@@ -56,6 +56,164 @@ const sections = [
   },
 ];
 
+const csrPhotos = [
+  {
+    image: 'community-garden-seating.webp',
+    alt: 'Raised wooden planters and seating built in a community garden.',
+    caption: 'A more welcoming community garden',
+  },
+  {
+    image: 'garden-volunteers-at-work.webp',
+    alt: 'Bamford colleagues assembling raised planters and arranging plants in a garden.',
+    caption: 'Colleagues helping build the garden',
+  },
+  {
+    image: 'christmas-toy-appeal.webp',
+    alt: 'Bamford colleagues with donated toys and Christmas gifts.',
+    caption: 'The annual Christmas toy appeal',
+  },
+  {
+    image: 'community-garden-team.webp',
+    alt: 'Bamford colleagues and local residents gathered in the completed community garden.',
+    caption: 'Working together in the garden',
+  },
+  {
+    image: 'girlguiding-leadership.webp',
+    alt: 'A Girlguiding leadership achievement celebrated with a certificate and badge.',
+    caption: 'Supporting young leaders',
+  },
+  {
+    image: 'community-garden-volunteers.webp',
+    alt: 'A Bamford colleague and community volunteers in a garden with new seating and planting.',
+    caption: 'A community garden project',
+  },
+  {
+    image: 'local-pantry-support.webp',
+    alt: 'A local pantry volunteer beside donated groceries and a bicycle.',
+    caption: 'Support for a local pantry',
+  },
+  {
+    image: 'pantry-christmas-donations.webp',
+    alt: 'Colleagues presenting Christmas food and gifts at a local pantry.',
+    caption: 'Sharing Christmas donations',
+  },
+  {
+    image: 'young-people-awards.webp',
+    alt: 'Young people and local employers recognised at an awards event.',
+    caption: 'Recognising young people',
+  },
+  {
+    image: 'neighbourhood-clean-up.webp',
+    alt: 'Bamford colleagues in high-visibility vests taking part in a neighbourhood clean-up.',
+    caption: 'A neighbourhood clean-up',
+  },
+  {
+    image: 'volunteer-litter-pick.webp',
+    alt: 'Colleagues collecting litter along a path beside a green fence.',
+    caption: 'Keeping shared spaces tidy',
+  },
+  {
+    image: 'community-clean-up-team.webp',
+    alt: 'Bamford volunteers gathering litter and clearing leaves from shared outdoor spaces.',
+    caption: 'Volunteers out in the community',
+  },
+  {
+    image: 'community-clean-up-collage.webp',
+    alt: 'A collage of colleagues collecting litter during a community clean-up.',
+    caption: 'A team effort outdoors',
+  },
+  {
+    image: 'volunteer-street-clean-up.webp',
+    alt: 'Volunteers collecting litter along a roadside and footpath.',
+    caption: 'Caring for local streets',
+  },
+  {
+    image: 'flintshire-toy-donations.webp',
+    alt: 'Bamford colleagues delivering Christmas toys and gifts in Flintshire.',
+    caption: 'Christmas donations in Flintshire',
+  },
+  {
+    image: 'fresh-start-award.webp',
+    alt: 'Two colleagues celebrating a Fresh Start award.',
+    caption: 'Celebrating community partners',
+  },
+  {
+    image: 'making-a-difference-award.webp',
+    alt: 'Kathy Smart and Alexis Smith holding a Making a Difference award.',
+    caption: 'Making a Difference award',
+  },
+  {
+    image: 'competition-bench-plaque.webp',
+    alt: 'An engraved Bamford Doors competition plaque fixed to a new wooden garden bench.',
+    caption: 'Spring is in the Air competition',
+  },
+  {
+    image: 'wellspring-christmas-donation.webp',
+    alt: 'Bamford colleagues delivering backpacks outside the decorated entrance to The Wellspring.',
+    caption: 'Backpack donation at The Wellspring',
+  },
+  {
+    image: 'sanctuary-toy-appeal.webp',
+    alt: 'Sanctuary staff and Bamford colleagues with donated toys beneath a Christmas tree.',
+    caption: 'A Christmas toy appeal at Sanctuary',
+  },
+  {
+    image: 'community-defibrillator-support.webp',
+    alt: 'A community representative and Bamford colleague beside a public defibrillator.',
+    caption: 'Supporting community defibrillators',
+  },
+  {
+    image: 'clothing-donation.webp',
+    alt: 'Bamford colleagues and a community partner beside donated clothing.',
+    caption: 'Clothing donation',
+  },
+  {
+    image: 'winter-community-donation.webp',
+    alt: 'Volunteers in high-visibility vests sharing winter essentials at a community stall.',
+    caption: 'Winter support in the community',
+  },
+  {
+    image: 'christmas-toy-donation-display.webp',
+    alt: 'A close-up of toys and gifts collected for a Christmas donation.',
+    caption: 'Gifts for the Christmas appeal',
+  },
+  {
+    image: 'toy-appeal-community-team.webp',
+    alt: 'Community partners and Bamford colleagues with a large collection of donated toys.',
+    caption: 'The toy appeal brings people together',
+  },
+  {
+    image: 'christmas-toy-donation-team.webp',
+    alt: 'Volunteers standing behind a display of donated toys for families.',
+    caption: 'A generous community collection',
+  },
+  {
+    image: 'community-toy-donation.webp',
+    alt: 'Local partners sorting boxes and bags of donated toys.',
+    caption: 'Preparing gifts for local families',
+  },
+  {
+    image: 'team-christmas-toy-donations.webp',
+    alt: 'Bamford colleagues and community volunteers with Christmas gifts and toys.',
+    caption: 'Colleagues supporting the toy appeal',
+  },
+  {
+    image: 'toy-donation-volunteers.webp',
+    alt: 'A group of volunteers behind a table of donated toys.',
+    caption: 'Volunteers make the appeal possible',
+  },
+  {
+    image: 'wellspring-backpack-donation.webp',
+    alt: 'The Wellspring team with donated backpacks and a Bamford colleague.',
+    caption: 'Backpacks for The Wellspring',
+  },
+  {
+    image: 'christmas-donation-gifts.webp',
+    alt: 'Red Christmas gift boxes filled with donated toys and games.',
+    caption: 'Christmas gifts ready to share',
+  },
+];
+
 function DirectVideoPlayer({ video, testId }: { video: typeof videos.general; testId: string }) {
   const [failed, setFailed] = useState(false);
   return (
@@ -84,6 +242,12 @@ function DirectVideoPlayer({ video, testId }: { video: typeof videos.general; te
 }
 
 export function CorporateSocialResponsibilityPage() {
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const scrollGallery = (direction: -1 | 1) => {
+    const gallery = galleryRef.current;
+    if (gallery) gallery.scrollBy({ left: direction * gallery.clientWidth * 0.78, behavior: 'auto' });
+  };
+
   return (
     <main className="csr-page">
       <section className="csr-hero">
@@ -146,6 +310,61 @@ export function CorporateSocialResponsibilityPage() {
             <p>Watch the video from our Defib Giveaway in Nottingham.</p>
           </div>
           <DirectVideoPlayer video={videos.defib} testId="defib-nottingham" />
+        </div>
+      </section>
+      <section className="csr-gallery" aria-labelledby="csr-gallery-heading">
+        <div className="wrap">
+          <div className="csr-gallery-head">
+            <div>
+              <p className="eyebrow">People · projects · partnerships</p>
+              <h2 id="csr-gallery-heading">A closer look at our community work.</h2>
+              <p className="csr-gallery-intro">A few moments from the causes, colleagues and local partnerships we’re proud to support.</p>
+            </div>
+            <div className="csr-gallery-controls" aria-label="Gallery controls">
+              <button
+                type="button"
+                aria-label="Scroll to earlier photos"
+                data-testid="button-csr-gallery-previous"
+                onClick={() => scrollGallery(-1)}
+              >
+                <ChevronLeft size={18} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                aria-label="Scroll to later photos"
+                data-testid="button-csr-gallery-next"
+                onClick={() => scrollGallery(1)}
+              >
+                <ChevronRight size={18} aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+          <div
+            className="csr-gallery-track"
+            ref={galleryRef}
+            role="region"
+            aria-label="Scrollable gallery of Bamford community projects"
+            tabIndex={0}
+            data-testid="gallery-csr-photos"
+          >
+            {csrPhotos.map((photo, index) => (
+              <figure className="csr-gallery-card" key={photo.image} data-testid={`card-csr-photo-${index + 1}`}>
+                <div className="csr-gallery-image">
+                  <img
+                    src={`${import.meta.env.BASE_URL}media/csr-gallery/${photo.image}`}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption>
+                  <span>{String(index + 1).padStart(2, '0')} / {String(csrPhotos.length).padStart(2, '0')}</span>
+                  <strong>{photo.caption}</strong>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="csr-gallery-hint">Scroll or swipe to explore all {csrPhotos.length} photos</p>
         </div>
       </section>
       <section className="csr-closing">
