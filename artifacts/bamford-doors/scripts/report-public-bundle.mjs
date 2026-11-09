@@ -15,6 +15,8 @@ const gzipBudgets = {
 const styleBudgets = {
   cssGzip: 65_000,
   fontBytes: 125_000,
+  latinFontBytes: 50_000,
+  latinExtFontBytes: 75_000,
 };
 const manifest = JSON.parse(await readFile(path.join(output, '.vite/manifest.json'), 'utf8'));
 const entry = Object.keys(manifest).find((key) => manifest[key].isEntry);
@@ -89,7 +91,10 @@ async function stylesFor(keys) {
       const localPath = url.startsWith('/')
         ? path.join(output, url.slice(1).split(/[?#]/)[0])
         : path.resolve(output, path.dirname(file), url.split(/[?#]/)[0]);
-      fontResources.set(path.relative(output, localPath), async () => readFile(localPath));
+      fontResources.set(path.relative(output, localPath), {
+        subset: 'local',
+        load: async () => readFile(localPath),
+      });
     }
   }
 
@@ -116,7 +121,10 @@ async function stylesFor(keys) {
       if (hasSubsetLabels && !['latin', 'latin-ext'].includes(subset?.trim().toLowerCase())) continue;
       for (const fontUrl of referencedUrls(face, /url\(\s*(['"]?)(.*?)\1\s*\)/gi)) {
         if (fontFilePattern.test(fontUrl)) {
-          fontResources.set(fontUrl, () => fetchRemote(fontUrl, fontAssetCache));
+          fontResources.set(fontUrl, {
+            subset: subset?.trim().toLowerCase() || 'unlabelled',
+            load: () => fetchRemote(fontUrl, fontAssetCache),
+          });
         }
       }
     }
@@ -134,10 +142,11 @@ async function stylesFor(keys) {
   }
 
   const fontAssets = [];
-  for (const [file, load] of fontResources) {
-    const buffer = await load();
+  for (const [file, resource] of fontResources) {
+    const buffer = await resource.load();
     fontAssets.push({
       file,
+      subset: resource.subset,
       bytes: buffer.length,
       // WOFF/WOFF2 are already compressed; use their actual payload size.
       gzip: gzipSync(buffer).length,
@@ -151,12 +160,18 @@ async function stylesFor(keys) {
   }), { bytes: 0, gzip: 0, brotli: 0 });
   const cssTotal = sum([...cssAssets, ...externalStylesheets]);
   const fontTotal = sum(fontAssets);
+  const fontTotalsBySubset = Object.fromEntries(
+    [...new Set(fontAssets.map(({ subset }) => subset))]
+      .sort()
+      .map((subset) => [subset, sum(fontAssets.filter((asset) => asset.subset === subset))]),
+  );
   return {
     cssAssets,
     externalStylesheets,
     cssTotal,
     fontAssets,
     fontTotal,
+    fontTotalsBySubset,
   };
 }
 
@@ -244,7 +259,7 @@ const report = {
   cmsDetailIncludingInitial: await transferFor([entry, detail, ...cmsReader]),
   originalSourceCharacters: Object.fromEntries([...sourceCharacters].sort((a, b) => b[1] - a[1])),
   publicStyles: {
-    note: 'Stylesheet totals include reachable emitted CSS and imported external CSS. Font totals count unique Latin and Latin-ext font payloads required by the English public pages; WOFF/WOFF2 are already compressed and are measured by their delivered file bytes.',
+    note: 'Stylesheet totals include reachable emitted CSS and imported external CSS. Font totals include unique Latin and Latin-ext font payloads; the Latin-ext subset is conditional on page text using characters outside the Latin subset Unicode ranges. WOFF/WOFF2 are already compressed and are measured by their delivered file bytes.',
     budgets: styleBudgets,
     groups: publicStyleGroups,
   },
@@ -263,6 +278,16 @@ for (const [group, styles] of Object.entries(publicStyleGroups)) {
   budgetChecks.push(
     { name: `${label} CSS`, actual: styles.cssTotal.gzip, limit: styleBudgets.cssGzip },
     { name: `${label} fonts`, actual: styles.fontTotal.bytes, limit: styleBudgets.fontBytes },
+    {
+      name: `${label} Latin fonts`,
+      actual: styles.fontTotalsBySubset.latin?.bytes || 0,
+      limit: styleBudgets.latinFontBytes,
+    },
+    {
+      name: `${label} Latin-ext fonts`,
+      actual: styles.fontTotalsBySubset['latin-ext']?.bytes || 0,
+      limit: styleBudgets.latinExtFontBytes,
+    },
   );
 }
 report.transferBudgetChecks = budgetChecks.map(({ name, actual, limit }) => ({

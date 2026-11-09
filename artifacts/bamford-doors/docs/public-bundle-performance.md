@@ -99,32 +99,50 @@ counts each reachable emitted stylesheet once, follows external CSS `@import`s,
 and measures font files referenced by `@font-face`. The imported Montserrat
 stylesheet is fetched using a fixed modern Chrome user agent; if the CDN cannot
 be reached or an asset fails to load, the analysis exits with an error instead
-of silently omitting it.
+of silently omitting it. Font bytes are reported by subset as well as in total:
+the Latin subset is used by the current English public copy, while Latin-ext is
+requested only when rendered text includes characters outside the Latin
+subset's Unicode ranges.
 
 Current measurements (November 6, 2026):
 
-| Public route graph | CSS gzip | Font payload |
-| --- | ---: | ---: |
-| Initial public pages | 52.06 kB | 108.64 kB |
-| CMS listing including initial graph | 52.06 kB | 108.64 kB |
-| CMS case-study detail including initial graph | 52.06 kB | 108.64 kB |
+| Public route graph | CSS gzip | Latin subset | Conditional Latin-ext | Combined font ceiling |
+| --- | ---: | ---: | ---: | ---: |
+| Initial public pages | 55.46 kB | 37.96 kB | 70.69 kB | 125 kB |
+| CMS listing including initial graph | 55.46 kB | 37.96 kB | 70.69 kB | 125 kB |
+| CMS case-study detail including initial graph | 55.46 kB | 37.96 kB | 70.69 kB | 125 kB |
 
-The CSS measurement includes the emitted stylesheet (51.40 kB gzip) and the
-imported Google Fonts stylesheet (0.66 kB gzip). The font measurement sums the
-unique Latin and Latin-ext Montserrat WOFF2 files, which cover the English
-public pages and accented Latin text. It is the sum of their delivered WOFF2
-file bytes; WOFF2 is already compressed, so it is not meaningfully reduced by
-gzip.
+The CSS measurement includes the emitted stylesheet (54.92 kB gzip) and the
+imported Google Fonts stylesheet (0.55 kB gzip). Switching the request to the
+Montserrat variable range (`400..800`) reduced the imported stylesheet from
+0.66 kB to 0.55 kB gzip. It did not reduce the font files: Google Fonts serves
+the same two variable WOFF2 files for the previous five-weight request and the
+variable-range request (108,644 bytes total). Each file contains the full
+variable weight axis, so requesting five separate weights does not create five
+unique font downloads. The public styles explicitly use all five weights:
+400, 500, 600, 700, and 800.
+
+The Latin file is 37,956 bytes and the Latin-ext file is 70,688 bytes. The
+browser's `unicode-range` rules make Latin-ext conditional rather than part of
+every English first visit. The source copy and current published Sanity news
+and case-study text contain no characters beyond Latin-1, so the normal page
+path needs only the 37,956-byte Latin subset. Latin-ext remains available for
+future CMS or page copy using additional Latin characters; removing it would
+change those glyphs to the fallback font. The combined 108,644-byte total is
+therefore a conservative worst case, not the expected download for current
+English-only copy.
 
 Each public route graph has these ceilings:
 
 | Asset group | Measured | Maximum |
 | --- | ---: | ---: |
-| CSS and imported stylesheets (gzip) | 52.06 kB | 65 kB |
-| Latin and Latin-ext font payloads (WOFF2) | 108.64 kB | 125 kB |
+| CSS and imported stylesheets (gzip) | 55.46 kB | 65 kB |
+| Latin subset (WOFF2) | 37.96 kB | 50 kB |
+| Conditional Latin-ext subset (WOFF2) | 70.69 kB | 75 kB |
+| Combined worst-case font payload (WOFF2) | 108.64 kB | 125 kB |
 
-The analyzer reports the CSS and font totals and each asset URL/file in
-`generated-artifacts/bundle-analysis/after.json`. If either ceiling is exceeded,
+The analyzer reports the CSS and font totals by subset and each asset URL/file
+in `generated-artifacts/bundle-analysis/after.json`. If any ceiling is exceeded,
 the command exits unsuccessfully and names the route graph and asset group,
 measured size, and limit.
 
