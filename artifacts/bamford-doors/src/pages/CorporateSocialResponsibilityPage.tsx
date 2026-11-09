@@ -212,6 +212,76 @@ const csrPhotos = [
     alt: 'Red Christmas gift boxes filled with donated toys and games.',
     caption: 'Christmas gifts ready to share',
   },
+  {
+    image: 'breast-cancer-tea-fundraiser.webp',
+    alt: 'A table of cakes and sweet treats at a Breast Cancer Now tea fundraiser.',
+    caption: 'Tea and treats for a good cause',
+  },
+  {
+    image: 'community-garden-cleanup.webp',
+    alt: 'A colleague pressure-washing paving in a shared community garden.',
+    caption: 'Preparing a community garden',
+  },
+  {
+    image: 'time-for-a-cuppa-bake-sale.webp',
+    alt: 'Homemade cakes and baked goods at a Bamford Doors Time for a Cuppa fundraiser.',
+    caption: 'Time for a Cuppa bake sale',
+  },
+  {
+    image: 'toy-donation-team-at-bamford.webp',
+    alt: 'A Bamford colleague and community partner with a bag of donated toys.',
+    caption: 'A toy donation for local families',
+  },
+  {
+    image: 'eem-food-bank-donation.webp',
+    alt: 'Food and household essentials arranged for an EEM food bank donation.',
+    caption: 'Supporting the EEM food bank',
+  },
+  {
+    image: 'stockport-pantry-christmas-boxes.webp',
+    alt: 'Stockport Pantry volunteers with boxes of Christmas food donations.',
+    caption: 'Christmas support for Stockport Pantry',
+  },
+  {
+    image: 'breast-cancer-now-bake-off.webp',
+    alt: 'A decorated bake-off table with cakes and treats for Breast Cancer Now.',
+    caption: 'A community bake-off fundraiser',
+  },
+  {
+    image: 'wellspring-hats-gloves-donation.webp',
+    alt: 'A Bamford colleague and Wellspring representative outside the decorated entrance.',
+    caption: 'Hats and gloves for The Wellspring',
+  },
+  {
+    image: 'community-bench-project.webp',
+    alt: 'A completed wooden community bench with a Bamford Doors competition plaque.',
+    caption: 'A bench for the community',
+  },
+  {
+    image: 'christmas-toy-donation-handover.webp',
+    alt: 'Two colleagues beside a large collection of donated Christmas toys.',
+    caption: 'Christmas toy donation handover',
+  },
+  {
+    image: '10-days-christmas-giving.webp',
+    alt: 'A collage celebrating Bamford Doors’ 10 Days of Christmas Giving campaign.',
+    caption: '10 Days of Christmas Giving',
+  },
+  {
+    image: 'pudsey-bamford-stand.webp',
+    alt: 'Pudsey Bear visiting the Bamford Doors exhibition stand.',
+    caption: 'Pudsey visits the Bamford stand',
+  },
+  {
+    image: 'christmas-toy-donations-stall.webp',
+    alt: 'A large display of Christmas toys and gifts ready for donation.',
+    caption: 'A collection of gifts for children',
+  },
+  {
+    image: 'coffee-morning-fundraiser-collage.webp',
+    alt: 'A collage of cakes and decorations from a World’s Biggest Coffee Morning fundraiser.',
+    caption: 'World’s Biggest Coffee Morning',
+  },
 ];
 
 function DirectVideoPlayer({ video, testId }: { video: typeof videos.general; testId: string }) {
