@@ -30,6 +30,15 @@ const clients = [
   ['wiltshire-council', 'Wiltshire Council'],
   ['exeter-city-council', 'Exeter City Council'],
   ['livewest', 'LiveWest'],
+  ['bron-afon', 'Bron Afon'],
+  ['taff', 'Taff'],
+  ['codi', 'Codi'],
+  ['hafod', 'Hafod'],
+  ['trivallis', 'Trivallis'],
+  ['wales-and-west-housing', 'Wales & West Housing'],
+  ['cardiff-community-housing', 'Cardiff Community Housing Association'],
+  ['caerphilly', 'Caerphilly County Borough Council'],
+  ['hedyn', 'Hedyn'],
 ] as const;
 
 const pad = (n: number) => String(n).padStart(2, '0');
