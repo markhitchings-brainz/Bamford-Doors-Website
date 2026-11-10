@@ -8,6 +8,7 @@ import './aluminium-modular-doors.css';
 const media = '/media/aluminium-modular/';
 
 const types = ['1000', '1100', '1110', '1111', '2000', '2200', '2220', '2222', '2100', '2210', '3000', '3300', '3100', '4000', '4400', '4100'];
+const colorVisualizerTypes = new Set(['2100', '4400']);
 const installedExamples: Partial<Record<string, { src: string; alt: string; description: string }>> = {
   '4100': {
     src: `${media}designs/type-4100-installed-example.webp`,
@@ -23,13 +24,13 @@ const doorDesigns = types.map((code, index) => ({
 }));
 
 const finishes = [
-  { code: 'RAL 5005', name: 'Signal blue', color: '#174889', image: `${media}colour-visualiser/type-2100-ral-5005.jpg` },
-  { code: 'RAL 6005', name: 'Moss green', color: '#114232', image: `${media}colour-visualiser/type-2100-ral-6005.jpg` },
-  { code: 'RAL 3003', name: 'Ruby red', color: '#8d1b27', image: `${media}colour-visualiser/type-2100-ral-3003.jpg` },
-  { code: 'RAL 7016', name: 'Anthracite grey', color: '#383e42', image: `${media}colour-visualiser/type-2100-ral-7016.jpg` },
-  { code: 'RAL 8016', name: 'Mahogany brown', color: '#4b2c25', image: `${media}colour-visualiser/type-2100-ral-8016.jpg` },
-  { code: 'RAL 9010', name: 'Pure white', color: '#f1eee5', image: `${media}colour-visualiser/type-2100-ral-9010.jpg` },
-  { code: 'RAL 9011', name: 'Graphite black', color: '#202326', image: `${media}colour-visualiser/type-2100-ral-9011.jpg` },
+  { code: 'RAL 5005', name: 'Signal blue', color: '#174889' },
+  { code: 'RAL 6005', name: 'Moss green', color: '#114232' },
+  { code: 'RAL 3003', name: 'Ruby red', color: '#8d1b27' },
+  { code: 'RAL 7016', name: 'Anthracite grey', color: '#383e42' },
+  { code: 'RAL 8016', name: 'Mahogany brown', color: '#4b2c25' },
+  { code: 'RAL 9010', name: 'Pure white', color: '#f1eee5' },
+  { code: 'RAL 9011', name: 'Graphite black', color: '#202326' },
 ];
 
 const features = [
@@ -52,11 +53,14 @@ export function AluminiumModularDoorsPage() {
   const [selectedDesignIndex, setSelectedDesignIndex] = useState(0);
   const [designViewerOpen, setDesignViewerOpen] = useState(false);
   const [showInstalledExample, setShowInstalledExample] = useState(false);
-  const [selectedFinishCode, setSelectedFinishCode] = useState('RAL 6005');
+  const [selectedFinishCode, setSelectedFinishCode] = useState<string | null>(null);
   const designDialogRef = useRef<HTMLDialogElement>(null);
   const selectedDesign = doorDesigns[selectedDesignIndex];
-  const selectedFinish = finishes.find(finish => finish.code === selectedFinishCode) ?? finishes[0];
-  const isColorVisualizer = selectedDesign.code === '2100';
+  const selectedFinish = selectedFinishCode ? finishes.find(finish => finish.code === selectedFinishCode) ?? null : null;
+  const selectedFinishImage = selectedFinish
+    ? `${media}colour-visualiser/type-${selectedDesign.code}-${selectedFinish.code.toLowerCase().replace(' ', '-')}.jpg`
+    : selectedDesign.src;
+  const isColorVisualizer = colorVisualizerTypes.has(selectedDesign.code);
   const showingInstalledExample = Boolean(selectedDesign.example && showInstalledExample);
 
   useEffect(() => {
@@ -69,11 +73,13 @@ export function AluminiumModularDoorsPage() {
   const openDesign = (index: number) => {
     setSelectedDesignIndex(index);
     setShowInstalledExample(false);
+    setSelectedFinishCode(null);
     setDesignViewerOpen(true);
   };
 
   const moveDesign = (direction: -1 | 1) => {
     setShowInstalledExample(false);
+    setSelectedFinishCode(null);
     setSelectedDesignIndex(current => (current + direction + doorDesigns.length) % doorDesigns.length);
   };
 
@@ -151,7 +157,7 @@ export function AluminiumModularDoorsPage() {
                 <button
                   type="button"
                   className={`amd-design-card${selectedDesignIndex === design.index ? ' is-selected' : ''}`}
-                  aria-label={design.code === '2100' ? 'Open Type 2100 colour visualiser' : `View a larger drawing of modular door Type ${design.code}`}
+                  aria-label={colorVisualizerTypes.has(design.code) ? `Open Type ${design.code} colour visualiser` : `View a larger drawing of modular door Type ${design.code}`}
                   aria-haspopup="dialog"
                   aria-pressed={selectedDesignIndex === design.index}
                   data-testid={`button-amd-type-${design.code}`}
@@ -184,11 +190,13 @@ export function AluminiumModularDoorsPage() {
               <figure className={`amd-design-dialog-visual${isColorVisualizer ? ' is-color-visualizer' : ''}`}>
                 {isColorVisualizer ? (
                   <img
-                    src={selectedFinish.image}
-                    alt={`Artistic colour mock-up of Type 2100 aluminium entrance in ${selectedFinish.code} ${selectedFinish.name}`}
-                    width="1086"
-                    height="1448"
-                    data-testid="image-amd-type-2100-color-preview"
+                    src={selectedFinishImage}
+                    alt={selectedFinish
+                      ? `Artistic colour mock-up of Type ${selectedDesign.code} aluminium entrance in ${selectedFinish.code} ${selectedFinish.name}`
+                      : `Front elevation drawing of aluminium modular door Type ${selectedDesign.code}`}
+                    width={selectedFinish ? selectedDesign.code === '2100' ? 1086 : 1104 : 300}
+                    height={selectedFinish ? selectedDesign.code === '2100' ? 1448 : 1425 : 500}
+                    data-testid={`image-amd-type-${selectedDesign.code}-color-preview`}
                   />
                 ) : selectedDesign.example ? (
                   <button
@@ -225,26 +233,38 @@ export function AluminiumModularDoorsPage() {
                 <div className={`amd-design-dialog-description${isColorVisualizer ? ' is-color-visualizer-copy' : ''}`}>
                   {isColorVisualizer ? (
                     <>
-                      <p className="amd-visualizer-intro">Choose from seven RAL colours to compare the Type 2100 entrance.</p>
-                      <div className="amd-visualizer-options" role="group" aria-label="Choose a Type 2100 RAL colour">
+                      <p className="amd-visualizer-intro">Choose a door sketch or one of seven RAL colours to compare the Type {selectedDesign.code} entrance.</p>
+                      <div className="amd-visualizer-options" role="group" aria-label={`Choose a Type ${selectedDesign.code} view or RAL colour`}>
+                        <button
+                          type="button"
+                          className={`amd-visualizer-option${selectedFinish === null ? ' is-selected' : ''}`}
+                          aria-label={`Show Type ${selectedDesign.code} door sketch`}
+                          aria-pressed={selectedFinish === null}
+                          data-testid={`button-amd-visualizer-sketch-${selectedDesign.code}`}
+                          onClick={() => setSelectedFinishCode(null)}
+                        >
+                          <span className="amd-visualizer-sketch-icon"><ScanLine size={15} aria-hidden="true" /></span>
+                          <span className="amd-visualizer-option-label"><strong>Door sketch</strong><small>Original design</small></span>
+                          {selectedFinish === null && <Check size={15} aria-hidden="true" />}
+                        </button>
                         {finishes.map(finish => (
                           <button
                             key={finish.code}
                             type="button"
-                            className={`amd-visualizer-option${selectedFinish.code === finish.code ? ' is-selected' : ''}`}
-                            aria-label={`Show Type 2100 in ${finish.code} ${finish.name}`}
-                            aria-pressed={selectedFinish.code === finish.code}
+                            className={`amd-visualizer-option${selectedFinishCode === finish.code ? ' is-selected' : ''}`}
+                            aria-label={`Show Type ${selectedDesign.code} in ${finish.code} ${finish.name}`}
+                            aria-pressed={selectedFinishCode === finish.code}
                             data-testid={`button-amd-visualizer-${finish.code.toLowerCase().replace(' ', '-')}`}
                             onClick={() => setSelectedFinishCode(finish.code)}
                           >
                             <span className="amd-visualizer-swatch" style={{ backgroundColor: finish.color }} aria-hidden="true" />
                             <span className="amd-visualizer-option-label"><strong>{finish.code}</strong><small>{finish.name}</small></span>
-                            {selectedFinish.code === finish.code && <Check size={15} aria-hidden="true" />}
+                            {selectedFinishCode === finish.code && <Check size={15} aria-hidden="true" />}
                           </button>
                         ))}
                       </div>
                       <p className="amd-visualizer-note">
-                        This is an artistic mock-up to help with colour decisions, not a guaranteed colour match. Screen settings and lighting can affect appearance; confirm the final finish with Bamford.
+                        Colour previews are artistic mock-ups to help with colour decisions, not guaranteed colour matches. Screen settings and lighting can affect appearance; confirm the final finish with Bamford.
                       </p>
                     </>
                   ) : showingInstalledExample ? (
