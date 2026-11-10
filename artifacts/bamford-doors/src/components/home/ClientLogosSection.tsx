@@ -50,6 +50,10 @@ const clients = [
   ['vico-homes', 'Vico Homes'],
   ['together-housing', 'Together Housing'],
   ['lincoln-city-council', 'City of Lincoln Council'],
+  ['jigsaw', 'Jigsaw Homes'],
+  ['stockport-homes', 'Stockport Homes'],
+  ['progress-housing-group', 'Progress Housing Group'],
+  ['bolton-at-home', 'Bolton at Home'],
 ] as const;
 
 const pad = (n: number) => String(n).padStart(2, '0');
