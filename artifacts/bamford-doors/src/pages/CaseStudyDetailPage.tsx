@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Expand, RotateCw, X } from 'lucide-react';
 import { Link } from 'wouter';
+import { CookieSettingsButton, useCookieConsent } from '@/components/CookieConsent';
 import { applyPageSeo } from '@/lib/seo';
 import { fetchPublishedCaseStudy, type CaseStudy } from '@/sanity/client';
 import { getCaseStudyVideoEmbed } from '@/sanity/caseStudyVideo';
@@ -18,6 +19,7 @@ type State =
 type GalleryImage = { _key: string; url: string; alt?: string; caption?: string };
 
 export function CaseStudyDetailPage({ slug }: { slug: string }) {
+  const { externalMediaAllowed } = useCookieConsent();
   const [state, setState] = useState<State>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const retry = useCallback(() => setAttempt((a) => a + 1), []);
@@ -153,15 +155,25 @@ export function CaseStudyDetailPage({ slug }: { slug: string }) {
             <p>Watch this project video on {video.provider}.</p>
           </div>
           <div className="cs-video-frame">
-            <iframe
-              src={video.src}
-              title={`${item.title} project video on ${video.provider}`}
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              data-testid="embed-cs-video"
-            />
+            {externalMediaAllowed ? (
+              <iframe
+                src={video.src}
+                title={`${item.title} project video on ${video.provider}`}
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                data-testid="embed-cs-video"
+              />
+            ) : (
+              <div className="cookie-media-blocked">
+                <p>
+                  This video is hosted by {video.provider}. Allow external
+                  media to load it.
+                </p>
+                <CookieSettingsButton>Review cookie preferences</CookieSettingsButton>
+              </div>
+            )}
           </div>
         </section>
       )}

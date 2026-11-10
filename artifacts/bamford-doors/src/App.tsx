@@ -7,6 +7,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import { EditablePageHeadline, PageHeadlinesProvider } from '@/components/EditablePageHeadline';
 import { applyPageSeo, type PageSeo } from '@/lib/seo';
+import { CookieConsentProvider, CookieSettingsButton } from '@/components/CookieConsent';
 import { ReferenceLedHome } from '@/components/home/ReferenceLedHome';
 import { AccreditationsPage } from '@/pages/AccreditationsPage';
 import { OurHistoryPage } from '@/pages/OurHistoryPage';
@@ -29,6 +30,7 @@ import { HmoEntranceDoorsPage } from '@/pages/HmoEntranceDoorsPage';
 import { GrpDoorsPage } from '@/pages/GrpDoorsPage';
 import { AutomaticOperatorsPage } from '@/pages/AutomaticOperatorsPage';
 import { SecurityDoorForcedEntryTestPage } from '@/pages/SecurityDoorForcedEntryTestPage';
+import { CookiePolicyPage, PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage';
 import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
 import { AboutOverviewPage } from '@/pages/AboutOverviewPage';
 import { SectorsOverviewPage } from '@/pages/SectorsOverviewPage';
@@ -169,7 +171,7 @@ function Header() {
 }
 
 function Footer() {
-  return <footer className="footer"><div className="wrap"><div className="footer-grid"><div><img className="footer-logo" src="/media/bamford-doors-footer-logo.png" alt="Bamford Doors" /><p>Custom-made security doors and screens for public and commercial buildings.</p></div><div><h3>Explore</h3>{navItems.slice(0,4).map(([label,path])=><Link key={path} href={path}>{label}</Link>)}<Link href="/news-insights">News &amp; insights</Link></div><div><h3>About</h3><Link href="/about">About Bamford</Link><Link href="/faq">Frequently asked questions</Link><Link href="/downloads">Documents and downloads</Link></div><div><h3>Start a conversation</h3><p>Tell us what your building needs.</p><Link href="/contact">Contact Bamford <ArrowRight size={13}/></Link></div></div><div className="footer-bottom"><span>© Bamford Doors</span><span>Door and entrance systems for buildings across the UK</span></div></div></footer>;
+  return <footer className="footer"><div className="wrap"><div className="footer-grid"><div><img className="footer-logo" src="/media/bamford-doors-footer-logo.png" alt="Bamford Doors" /><p>Custom-made security doors and screens for public and commercial buildings.</p></div><div><h3>Explore</h3>{navItems.slice(0,4).map(([label,path])=><Link key={path} href={path}>{label}</Link>)}<Link href="/news-insights">News &amp; insights</Link></div><div><h3>About</h3><Link href="/about">About Bamford</Link><Link href="/faq">Frequently asked questions</Link><Link href="/downloads">Documents and downloads</Link><Link href="/privacy-policy">Privacy Policy</Link><Link href="/cookie-policy">Cookie Policy</Link><CookieSettingsButton/></div><div><h3>Start a conversation</h3><p>Tell us what your building needs.</p><Link href="/contact">Contact Bamford <ArrowRight size={13}/></Link></div></div><div className="footer-bottom"><span>© Bamford Doors</span><span>Door and entrance systems for buildings across the UK</span></div></div></footer>;
 }
 
 function Breadcrumbs({items}:{items:{label:string;href?:string}[]}) {
@@ -655,6 +657,8 @@ function RouteContent() {
   if(path==='/case-studies') return <Suspense fallback={<PageHeading eyebrow="Case studies" title="Loading projects…"/>}><CaseStudiesIndexPage/></Suspense>;
   if(path==='/news-insights') return <Suspense fallback={<PageHeading eyebrow="News & insights" title="Loading stories…"/>}><NewsInsightsPage/></Suspense>;
   if(path==='/faq') return <FAQPage/>;
+  if(path==='/privacy-policy') return <PrivacyPolicyPage/>;
+  if(path==='/cookie-policy') return <CookiePolicyPage/>;
   if(path==='/contact'||path==='/contact-us') return <ContactPage/>;
   if(path==='/about'||path==='/about-5') return <AboutOverviewPage pages={aboutOverviewLinks}/>;
   const companyPath=legacyCompanyRoutes[path]||path;
@@ -704,6 +708,8 @@ export function getPageSeo(path:string): PageSeo {
   if(path==='/services') return {title:'Door Project and Maintenance Services',description:'Discuss project management, maintenance, stock condition surveys and entrance-system services with Bamford Doors.',path};
   if(path==='/sectors') return {title:'Sectors We Serve',description:'Explore door and entrance system information for housing, local authorities, education, healthcare and public buildings.',path};
   if(path==='/contact'||path==='/contact-us') return {title:'Contact Bamford Doors',description:'Contact Bamford Doors about a security door, entrance system, project, maintenance requirement or stock condition survey.',path:'/contact',noindex:path==='/contact-us'};
+  if(path==='/privacy-policy') return {title:'Privacy Policy',description:'How F. Bamford (Engineering) Limited handles personal information when you use the Bamford Doors website or contact the team.',path};
+  if(path==='/cookie-policy') return {title:'Cookie Policy',description:'How cookies and similar technologies may be used on the Bamford Doors website.',path};
   if(path==='/case-studies') return {...CASE_STUDIES_SEO,noindex:true};
   if(path==='/news-insights'||path==='/blog'||path==='/blog-2-2'||path==='/more-news') return {title:'News and Insights for Building Teams',description:'Practical starting points for teams planning, maintaining or improving a shared entrance.',path:'/news-insights',noindex:path!=='/news-insights'};
   if(path==='/faq') return {title:'Security Door and Entrance FAQs',description:'Practical answers about security door enquiries, product options and services from Bamford Doors.',path};
@@ -729,6 +735,8 @@ export function getSeoRoutes(): Array<PageSeo & { requestPath: string }> {
     ...Object.keys(companyPages),
     '/news-insights',
     '/faq',
+    '/privacy-policy',
+    '/cookie-policy',
     '/contact',
     '/case-studies',
     '/admin',
@@ -762,6 +770,6 @@ function Router() {
   return <PageHeadlinesProvider pagePath={editableHeadlinePath(path)}><ErrorBoundary resetKey={location}><div className="site-shell"><Header/><Switch><Route component={RouteContent}/></Switch><Footer/></div></ErrorBoundary></PageHeadlinesProvider>;
 }
 function App({ssrPath}:{ssrPath?:string}={}) {
-  return <QueryClientProvider client={queryClient}><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')} ssrPath={ssrPath}><Router/></WouterRouter></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/,'')} ssrPath={ssrPath}><CookieConsentProvider><Router/></CookieConsentProvider></WouterRouter></QueryClientProvider>;
 }
 export default App;

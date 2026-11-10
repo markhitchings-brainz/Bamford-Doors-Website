@@ -60,6 +60,8 @@ try {
     ['/services/stock-condition-surveys/', 'Stock Condition Surveys', 'door entry and access systems'],
     ['/services/warranties/', 'Warranties', 'written terms'],
     ['/sectors/social-housing/', 'Social housing', 'entrance'],
+    ['/privacy-policy/', 'Privacy Policy', 'F. Bamford (Engineering) Limited'],
+    ['/cookie-policy/', 'Cookie Policy', 'Cookies'],
   ];
   for (const [route, heading, copy] of representative) {
     const html = pages.get(route);
@@ -69,6 +71,17 @@ try {
     console.log(`PASS served ${route}: H1, content, links and unique metadata`);
   }
   assert.ok(pages.get('/contact/').includes('data-testid="button-submit-enquiry"'));
+  assert.ok(pages.get('/privacy-policy/'), 'Privacy policy is included in the sitemap');
+  assert.ok(pages.get('/cookie-policy/'), 'Cookie policy is included in the sitemap');
+  assert.ok(pages.get('/privacy-policy/').includes('href="/cookie-policy/"'), 'Privacy policy links to the cookie policy');
+  assert.ok(pages.get('/'), 'Homepage exists');
+  assert.ok(pages.get('/').includes('href="/privacy-policy"'), 'Homepage footer links to the privacy policy');
+  assert.ok(pages.get('/').includes('href="/cookie-policy"'), 'Homepage footer links to the cookie policy');
+  assert.ok(pages.get('/').includes('Cookie settings'), 'Homepage footer can reopen cookie preferences');
+  assert.ok(pages.get('/contact/').includes('href="/privacy-policy"'), 'Internal page footer links to the privacy policy');
+  assert.ok(pages.get('/contact/').includes('href="/cookie-policy"'), 'Internal page footer links to the cookie policy');
+  assert.ok(pages.get('/contact/').includes('Cookie settings'), 'Internal page footer can reopen cookie preferences');
+  assert.ok(pages.get('/cookie-policy/').includes('Open cookie preferences'), 'Cookie policy can open cookie preferences');
   const fallback = await (await fetch(`${origin}/spa.html`)).text();
   assert.ok(fallback.includes('<div id="root"></div>'), 'Fallback must remain client-only');
   const unknownRoute = await (await fetch(`${origin}/not-a-generated-page/`)).text();

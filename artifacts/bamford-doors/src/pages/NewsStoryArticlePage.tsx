@@ -1,5 +1,6 @@
 import { PortableText } from '@portabletext/react';
 import { Link } from 'wouter';
+import { CookieSettingsButton, useCookieConsent } from '@/components/CookieConsent';
 import { getCaseStudyVideoEmbed } from '../sanity/caseStudyVideo';
 import './news-story-article.css';
 
@@ -81,6 +82,7 @@ function imageSrcSet(image: NewsStoryImage, widths: number[]) {
 
 export function NewsStoryArticlePage({ story }: NewsStoryArticlePageProps) {
   const video = getCaseStudyVideoEmbed(story.videoUrl);
+  const { externalMediaAllowed } = useCookieConsent();
   const gallery = (story.gallery || []).filter((image) => image?.url);
 
   return (
@@ -175,14 +177,24 @@ export function NewsStoryArticlePage({ story }: NewsStoryArticlePageProps) {
               <h2 id="news-story-video-title">The story in context</h2>
             </div>
             <div className="news-story-video-frame">
-              <iframe
-                src={video.src}
-                title={`${story.title} — video on ${video.provider}`}
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              {externalMediaAllowed ? (
+                <iframe
+                  src={video.src}
+                  title={`${story.title} — video on ${video.provider}`}
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <div className="cookie-media-blocked">
+                  <p>
+                    This video is hosted by {video.provider}. Allow external
+                    media to load it.
+                  </p>
+                  <CookieSettingsButton>Review cookie preferences</CookieSettingsButton>
+                </div>
+              )}
             </div>
             <p className="news-story-media-caption">Watch this story on {video.provider}.</p>
           </section>
