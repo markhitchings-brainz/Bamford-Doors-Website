@@ -28,6 +28,7 @@ import { WoodEffectDoorsPage } from '@/pages/WoodEffectDoorsPage';
 import { HmoEntranceDoorsPage } from '@/pages/HmoEntranceDoorsPage';
 import { GrpDoorsPage } from '@/pages/GrpDoorsPage';
 import { AutomaticOperatorsPage } from '@/pages/AutomaticOperatorsPage';
+import { ForcedEntryDemonstrationPage } from '@/pages/ForcedEntryDemonstrationPage';
 import { DetailSkeleton } from '@/pages/case-studies/DetailSkeleton';
 import { AboutOverviewPage } from '@/pages/AboutOverviewPage';
 import { SectorsOverviewPage } from '@/pages/SectorsOverviewPage';
@@ -202,7 +203,7 @@ function ProductCard({product,imageOverride}:{product:Product;imageOverride?:str
 }
 
 function ProductIndex() {
-  return <><PageHeading eyebrow="Products" title={"Aluminium Modular\nSecurity Doors"} lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p} imageOverride={p.slug==='thermally-broken-doors'?'/media/thermal-door-card.webp':undefined}/>)}</div></div></section><CTA/></>;
+  return <><PageHeading eyebrow="Products" title={"Aluminium Modular\nSecurity Doors"} lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p} imageOverride={p.slug==='thermally-broken-doors'?'/media/thermal-door-card.webp':undefined}/>)}</div></div></section><section className="feature-band"><div className="wrap" style={{display:'flex',alignItems:'center',justifyContent:'space-between',gap:30,flexWrap:'wrap'}}><div><p className="eyebrow">Practical demonstration</p><h2 style={{fontSize:'clamp(28px,4vw,42px)'}}>Five tools. One door.</h2><p style={{color:'#c5c5c5',maxWidth:610,marginBottom:0}}>See what happened when five tools were used in sequence against the same Bamford security door.</p></div><Link className="button" href="/products/forced-entry-demonstration">View the demonstration <ArrowRight size={16}/></Link></div></section><CTA/></>;
 }
 function MailboxesPageContent({product}:{product:Product}) {
   const photos = [
@@ -648,6 +649,7 @@ function RouteContent() {
   const path=normalizePath(location);
   if(path==='/') return <Home/>;
   if(path==='/products') return <ProductIndex/>;
+  if(path==='/products/forced-entry-demonstration') return <ForcedEntryDemonstrationPage/>;
   if(path==='/services') return <ServiceIndex/>;
   if(path==='/sectors') return <SectorsOverviewPage sectors={sectors}/>;
   if(path==='/case-studies') return <Suspense fallback={<PageHeading eyebrow="Case studies" title="Loading projects…"/>}><CaseStudiesIndexPage/></Suspense>;
@@ -698,6 +700,7 @@ export function getPageSeo(path:string): PageSeo {
   if(path==='/admin'||path.startsWith('/admin/')) return {title:'Content editor',description:'Private content management area.',path,noindex:true};
   if(path==='/') return {title:'Quality Bespoke Security Doors',description:'Bamford Doors designs, manufactures and installs bespoke security doors and screens for housing providers, councils, schools and public buildings.',path:'/'};
   if(path==='/products') return {title:'Security Door Products',description:'Explore Bamford Doors’ custom-made security door and entrance system options for housing, public and commercial buildings.',path};
+  if(path==='/products/forced-entry-demonstration') return {title:'Forced-Entry Demonstration',description:'A practical demonstration used an axe, pickaxe, hammer, sledgehammer and power drill against one door. No entry was achieved. See the result and its limits.',path};
   if(path==='/services') return {title:'Door Project and Maintenance Services',description:'Discuss project management, maintenance, stock condition surveys and entrance-system services with Bamford Doors.',path};
   if(path==='/sectors') return {title:'Sectors We Serve',description:'Explore door and entrance system information for housing, local authorities, education, healthcare and public buildings.',path};
   if(path==='/contact'||path==='/contact-us') return {title:'Contact Bamford Doors',description:'Contact Bamford Doors about a security door, entrance system, project, maintenance requirement or stock condition survey.',path:'/contact',noindex:path==='/contact-us'};
@@ -717,6 +720,7 @@ export function getSeoRoutes(): Array<PageSeo & { requestPath: string }> {
   const canonicalPaths = [
     '/',
     '/products',
+    '/products/forced-entry-demonstration',
     ...products.map(productPath),
     '/services',
     ...services.map(servicePath),
