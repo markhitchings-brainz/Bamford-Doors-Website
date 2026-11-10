@@ -36,6 +36,10 @@
 .rl-hero-image:after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,.94) 8%, rgba(255,255,255,.52) 34%, rgba(27,24,22,.04) 72%), linear-gradient(0deg,rgba(20,18,17,.34),transparent 22%); }
 .rl-hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 54%; display: block; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
 .rl-hero:hover .rl-hero-image img { transform: scale(1.018); }
+.rl-hero-image .rl-hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rl-hero-video-control { position: absolute; top: 18px; right: 18px; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 10px 13px; border: 1px solid rgba(255,255,255,.5); background: rgba(0,0,0,.65); color: white; font: inherit; font-size: 10px; cursor: pointer; }
+.rl-hero-video-control:hover { background: #000; }
+.rl-hero-video-control:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .rl-hero-panel { width: min(600px, 52%); min-height: 575px; padding: 67px 48px 48px max(8.2vw, 70px); display: flex; flex-direction: column; align-items: flex-start; background: linear-gradient(90deg,#fff 78%,rgba(255,255,255,.97)); }
 .rl-kicker { margin: 0 0 20px; color: var(--rl-red); font-size: 9px; font-weight: 700; letter-spacing: .17em; line-height: 1.5; text-transform: uppercase; }
 .rl-kicker b { padding: 0 7px; color: #9d9992; }

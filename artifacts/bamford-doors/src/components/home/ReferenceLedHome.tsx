@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
 import { CustomerFeedbackSection } from './CustomerFeedbackSection';
+import { HomeHeroVideo } from './HomeHeroVideo';
 import './reference-led-home.css';
 
 const navItems = [
@@ -75,7 +76,7 @@ export function ReferenceLedHome() {
       <Header />
       <main>
         <section className="rl-hero">
-          <div className="rl-hero-image"><ResponsiveImage src="/media/grp.webp" alt="Bamford entrance door installed at a shared residential building" sizes="(max-width: 760px) 100vw, 50vw" fetchPriority="high" /><div className="rl-image-caption"><span>01</span><i /> ENTRANCE SYSTEMS</div></div>
+          <div className="rl-hero-image"><HomeHeroVideo /><div className="rl-image-caption"><span>01</span><i /> ENTRANCE SYSTEMS</div></div>
           <div className="rl-hero-panel">
             <p className="rl-kicker">Bamford Doors <b>/</b> Bespoke Doors for Lasting Security</p>
             <EditablePageHeadline>Communal Security Doors and Entrance Systems</EditablePageHeadline>
