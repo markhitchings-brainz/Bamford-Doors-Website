@@ -4,10 +4,10 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import './client-logos.css';
 
 const clients = [
-  ['barnet-homes', 'Barnet Homes'],
-  ['east-suffolk', 'East Suffolk Council'],
-  ['great-yarmouth', 'Great Yarmouth Borough Council'],
-  ['hounslow', 'London Borough of Hounslow'],
+  ['barnet-homes', 'Barnet Homes', 'https://www.barnethomes.org/'],
+  ['east-suffolk', 'East Suffolk Council', 'https://www.eastsuffolk.gov.uk/'],
+  ['great-yarmouth', 'Great Yarmouth Borough Council', 'https://www.great-yarmouth.gov.uk/welcome'],
+  ['hounslow', 'London Borough of Hounslow', 'https://www.hounslow.gov.uk/'],
   ['hyde', 'Hyde'],
   ['mtvh', 'Metropolitan Thames Valley Housing'],
   ['mhs', 'mhs homes group'],
@@ -141,15 +141,27 @@ export function ClientLogosSection() {
             onKeyDown={onKey}
             data-testid="list-client-logos"
           >
-            {clients.map(([slug, name], i) => (
-              <li key={slug} className="home-client" data-testid={`card-client-${slug}`}>
-                <span className="home-client-index" aria-hidden="true">{pad(i + 1)}</span>
-                <div className="home-client-logo">
-                  <img src={`/media/clients/${slug}.webp`} alt={name} loading="lazy" decoding="async" draggable={false} />
-                </div>
-                <span className="home-client-name">{name}</span>
-              </li>
-            ))}
+            {clients.map(([slug, name, website], i) => {
+              const card = (
+                <>
+                  <span className="home-client-index" aria-hidden="true">{pad(i + 1)}</span>
+                  <div className="home-client-logo">
+                    <img src={`/media/clients/${slug}.webp`} alt={name} loading="lazy" decoding="async" draggable={false} />
+                  </div>
+                  <span className="home-client-name">{name}</span>
+                </>
+              );
+
+              return (
+                <li key={slug} className={`home-client${website ? ' home-client-linked' : ''}`} data-testid={`card-client-${slug}`}>
+                  {website ? (
+                    <a className="home-client-link" href={website} target="_blank" rel="noopener noreferrer" aria-label={`Visit the ${name} website (opens in a new tab)`}>
+                      {card}
+                    </a>
+                  ) : card}
+                </li>
+              );
+            })}
           </ul>
         </div>
 

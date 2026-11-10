@@ -25,6 +25,8 @@
 .home-clients-track:focus-visible { outline: 3px solid var(--rl-red); outline-offset: 6px; }
 
 .home-client { position: relative; min-width: 0; display: flex; flex-direction: column; scroll-snap-align: start; background: #fff; border-top: 3px solid transparent; transition: border-color .25s, transform .25s, box-shadow .25s; }
+.home-client-link { display: flex; flex: 1; min-width: 0; flex-direction: column; color: inherit; text-decoration: none; }
+.home-client-link:focus-visible { outline: 3px solid var(--rl-red); outline-offset: -3px; }
 .home-client:hover { border-top-color: var(--rl-red); transform: translateY(-4px); box-shadow: 0 14px 26px rgba(32,30,27,.08); }
 .home-client-index { position: absolute; top: 13px; left: 15px; color: var(--rl-red); font-size: 8px; font-weight: 700; letter-spacing: .12em; }
 .home-client-logo { height: 168px; display: grid; place-items: center; padding: 38px 30px 26px; }
