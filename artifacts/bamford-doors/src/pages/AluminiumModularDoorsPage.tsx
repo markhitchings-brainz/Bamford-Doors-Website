@@ -144,7 +144,7 @@ export function AluminiumModularDoorsPage() {
       <section className="amd-config-section" id="configurations" aria-labelledby="amd-config-title">
         <div className="amd-wrap">
           <div className="amd-section-head amd-config-head">
-            <div><p className="amd-eyebrow">Choose a door design</p><h2 id="amd-config-title">Sixteen starting points.</h2></div>
+            <div><p className="amd-eyebrow">Choose a door design</p><h2 id="amd-config-title">The Bamford Doors Visualiser</h2></div>
             <p>Explore sixteen door designs. The drawings show example panel layouts; your final door and screen arrangement is made to suit the opening.</p>
           </div>
           <div className="amd-design-guide">
