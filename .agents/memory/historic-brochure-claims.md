@@ -10,9 +10,3 @@ Qualify technical, regulatory, approval, and test claims: invite the reader to c
 **Why:** the user asked that Bamford website copy address visitors directly and not refer to the brochure/source material. Older product information may also cite superseded standards, and test results apply only to particular samples and configurations.
 
 **How to apply:** When adapting historical product information for any Bamford page, state relevant product details as clear, direct customer-facing copy; keep the qualification about current evidence and project fit without naming the source document.
-
-Treat the forced-entry demonstration as a practical demonstration, not an accredited test or certification. Do not extend its result into a universal security guarantee.
-
-**Why:** The user explicitly approved the demonstration content with this limitation and required unsupported specifications, certifications and claims to be omitted.
-
-**How to apply:** Preserve this distinction when replacing demonstration media or reusing the result elsewhere on the site.

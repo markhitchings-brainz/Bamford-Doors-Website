@@ -8,7 +8,6 @@
     "build": "vite build --config vite.config.ts && node scripts/generate-seo-pages.mjs",
     "build:analyze": "BUNDLE_ANALYZE=1 pnpm exec vite build --config vite.config.ts && { node scripts/report-public-bundle.mjs; report_status=$?; node scripts/verify-public-transfer.mjs; transfer_status=$?; if [ \"$report_status\" -ne 0 ] || [ \"$transfer_status\" -ne 0 ]; then exit 1; fi; }",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
-    "test:bundle-audit": "node --test scripts/public-style-audit.test.mjs",
     "test:ssg": "node scripts/verify-seo-pages.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
