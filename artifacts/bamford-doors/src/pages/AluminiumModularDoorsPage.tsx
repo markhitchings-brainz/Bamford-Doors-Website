@@ -218,7 +218,7 @@ export function AluminiumModularDoorsPage() {
                   <div>
                     <p className="amd-eyebrow">{isColorVisualizer ? 'Door colour visualiser' : 'Selected door design'}</p>
                     <h3 id="amd-design-dialog-title">Type {selectedDesign.code}</h3>
-                    <p className="amd-design-dialog-index">Design {String(selectedDesignIndex + 1).padStart(2, '0')} of 16 · {isColorVisualizer ? 'Colour visualiser' : showingInstalledExample ? 'Installed example' : 'Front elevation'}</p>
+                    <p className={`amd-design-dialog-index${isColorVisualizer ? ' is-color-visualizer-index' : ''}`}>Design {String(selectedDesignIndex + 1).padStart(2, '0')} of 16 · {isColorVisualizer ? 'Colour visualiser' : showingInstalledExample ? 'Installed example' : 'Front elevation'}</p>
                   </div>
                   <button className="amd-design-close" type="button" aria-label="Close enlarged door design" onClick={() => setDesignViewerOpen(false)}><X size={20} aria-hidden="true" /></button>
                 </div>

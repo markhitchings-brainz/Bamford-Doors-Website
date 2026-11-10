@@ -83,7 +83,8 @@
 .amd-design-dialog-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
 .amd-design-dialog-heading .amd-eyebrow { margin-bottom: 13px; }
 .amd-design-dialog-heading h3 { margin: 0; font-size: clamp(42px, 5vw, 62px); line-height: .98; letter-spacing: -.075em; }
-.amd-design-dialog-index { margin: 22px 0 0; color: #727474; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.amd-design-dialog-index { margin: 13px 0 0; color: #727474; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.amd-design-dialog-index.is-color-visualizer-index { margin-top: 34px; }
 .amd-design-close { display: grid; width: 42px; height: 42px; flex: 0 0 auto; padding: 0; place-items: center; border: 1px solid var(--amd-line); background: #fff; color: var(--amd-ink); cursor: pointer; }
 .amd-design-dialog-description { margin: 38px 0; color: #5d6060; font-size: 12px; line-height: 1.8; }
 .amd-design-dialog-description p + p { margin-top: 14px; }
