@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Pause, Play } from 'lucide-react';
 
 const VIDEO_URL =
-  'https://cdn.sanity.io/files/ih9rxf6u/production/e0913a5c22dba764da0bf8461cb2bab77d6ce9d4.mp4';
+  'https://cdn.sanity.io/files/ih9rxf6u/production/6d6388fdc17671d6c762de945b8d368834b3bce9.mp4';
 
 export function HomeHeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -28,7 +28,7 @@ export function HomeHeroVideo() {
         ref={videoRef}
         className="rl-hero-video"
         src={VIDEO_URL}
-        poster="/media/home-hero-video-poster.webp"
+        poster="/media/home-hero-video-poster-v2.webp"
         muted
         loop
         playsInline
