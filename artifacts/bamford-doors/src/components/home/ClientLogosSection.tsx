@@ -19,6 +19,17 @@ const clients = [
   ['transform', 'Transform Housing & Support'],
   ['vivid', 'VIVID'],
   ['welwyn-hatfield', 'Welwyn Hatfield Borough Council'],
+  ['greensquare', 'GreenSquare'],
+  ['homes-in-sedgemoor', 'Homes in Sedgemoor'],
+  ['cornerstone', 'Cornerstone'],
+  ['brighter-places', 'Brighter Places'],
+  ['east-devon', 'East Devon District Council'],
+  ['somerset-west-taunton', 'Somerset West and Taunton'],
+  ['selwood-housing', 'Selwood Housing'],
+  ['aster-group', 'Aster Group'],
+  ['wiltshire-council', 'Wiltshire Council'],
+  ['exeter-city-council', 'Exeter City Council'],
+  ['livewest', 'LiveWest'],
 ] as const;
 
 const pad = (n: number) => String(n).padStart(2, '0');
