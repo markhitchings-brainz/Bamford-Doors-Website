@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Link } from 'wouter';
 import { EditablePageHeadline } from '@/components/EditablePageHeadline';
 import { ResponsiveImage } from '@/components/ResponsiveImage';
+import { CustomerFeedbackSection } from './CustomerFeedbackSection';
 import './reference-led-home.css';
 
 const navItems = [
@@ -118,6 +119,8 @@ export function ReferenceLedHome() {
             <div className="rl-service-links"><Link href="/services/project-management"><span>01</span>Project management<ArrowUpRight size={16} /></Link><Link href="/services/stock-condition-surveys"><span>02</span>Stock condition surveys<ArrowUpRight size={16} /></Link><Link href="/services/maintenance-packages"><span>03</span>Maintenance packages<ArrowUpRight size={16} /></Link></div>
           </div>
         </section>
+
+        <CustomerFeedbackSection />
 
         <section className="rl-process rl-wrap"><div><p className="rl-kicker">A clear way forward</p><h2>Start with what<br />you <em>know.</em></h2><p>Share the details you have. Our team can talk through the building, entrance and project requirements with you.</p><Link className="rl-link" href="/contact">What to include in an enquiry <ArrowRight size={14} /></Link></div><ol><li><span>01</span><div><h3>Tell us about the building</h3><p>Its setting, use and the work being considered.</p></div></li><li><span>02</span><div><h3>Discuss the requirement</h3><p>Explore the entrance and product options together.</p></div></li><li><span>03</span><div><h3>Agree a way forward</h3><p>Understand the next steps for your project.</p></div></li></ol></section>
 
