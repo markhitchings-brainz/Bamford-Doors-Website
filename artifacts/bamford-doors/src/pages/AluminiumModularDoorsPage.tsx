@@ -23,13 +23,13 @@ const doorDesigns = types.map((code, index) => ({
 }));
 
 const finishes = [
-  { code: 'RAL 5005', name: 'Signal blue', color: '#174889', image: `${media}colour-visualiser/type-2100-ral-5005.webp` },
-  { code: 'RAL 6005', name: 'Moss green', color: '#114232', image: `${media}colour-visualiser/type-2100-ral-6005.webp` },
-  { code: 'RAL 3003', name: 'Ruby red', color: '#8d1b27', image: `${media}colour-visualiser/type-2100-ral-3003.webp` },
-  { code: 'RAL 7016', name: 'Anthracite grey', color: '#383e42', image: `${media}colour-visualiser/type-2100-ral-7016.webp` },
-  { code: 'RAL 8016', name: 'Mahogany brown', color: '#4b2c25', image: `${media}colour-visualiser/type-2100-ral-8016.webp` },
-  { code: 'RAL 9010', name: 'Pure white', color: '#f1eee5', image: `${media}colour-visualiser/type-2100-ral-9010.webp` },
-  { code: 'RAL 9011', name: 'Graphite black', color: '#202326', image: `${media}colour-visualiser/type-2100-ral-9011.webp` },
+  { code: 'RAL 5005', name: 'Signal blue', color: '#174889', image: `${media}colour-visualiser/type-2100-ral-5005.jpg` },
+  { code: 'RAL 6005', name: 'Moss green', color: '#114232', image: `${media}colour-visualiser/type-2100-ral-6005.jpg` },
+  { code: 'RAL 3003', name: 'Ruby red', color: '#8d1b27', image: `${media}colour-visualiser/type-2100-ral-3003.jpg` },
+  { code: 'RAL 7016', name: 'Anthracite grey', color: '#383e42', image: `${media}colour-visualiser/type-2100-ral-7016.jpg` },
+  { code: 'RAL 8016', name: 'Mahogany brown', color: '#4b2c25', image: `${media}colour-visualiser/type-2100-ral-8016.jpg` },
+  { code: 'RAL 9010', name: 'Pure white', color: '#f1eee5', image: `${media}colour-visualiser/type-2100-ral-9010.jpg` },
+  { code: 'RAL 9011', name: 'Graphite black', color: '#202326', image: `${media}colour-visualiser/type-2100-ral-9011.jpg` },
 ];
 
 const features = [
@@ -186,8 +186,8 @@ export function AluminiumModularDoorsPage() {
                   <img
                     src={selectedFinish.image}
                     alt={`Artistic colour mock-up of Type 2100 aluminium entrance in ${selectedFinish.code} ${selectedFinish.name}`}
-                    width="768"
-                    height="1024"
+                    width="1086"
+                    height="1448"
                     data-testid="image-amd-type-2100-color-preview"
                   />
                 ) : selectedDesign.example ? (
