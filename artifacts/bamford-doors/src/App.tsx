@@ -205,7 +205,28 @@ function ProductCard({product,imageOverride}:{product:Product;imageOverride?:str
 }
 
 function ProductIndex() {
-  return <><PageHeading eyebrow="Products" title={"Aluminium Modular\nSecurity Doors"} lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/><section className="section"><div className="wrap"><div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p} imageOverride={p.slug==='thermally-broken-doors'?'/media/thermal-door-card.webp':undefined}/>)}</div></div></section><section className="fd-test-promo" aria-labelledby="fd-test-promo-title"><div className="wrap fd-test-promo-grid"><img src="/media/forced-entry-test/axe.webp" alt="Bamford aluminium security door during a practical forced-entry demonstration" width="1672" height="941" loading="lazy"/><div><p className="eyebrow">Security, demonstrated</p><h2 id="fd-test-promo-title">Five tools. One door. See what happened.</h2><p>Watch a practical demonstration of a Bamford aluminium security door. No entry was achieved under the conditions shown.</p><Link className="button" href="/security-door-forced-entry-test" data-testid="link-forced-entry-test">Watch the forced-entry test <ArrowRight size={15}/></Link></div></div></section><CTA/></>;
+  return <>
+    <PageHeading eyebrow="Products" title={"Aluminium Modular\nSecurity Doors"} lead="Custom-made, vandal-resistant security doors and screens for housing providers, councils, schools and public and commercial buildings."/>
+    <section className="section">
+      <div className="wrap">
+        <div className="product-grid">{products.map(p=><ProductCard key={p.slug} product={p} imageOverride={p.slug==='thermally-broken-doors'?'/media/thermal-door-card.webp':undefined}/>)}</div>
+      </div>
+    </section>
+    <section className="faq-promo" aria-labelledby="products-faq-title" data-testid="section-products-faq">
+      <div className="wrap faq-promo-inner">
+        <div>
+          <p className="eyebrow">Need a little guidance?</p>
+          <h2 id="products-faq-title">Questions about your entrance?</h2>
+        </div>
+        <div className="faq-promo-copy">
+          <p>Find practical answers about product choices, lead times, finishes, installation, access control, warranties and maintenance.</p>
+          <Link className="button" href="/faq" data-testid="link-products-faq">Visit our frequently asked questions <ArrowRight size={15}/></Link>
+        </div>
+      </div>
+    </section>
+    <section className="fd-test-promo" aria-labelledby="fd-test-promo-title"><div className="wrap fd-test-promo-grid"><img src="/media/forced-entry-test/axe.webp" alt="Bamford aluminium security door during a practical forced-entry demonstration" width="1672" height="941" loading="lazy"/><div><p className="eyebrow">Security, demonstrated</p><h2 id="fd-test-promo-title">Five tools. One door. See what happened.</h2><p>Watch a practical demonstration of a Bamford aluminium security door. No entry was achieved under the conditions shown.</p><Link className="button" href="/security-door-forced-entry-test" data-testid="link-forced-entry-test">Watch the forced-entry test <ArrowRight size={15}/></Link></div></div></section>
+    <CTA/>
+  </>;
 }
 function MailboxesPageContent({product}:{product:Product}) {
   const photos = [
@@ -460,7 +481,27 @@ function ProductDetail({product}:{product:Product}) {
   return <><PageHeading eyebrow="Products" title={product.title} lead={product.summary}/><div className="wrap"><Breadcrumbs items={[{label:'Products',href:'/products'},{label:product.title}]}/><div className="detail-layout"><div className="detail-image">{product.image?<img src={product.image} alt={product.title}/>:<div className="product-image-pending product-detail-pending"><span>Approved product photography to be supplied</span></div>}</div><div className="detail-text"><p className="eyebrow">Product overview</p><h2 style={{fontSize:34}}>{curtainWallingPhotos ? 'A considered frame. A flexible finish.' : louveredDoor ? 'Ventilation for service spaces.' : 'Made to suit the entrance.'}</h2><p>{curtainWallingPhotos ? 'Bamford side screens and curtain walling use a high-strength aluminium frame with interchangeable panels selected around your project. Choose glazed, GRP or louvred panels, combined and made to suit each application.' : louveredDoor ? 'Louvred doors and screens are often used in bin stores, plant rooms and boiler rooms. Angled slats can allow air to pass through while the door is closed, while helping maintain privacy. The final balance of airflow and privacy depends on the louvre design and installation.' : `${product.summary} Discuss your building and requirements with our team.`}</p><h3 style={{fontSize:18,marginTop:30}}>Where this product may be considered</h3><ul className="info-list">{product.applications.map(x=><li key={x}>{x}</li>)}</ul><h3 style={{fontSize:18,marginTop:22}}>Product information</h3><ul className="info-list">{product.features.map(x=><li key={x}>{x}</li>)}</ul>{louveredDoor && <p className="product-claim-note">Ask us to confirm current ISO 9001 certification and the scope that applies to your project.</p>}<Link className="button" href={`/contact?purpose=product&product=${encodeURIComponent(product.title)}`} data-testid={`link-enquire-${product.slug}`}>Enquire about this product <ArrowRight size={15}/></Link></div></div></div>{curtainWallingPhotos && <section className="product-photo-gallery" aria-labelledby="product-photo-gallery-title"><div className="wrap"><div className="product-photo-gallery-heading"><div><p className="eyebrow">Project examples</p><h2 id="product-photo-gallery-title">Screens and curtain walling in context.</h2></div><p>Explore examples of bespoke aluminium frames with different panel combinations and entrance layouts.</p></div><div className="product-photo-gallery-grid">{curtainWallingPhotos.map((photo, index) => <figure key={photo.src}><img src={photo.src} alt={photo.alt} loading="lazy"/><figcaption><span>0{index + 2} / PROJECT</span>{photo.caption}</figcaption></figure>)}</div></div></section>}<section className="section section-muted"><div className="wrap"><p className="eyebrow">More to explore</p><h2 style={{marginBottom:28}}>Related products</h2><div className="product-grid">{products.filter(p=>p.slug!==product.slug).slice(0,4).map(p=><ProductCard key={p.slug} product={p}/>)}</div></div></section></>;
 }
 
-function ServiceIndex() { return <><PageHeading eyebrow="Services" title="Support around the entrance" lead="Discuss the wider requirements of your entrance system project with the Bamford team."/><section className="section"><div className="wrap tile-grid">{services.filter(s=>s.slug!=='door-entry-access-control').map(s=><Link className="tile" href={servicePath(s)} key={s.slug}><strong>{s.title}</strong><p>{s.summary}</p><span className="arrow"><MoveUpRight size={18}/></span></Link>)}</div></section><CTA/></>; }
+function ServiceIndex() {
+  return <>
+    <PageHeading eyebrow="Services" title="Support around the entrance" lead="Discuss the wider requirements of your entrance system project with the Bamford team."/>
+    <section className="section">
+      <div className="wrap tile-grid">{services.filter(s=>s.slug!=='door-entry-access-control').map(s=><Link className="tile" href={servicePath(s)} key={s.slug}><strong>{s.title}</strong><p>{s.summary}</p><span className="arrow"><MoveUpRight size={18}/></span></Link>)}</div>
+    </section>
+    <section className="faq-promo" aria-labelledby="services-faq-title" data-testid="section-services-faq">
+      <div className="wrap faq-promo-inner">
+        <div>
+          <p className="eyebrow">Need a little guidance?</p>
+          <h2 id="services-faq-title">Questions about your entrance?</h2>
+        </div>
+        <div className="faq-promo-copy">
+          <p>Find practical answers about product choices, lead times, finishes, installation, access control, warranties and maintenance.</p>
+          <Link className="button" href="/faq" data-testid="link-services-faq">Visit our frequently asked questions <ArrowRight size={15}/></Link>
+        </div>
+      </div>
+    </section>
+    <CTA/>
+  </>;
+}
 function MaintenancePackagesContent() {
   return <>
     <section className="section maintenance-overview">

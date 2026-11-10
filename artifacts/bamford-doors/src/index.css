@@ -645,6 +645,11 @@ h1,h2,h3 { letter-spacing:-.055em; }
 .product-card-copy p { min-height:60px; font-size:11px; }
 .product-index-link { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-top:26px; padding-top:19px; border-top:1px solid var(--line); }
 .product-index-link > span { color:#777; font-size:10px; }
+.faq-promo { padding:clamp(58px,8vw,100px) 0; color:#fff; background:#171717; }
+.faq-promo-inner { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); align-items:center; gap:clamp(32px,7vw,96px); }
+.faq-promo .eyebrow { color:#fff; }
+.faq-promo h2 { max-width:14ch; margin:0; color:#fff; font-size:clamp(36px,4.8vw,60px); line-height:1.04; letter-spacing:-.06em; }
+.faq-promo-copy p { max-width:500px; margin:0 0 24px; color:#c8c8c8; font-size:13px; line-height:1.8; }
 .service-spotlight { display:grid; grid-template-columns:1fr 1fr; background:#f4f3f1; min-height:520px; }
 .service-visual { min-height:520px; overflow:hidden; position:relative; background:#ddd; }
 .service-visual img { display:block; width:100%; height:100%; min-height:520px; object-fit:cover; object-position:center 48%; transition:transform .7s cubic-bezier(.2,.65,.25,1); }
@@ -774,6 +779,10 @@ h1,h2,h3 { letter-spacing:-.055em; }
  .product-card .text-link { font-size:9px; }
  .product-index-link { align-items:flex-start; flex-direction:column; gap:9px; }
  .product-index-link > span { font-size:9px; }
+  .faq-promo { padding:56px 0; }
+  .faq-promo-inner { grid-template-columns:1fr; gap:24px; }
+  .faq-promo h2 { max-width:12ch; font-size:clamp(37px,9vw,50px); }
+  .faq-promo-copy p { margin-bottom:20px; font-size:12px; }
  .service-spotlight { grid-template-columns:1fr; }
  .service-visual { min-height:280px; height:280px; }
  .service-visual img { min-height:280px; height:280px; }
