@@ -39,6 +39,11 @@ const clients = [
   ['cardiff-community-housing', 'Cardiff Community Housing Association'],
   ['caerphilly', 'Caerphilly County Borough Council'],
   ['hedyn', 'Hedyn'],
+  ['flintshire', 'Flintshire County Council'],
+  ['clwydalyn', 'ClwydAlyn'],
+  ['adra', 'Adra'],
+  ['clarion', 'Clarion Housing Group'],
+  ['places-for-people', 'Places for People'],
 ] as const;
 
 const pad = (n: number) => String(n).padStart(2, '0');
