@@ -87,6 +87,19 @@
 .amd-design-close { display: grid; width: 42px; height: 42px; flex: 0 0 auto; padding: 0; place-items: center; border: 1px solid var(--amd-line); background: #fff; color: var(--amd-ink); cursor: pointer; }
 .amd-design-dialog-description { margin: 38px 0; color: #5d6060; font-size: 12px; line-height: 1.8; }
 .amd-design-dialog-description p + p { margin-top: 14px; }
+.amd-design-dialog-visual.is-color-visualizer { background: #eeece8; }
+.amd-design-dialog-description.is-color-visualizer-copy { margin: 24px 0; }
+.amd-visualizer-intro { margin: 0 0 12px; color: var(--amd-ink); font-size: 11px; }
+.amd-visualizer-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.amd-visualizer-option { display: grid; min-width: 0; min-height: 48px; grid-template-columns: 26px minmax(0, 1fr) 15px; align-items: center; gap: 8px; padding: 7px 9px; border: 1px solid #d8d6d1; background: #fff; color: var(--amd-ink); text-align: left; cursor: pointer; transition: border-color .18s ease, box-shadow .18s ease; }
+.amd-visualizer-option:hover, .amd-visualizer-option.is-selected { border-color: var(--amd-red); }
+.amd-visualizer-option.is-selected { box-shadow: inset 0 0 0 1px var(--amd-red); }
+.amd-visualizer-swatch { width: 25px; height: 25px; border: 1px solid rgba(0,0,0,.16); }
+.amd-visualizer-option-label { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+.amd-visualizer-option-label strong { font-size: 9px; line-height: 1.1; }
+.amd-visualizer-option-label small { overflow: hidden; color: #777; font-size: 8px; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+.amd-visualizer-option > svg { color: var(--amd-red); }
+.amd-visualizer-note { margin: 15px 0 0; color: #6c6d6c; font-size: 9px; line-height: 1.55; }
 .amd-design-dialog-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 17px; border-top: 1px solid var(--amd-line); }
 .amd-design-dialog-controls > span { color: #777; font-size: 8px; font-weight: 700; letter-spacing: .13em; }
 .amd-design-dialog-controls button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; border: 0; background: transparent; color: var(--amd-ink); font-size: 10px; font-weight: 700; cursor: pointer; }
@@ -191,9 +204,15 @@
   .amd-design-dialog-content { grid-template-columns: 1fr; }
   .amd-design-dialog-visual { min-height: 310px; padding: 20px; }
   .amd-design-dialog-visual img { height: min(42vh, 370px); }
+  .amd-design-dialog-visual.is-color-visualizer { min-height: 310px; padding: 14px; }
+  .amd-design-dialog-visual.is-color-visualizer img { height: min(31vh, 260px); }
   .amd-design-image-toggle { height: min(42vh, 370px); }
   .amd-design-dialog-copy { padding: 24px; }
   .amd-design-dialog-description { margin: 22px 0; }
+  .amd-design-dialog-description.is-color-visualizer-copy { margin: 20px 0; }
+  .amd-visualizer-options { gap: 7px; }
+  .amd-visualizer-option { min-height: 44px; gap: 6px; padding: 6px 7px; }
+  .amd-visualizer-swatch { width: 23px; height: 23px; }
   .amd-gallery-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
   .amd-gallery-grid .amd-gallery-main { grid-column: 1 / -1; }
   .amd-gallery-grid figure img, .amd-gallery-grid .amd-gallery-main img { height: 235px; }
