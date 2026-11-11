@@ -5,7 +5,7 @@ import './security-door-forced-entry-test.css';
 
 const media = '/media/forced-entry-test/';
 const videoUrl =
-  'https://cdn.sanity.io/files/ih9rxf6u/production/f0c89976b898ce49ac954ba9108beecfbbed0b40.mp4';
+  'https://cdn.sanity.io/files/ih9rxf6u/production/f8b0fbc2ab1368e84a96d236555b5681d2caf150.mp4';
 
 const demonstrationImages = [
   {
